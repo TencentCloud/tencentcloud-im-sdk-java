@@ -4,8 +4,8 @@ import tencentcloud.im.ApiClient;
 import tencentcloud.im.ApiException;
 import tencentcloud.im.Configuration;
 import tencentcloud.im.api.SingleChatApi;
-import tencentcloud.im.model.CommonResponse;
-import tencentcloud.im.model.MsgWithdrawRequest;
+import tencentcloud.im.model.GetRoamMsgRequest;
+import tencentcloud.im.model.GetRoamMsgResponse;
 
 /**
  * 查询单聊消息（https://cloud.tencent.com/document/product/269/42794）
@@ -26,14 +26,14 @@ public class AdminGetRoamMsgExample {
 
         SingleChatApi apiInstance = new SingleChatApi(defaultClient);
         Integer random = 56; // Integer |
-        MsgWithdrawRequest msgWithdrawRequest = new MsgWithdrawRequest(); // MsgWithdrawRequest |
+        GetRoamMsgRequest getRoamMsgRequest = new GetRoamMsgRequest(); // GetRoamMsgRequest |
         //TODO: Set the parameters
 
         try {
-            CommonResponse result = apiInstance.adminMsgwithdraw(random, msgWithdrawRequest);
+            GetRoamMsgResponse result = apiInstance.adminGetroammsg(random, getRoamMsgRequest);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling SingleChatApi#adminMsgwithdraw");
+            System.err.println("Exception when calling SingleChatApi#adminGetroammsg");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());
