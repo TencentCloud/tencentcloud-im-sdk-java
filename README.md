@@ -37,7 +37,7 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>tencentcloud.im</groupId>
+  <groupId>com.tencentcloudapi.im</groupId>
   <artifactId>tencentcloud-im-sdk-java</artifactId>
   <version>1.0.0</version>
   <scope>compile</scope>
@@ -49,7 +49,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "tencentcloud.im:tencentcloud-im-sdk-java:1.0.0"
+compile "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.0"
 ```
 
 ### Others
@@ -71,10 +71,10 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import tencentcloud.im.*;
-import tencentcloud.im.auth.*;
-import tencentcloud.im.model.*;
-import tencentcloud.im.api.AccountApi;
+import com.tencentcloudapi.im.*;
+import com.tencentcloudapi.im.auth.*;
+import com.tencentcloudapi.im.model.*;
+import com.tencentcloudapi.im.api.AccountApi;
 
 public class AccountApiExample {
 

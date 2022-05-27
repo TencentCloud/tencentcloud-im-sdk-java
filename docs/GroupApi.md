@@ -45,11 +45,11 @@ All URIs are relative to *https://console.tim.qq.com*
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -121,11 +121,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -197,11 +197,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -273,11 +273,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -349,11 +349,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -425,11 +425,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -501,11 +501,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -577,11 +577,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -653,11 +653,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -729,11 +729,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -805,11 +805,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -881,11 +881,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -957,11 +957,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1033,11 +1033,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1109,11 +1109,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1185,11 +1185,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1261,11 +1261,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1337,11 +1337,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1413,11 +1413,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1489,11 +1489,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1565,11 +1565,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1641,11 +1641,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1717,11 +1717,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1793,11 +1793,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1869,11 +1869,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -1945,11 +1945,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -2021,11 +2021,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
@@ -2097,11 +2097,11 @@ No authorization required
 
 ```java
 // Import classes:
-import tencentcloud.im.ApiClient;
-import tencentcloud.im.ApiException;
-import tencentcloud.im.Configuration;
-import tencentcloud.im.models.*;
-import tencentcloud.im.api.GroupApi;
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
     public static void main(String[] args) {
