@@ -465,4 +465,4 @@ It's recommended to create an instance of `ApiClient` per thread in a multithrea
 ## Contact
  腾讯云IM REST API SDK 技术交流QQ群
 
- <img src="images/img_group01.png" width="20%" height="20%" />
+ <img src="images/img_group_01.png" width="30%" height="30%" />
