@@ -1,0 +1,4807 @@
+openapi: 3.0.3
+info:
+  title: TIM SERVER REST API SDK
+  description: TIM REST API
+  version: 1.0.0
+servers:
+  - url: https://console.tim.qq.com
+tags:
+  - name: account
+    description: 帐号管理
+  - name: single_chat
+    description: 单聊消息
+  - name: all_member_push
+    description: 全员推送
+  - name: portrait
+    description: 资料管理
+  - name: relationships
+    description: 关系链管理
+  - name: recent_contact
+    description: 最近联系人
+  - name: group
+    description: 群组管理
+  - name: mute
+    description: 全局禁言管理
+  - name: operation
+    description: 运营管理
+paths:
+  # 帐号管理
+  /v4/im_open_login_svc/account_import:
+    post:
+      operationId: account_import
+      tags:
+        - account
+      summary: 导入单个帐号（https://cloud.tencent.com/document/product/269/1608）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountImportRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/im_open_login_svc/multiaccount_import:
+    post:
+      operationId: multi_account_import
+      tags:
+        - account
+      summary: 导入多个帐号（https://cloud.tencent.com/document/product/269/4919）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiAccountImportRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiAccountImportResponse'
+  /v4/im_open_login_svc/account_delete:
+    post:
+      operationId: account_delete
+      tags:
+        - account
+      summary: 删除帐号（https://cloud.tencent.com/document/product/269/36443）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountDeleteRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDeleteResponse'
+  /v4/im_open_login_svc/account_check:
+    post:
+      operationId: account_check
+      tags:
+        - account
+      summary: 查询帐号 (https://cloud.tencent.com/document/product/269/38417)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountCheckRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCheckResponse'
+  /v4/im_open_login_svc/kick:
+    post:
+      operationId: kick
+      tags:
+        - account
+      summary: 失效帐号登录状态（https://cloud.tencent.com/document/product/269/3853）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KickRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/openim/query_online_status:
+    post:
+      operationId: query_online_status
+      tags:
+        - account
+      summary: 查询帐号在线状态（https://cloud.tencent.com/document/product/269/2566）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryOnlineStatusRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryOnlineStatusResponse'
+  # 单聊消息
+  /v4/openim/sendmsg:
+    post:
+      operationId: sendmsg
+      tags:
+        - single_chat
+      summary: 单发单聊消息（https://cloud.tencent.com/document/product/269/2282）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendSingleChatMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendSingleChatMsgResponse'
+  /v4/openim/batchsendmsg:
+    post:
+      operationId: batchsendmsg
+      tags:
+        - single_chat
+      summary: 批量发单聊消息（https://cloud.tencent.com/document/product/269/1612）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchSendSingleChatMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchSendSingleChatMsgResponse'
+  /v4/openim/importmsg:
+    post:
+      operationId: importmsg
+      tags:
+        - single_chat
+      summary: 导入单聊消息（https://cloud.tencent.com/document/product/269/2568）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/openim/admin_getroammsg:
+    post:
+      operationId: admin_getroammsg
+      tags:
+        - single_chat
+      summary: 查询单聊消息（https://cloud.tencent.com/document/product/269/42794）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoamMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoamMsgResponse'
+  /v4/openim/admin_msgwithdraw:
+    post:
+      operationId: admin_msgwithdraw
+      tags:
+        - single_chat
+      summary: 撤回单聊消息（https://cloud.tencent.com/document/product/269/38980）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MsgWithdrawRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/openim/admin_set_msg_read:
+    post:
+      operationId: admin_set_msg_read
+      tags:
+        - single_chat
+      summary: 设置单聊消息已读（https://cloud.tencent.com/document/product/269/50349）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetMsgReadRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/openim/get_c2c_unread_msg_num:
+    post:
+      operationId: get_c2c_unread_msg_num
+      tags:
+        - single_chat
+      summary: 查询单聊未读消息计数（https://cloud.tencent.com/document/product/269/56043）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetC2cUnreadMsgNumRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetC2cUnreadMsgNumResponse'
+
+  # 全员推送
+  /v4/all_member_push/im_push:
+    post:
+      operationId: im_push
+      tags:
+        - all_member_push
+      summary: 全员推送（https://cloud.tencent.com/document/product/269/45934）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImPushRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImPushResponse'
+  /v4/all_member_push/im_set_attr_name:
+    post:
+      operationId: im_set_attr_name
+      tags:
+        - all_member_push
+      summary: 设置应用属性名称（https://cloud.tencent.com/document/product/269/45935）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImSetAttrNameRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/all_member_push/im_get_attr_name:
+    post:
+      operationId: im_get_attr_name
+      tags:
+        - all_member_push
+      summary: 获取应用属性名称（https://cloud.tencent.com/document/product/269/45936）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImGetAttrNameRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImGetAttrNameResponse'
+
+  /v4/all_member_push/im_get_attr:
+    post:
+      operationId: im_get_attr
+      tags:
+        - all_member_push
+      summary: 获取用户属性（https://cloud.tencent.com/document/product/269/45937）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImGetAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImGetAttrResponse'
+  /v4/all_member_push/im_set_attr:
+    post:
+      operationId: im_set_attr
+      tags:
+        - all_member_push
+      summary: 设置用户属性（https://cloud.tencent.com/document/product/269/45938）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImSetAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/all_member_push/im_remove_attr:
+    post:
+      operationId: im_remove_attr
+      tags:
+        - all_member_push
+      summary: 删除用户属性（https://cloud.tencent.com/document/product/269/45939）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImRemoveAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/all_member_push/im_get_tag:
+    post:
+      operationId: im_get_tag
+      tags:
+        - all_member_push
+      summary: 获取用户标签（https://cloud.tencent.com/document/product/269/45940）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImGetTagRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImGetTagResponse'
+  /v4/all_member_push/im_add_tag:
+    post:
+      operationId: im_add_tag
+      tags:
+        - all_member_push
+      summary: 添加用户标签（https://cloud.tencent.com/document/product/269/45941）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImAddTagRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/all_member_push/im_remove_tag:
+    post:
+      operationId: im_remove_tag
+      tags:
+        - all_member_push
+      summary: 删除用户标签（https://cloud.tencent.com/document/product/269/45942）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImRemoveTagRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/all_member_push/im_remove_all_tags:
+    post:
+      operationId: im_remove_all_tags
+      tags:
+        - all_member_push
+      summary: 删除用户所有标签（https://cloud.tencent.com/document/product/269/45943）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImRemoveAllTagRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+
+  # 资料管理
+  /v4/profile/portrait_set:
+    post:
+      operationId: portrait_set
+      tags:
+        - portrait
+      summary: 设置资料（https://cloud.tencent.com/document/product/269/1640）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortraitSetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortraitSetResponse'
+  /v4/profile/portrait_get:
+    post:
+      operationId: portrait_get
+      tags:
+        - portrait
+      summary: 拉取资料（https://cloud.tencent.com/document/product/269/1639）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PortraitGetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortraitGetResponse'
+
+  # 关系链管理
+  /v4/sns/friend_add:
+    post:
+      operationId: friend_add
+      tags:
+        - relationships
+      summary: 添加好友（https://cloud.tencent.com/document/product/269/1643）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendAddRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendAddResponse'
+  /v4/sns/friend_import:
+    post:
+      operationId: friend_import
+      tags:
+        - relationships
+      summary: 导入好友（https://cloud.tencent.com/document/product/269/8301）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendImportRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendImportResponse'
+  /v4/sns/friend_update:
+    post:
+      operationId: friend_update
+      tags:
+        - relationships
+      summary: 更新好友（https://cloud.tencent.com/document/product/269/12525）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendUpdateRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendUpdateResponse'
+  /v4/sns/friend_delete:
+    post:
+      operationId: friend_delete
+      tags:
+        - relationships
+      summary: 删除好友（https://cloud.tencent.com/document/product/269/1644）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendDeleteRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendDeleteResponse'
+  /v4/sns/friend_delete_all:
+    post:
+      operationId: friend_delete_all
+      tags:
+        - relationships
+      summary: 删除所有好友（https://cloud.tencent.com/document/product/269/1645）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendDeleteAllRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendDeleteAllResponse'
+  /v4/sns/friend_check:
+    post:
+      operationId: friend_check
+      tags:
+        - relationships
+      summary: 校验好友（https://cloud.tencent.com/document/product/269/1646）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendCheckRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendCheckResponse'
+  /v4/sns/friend_get:
+    post:
+      operationId: friend_get
+      tags:
+        - relationships
+      summary: 拉取好友（https://cloud.tencent.com/document/product/269/1647）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendGetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendGetResponse'
+  /v4/sns/friend_get_list:
+    post:
+      operationId: friend_get_list
+      tags:
+        - relationships
+      summary: 拉取指定好友（https://cloud.tencent.com/document/product/269/8609）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FriendGetListRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FriendGetListResponse'
+  /v4/sns/black_list_add:
+    post:
+      operationId: black_list_add
+      tags:
+        - relationships
+      summary: 添加黑名单（https://cloud.tencent.com/document/product/269/3718）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackListAddRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackListAddResponse'
+  /v4/sns/black_list_delete:
+    post:
+      operationId: black_list_delete
+      tags:
+        - relationships
+      summary: 删除黑名单（https://cloud.tencent.com/document/product/269/3719）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackListDeleteRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackListDeleteResponse'
+  /v4/sns/black_list_get:
+    post:
+      operationId: black_list_get
+      tags:
+        - relationships
+      summary: 拉取黑名单（https://cloud.tencent.com/document/product/269/3722）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackListGetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackListGetResponse'
+  /v4/sns/black_list_check:
+    post:
+      operationId: black_list_check
+      tags:
+        - relationships
+      summary: 校验黑名单（https://cloud.tencent.com/document/product/269/3725）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlackListCheckRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlackListCheckResponse'
+  /v4/sns/group_add:
+    post:
+      operationId: group_add
+      tags:
+        - relationships
+      summary: 添加分组（https://cloud.tencent.com/document/product/269/10107）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupAddRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupAddResponse'
+  /v4/sns/group_delete:
+    post:
+      operationId: group_delete
+      tags:
+        - relationships
+      summary: 删除分组（https://cloud.tencent.com/document/product/269/10108）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupDeleteRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupDeleteResponse'
+  /v4/sns/group_get:
+    post:
+      operationId: group_get
+      tags:
+        - relationships
+      summary: 拉取分组（https://cloud.tencent.com/document/product/269/54763）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupGetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupGetResponse'
+
+  #  最近联系人
+  /v4/recentcontact/get_list:
+    post:
+      operationId: get_recent_contact_list
+      tags:
+        - recent_contact
+      summary: 拉取会话列表（https://cloud.tencent.com/document/product/269/62118）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRecentContactListGroupGetRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecentContactListGroupGetResponse'
+  /v4/recentcontact/delete:
+    post:
+      operationId: delete_recent_contact
+      tags:
+        - recent_contact
+      summary: 删除单个会话（https://cloud.tencent.com/document/product/269/62119）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRecentContactListGroupDeleteRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecentContactListGroupDeleteResponse'
+
+  #   群组管理
+  /v4/group_open_http_svc/get_appid_group_list:
+    post:
+      operationId: get_appid_group_list
+      tags:
+        - group
+      summary: 获取 App 中的所有群组（https://cloud.tencent.com/document/product/269/1614）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAppidGroupListRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppidGroupListResponse'
+  /v4/group_open_http_svc/create_group:
+    post:
+      operationId: create_group
+      tags:
+        - group
+      summary: 创建群组（https://cloud.tencent.com/document/product/269/1615）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+  /v4/group_open_http_svc/get_group_info:
+    post:
+      operationId: get_group_info
+      tags:
+        - group
+      summary: 获取群详细资料（https://cloud.tencent.com/document/product/269/1616）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGroupInfoRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupInfoResponse'
+  /v4/group_open_http_svc/get_group_member_info:
+    post:
+      operationId: get_group_member_info
+      tags:
+        - group
+      summary: 获取群成员详细资料（https://cloud.tencent.com/document/product/269/1617）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGroupMemberInfoRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupMemberInfoResponse'
+  /v4/group_open_http_svc/modify_group_base_info:
+    post:
+      operationId: modify_group_base_info
+      tags:
+        - group
+      summary: 修改群基础资料（https://cloud.tencent.com/document/product/269/1620）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyGroupBaseInfoRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/add_group_member:
+    post:
+      operationId: add_group_member
+      tags:
+        - group
+      summary: 增加群成员（https://cloud.tencent.com/document/product/269/1621）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGroupMemberRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddGroupMemberResponse'
+  /v4/group_open_http_svc/delete_group_member:
+    post:
+      operationId: delete_group_member
+      tags:
+        - group
+      summary: 删除群成员（https://cloud.tencent.com/document/product/269/1622）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteGroupMemberRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/modify_group_member_info:
+    post:
+      operationId: modify_group_member_info
+      tags:
+        - group
+      summary: 修改群成员资料(https://cloud.tencent.com/document/product/269/1623)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyGroupMemberInfoRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/destroy_group:
+    post:
+      operationId: destroy_group
+      tags:
+        - group
+      summary: 解散群组(https://cloud.tencent.com/document/product/269/1624)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestroyGroupRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/get_joined_group_list:
+    post:
+      operationId: get_joined_group_list
+      tags:
+        - group
+      summary: 获取用户所加入的群组(https://cloud.tencent.com/document/product/269/1625)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetJoinedGroupListRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJoinedGroupListResponse'
+  /v4/group_open_http_svc/get_role_in_group:
+    post:
+      operationId: get_role_in_group
+      tags:
+        - group
+      summary: 查询用户在群组中的身份(https://cloud.tencent.com/document/product/269/1626)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoleInGroupRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoleInGroupResponse'
+  /v4/group_open_http_svc/forbid_send_msg:
+    post:
+      operationId: forbid_send_msg
+      tags:
+        - group
+      summary: 批量禁言和取消禁言(https://cloud.tencent.com/document/product/269/1627)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForbidSendMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/get_group_shutted_uin:
+    post:
+      operationId: get_group_shutted_uin
+      tags:
+        - group
+      summary: 获取被禁言群成员列表(https://cloud.tencent.com/document/product/269/2925)
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGroupShuttedUinRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupShuttedUinResponse'
+  /v4/group_open_http_svc/send_group_msg:
+    post:
+      operationId: send_group_msg
+      tags:
+        - group
+      summary: 在群组中发送普通消息（https://cloud.tencent.com/document/product/269/1629）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendGroupMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendGroupMsgResponse'
+  /v4/group_open_http_svc/send_group_system_notification:
+    post:
+      operationId: send_group_system_notification
+      tags:
+        - group
+      summary: 在群组中发送系统通知（https://cloud.tencent.com/document/product/269/1630）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendGroupSystemNotificationRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/change_group_owner:
+    post:
+      operationId: change_group_owner
+      tags:
+        - group
+      summary: 转让群主（https://cloud.tencent.com/document/product/269/1633）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeGroupOwnerRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/group_msg_recall:
+    post:
+      operationId: group_msg_recall
+      tags:
+        - group
+      summary: 撤回群消息（https://cloud.tencent.com/document/product/269/12341）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMsgRecallRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMsgRecallResponse'
+  /v4/group_open_http_svc/import_group:
+    post:
+      operationId: import_group
+      tags:
+        - group
+      summary: 导入群基础资料（https://cloud.tencent.com/document/product/269/1634）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportGroupRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportGroupResponse'
+  /v4/group_open_http_svc/import_group_msg:
+    post:
+      operationId: import_group_msg
+      tags:
+        - group
+      summary: 导入群消息（https://cloud.tencent.com/document/product/269/1635）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportGroupMsgRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportGroupMsgResponse'
+  /v4/group_open_http_svc/import_group_member:
+    post:
+      operationId: import_group_member
+      tags:
+        - group
+      summary: 导入群成员（https://cloud.tencent.com/document/product/269/1636）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportGroupMemberRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportGroupMemberResponse'
+  /v4/group_open_http_svc/set_unread_msg_num:
+    post:
+      operationId: set_unread_msg_num
+      tags:
+        - group
+      summary: 设置成员未读消息计数（https://cloud.tencent.com/document/product/269/1637）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetUnreadMsgNumRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/delete_group_msg_by_sender:
+    post:
+      operationId: delete_group_msg_by_sender
+      tags:
+        - group
+      summary: 删除指定用户发送的消息（https://cloud.tencent.com/document/product/269/2359）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteGroupMsgBySenderRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/group_msg_get_simple:
+    post:
+      operationId: group_msg_get_simple
+      tags:
+        - group
+      summary: 拉取群历史消息（https://cloud.tencent.com/document/product/269/2738）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMsgGetSimpleRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMsgGetSimpleResponse'
+  /v4/group_open_http_svc/get_online_member_num:
+    post:
+      operationId: get_online_member_num
+      tags:
+        - group
+      summary: 获取直播群在线人数（https://cloud.tencent.com/document/product/269/49180）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOnlineMemberNumRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOnlineMemberNumResponse'
+  /v4/group_open_http_svc/get_group_attr:
+    post:
+      operationId: get_group_attr
+      tags:
+        - group
+      summary: 获取群自定义属性（https://cloud.tencent.com/document/product/269/67012）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGroupAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupAttrResponse'
+  /v4/group_open_http_svc/modify_group_attr:
+    post:
+      operationId: modify_group_attr
+      tags:
+        - group
+      summary: 修改群自定义属性（https://cloud.tencent.com/document/product/269/67010）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyGroupAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/clear_group_attr:
+    post:
+      operationId: clear_group_attr
+      tags:
+        - group
+      summary: 清空群自定义属性（https://cloud.tencent.com/document/product/269/67009）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClearGroupAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/group_open_http_svc/set_group_attr:
+    post:
+      operationId: set_group_attr
+      tags:
+        - group
+      summary: 重置群自定义属性（https://cloud.tencent.com/document/product/269/67011）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetGroupAttrRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+
+  # 全局禁言管理
+  /v4/openconfigsvr/setnospeaking:
+    post:
+      operationId: setnospeaking
+      tags:
+        - mute
+      summary: 设置全局禁言（https://cloud.tencent.com/document/product/269/4230）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetNoSpeakingRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommonResponse'
+  /v4/openconfigsvr/getnospeaking:
+    post:
+      operationId: getnospeaking
+      tags:
+        - mute
+      summary: 查询全局禁言（https://cloud.tencent.com/document/product/269/4229）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNoSpeakingRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNoSpeakingResponse'
+  # 运营管理
+  /v4/openconfigsvr/getappinfo:
+    post:
+      operationId: getappinfo
+      tags:
+        - operation
+      summary: 拉取运营数据（https://cloud.tencent.com/document/product/269/4193）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAppInfoRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppInfoResponse'
+  /v4/open_msg_svc/get_history:
+    post:
+      operationId: get_history
+      tags:
+        - operation
+      summary: 下载最近消息记录（https://cloud.tencent.com/document/product/269/1650）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOperateMsgHistoryRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOperateMsgHistoryResponse'
+  /v4/ConfigSvc/GetIPList:
+    post:
+      operationId: GetIPList
+      tags:
+        - operation
+      summary: 获取服务器 IP 地址（https://cloud.tencent.com/document/product/269/45438）
+      parameters:
+        - $ref: '#/components/parameters/Random'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIPListRequest'
+      responses:
+        200:
+          description: 正常响应
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIPListResponse'
+components:
+  parameters:
+    UserSig:
+      in: query
+      name: usersig
+      required: true
+      schema:
+        type: string
+    Identifier:
+      in: query
+      name: identifier
+      required: true
+      schema:
+        type: string
+    SdkAppId:
+      in: query
+      name: sdkappid
+      required: true
+      schema:
+        type: string
+    ContentType:
+      in: query
+      name: contenttype
+      required: true
+      schema:
+        type: string
+        default: 'json'
+    Random:
+      in: query
+      name: random
+      required: true
+      schema:
+        type: integer
+        format: uint32
+    Key:
+      in: query
+      name: key
+      required: true
+      schema:
+        type: string
+  schemas:
+    # 通用
+    GroupType:
+      type: string
+      enum:
+        - Work
+        - Private
+        - Public
+        - Meeting
+        - ChatRoom
+        - AVChatRoom
+        - Community
+    DefinedData:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+    ForbidCallbackControl:
+      type: string
+      enum:
+        - ForbidBeforeSendMsgCallback
+        - ForbidAfterSendMsgCallback
+    SendMsgControl:
+      type: string
+      enum:
+        - NoLastMsg
+        - NoUnread
+    OfflinePushInfo:
+      type: object
+      properties:
+        PushFlag:
+          type: integer
+          description: 0表示推送，1表示不离线推送。
+          enum:
+            - 0
+            - 1
+        Title:
+          type: string
+          description: 离线推送标题。该字段为 iOS 和 Android 共用。
+        Desc:
+          type: string
+          description: 离线推送内容。该字段会覆盖上面各种消息元素 TIMMsgElement 的离线推送展示文本。若发送的消息只有一个 TIMCustomElem 自定义消息元素，该 Desc 字段会覆盖 TIMCustomElem 中的 Desc 字段。如果两个 Desc 字段都不填，将收不到该自定义消息的离线推送。
+        Ext:
+          type: string
+          description: 离线推送透传内容。由于国内各 Android 手机厂商的推送平台要求各不一样，请保证此字段为 JSON 格式，否则可能会导致收不到某些厂商的离线推送。
+        AndroidInfo:
+          type: object
+          properties:
+            Sound:
+              type: string
+              description: Android 离线推送声音文件路径。
+            HuaWeiChannelID:
+              type: string
+              description: 华为手机 EMUI 10.0 及以上的通知渠道字段。该字段不为空时，会覆盖控制台配置的 ChannelID 值；该字段为空时，不会覆盖控制台配置的 ChannelID 值。
+            XiaoMiChannelID:
+              type: string
+              description: 小米手机 MIUI 10 及以上的通知类别（Channel）适配字段。该字段不为空时，会覆盖控制台配置的 ChannelID 值；该字段为空时，不会覆盖控制台配置的 ChannelID 值
+            OPPOChannelID:
+              type: string
+              description: OPPO 手机 Android 8.0 及以上的 NotificationChannel 通知适配字段。该字段不为空时，会覆盖控制台配置的 ChannelID 值；该字段为空时，不会覆盖控制台配置的 ChannelID 值。
+            GoogleChannelID:
+              type: string
+              description: Google 手机 Android 8.0 及以上的通知渠道字段。Google 推送新接口（上传证书文件）支持 channel id，旧接口（填写服务器密钥）不支持。
+            VIVOClassification:
+              type: string
+              description: VIVO 手机推送消息分类，“0”代表运营消息，“1”代表系统消息，不填默认为1。
+              enum:
+                - 0
+                - 1
+            HuaWeiImportance:
+              type: string
+              description: 华为推送通知消息分类，取值为 LOW、NORMAL，不填默认为 NORMAL。
+            ExtAsHuaweiIntentParam:
+              type: integer
+              description: 在控制台配置华为推送为“打开应用内指定页面”的前提下，传“1”表示将透传内容 Ext 作为 Intent 的参数，“0”表示将透传内容 Ext 作为 Action 参数。不填默认为0。两种传参区别可参见 华为推送文档（https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/andorid-basic-clickaction-0000001087554076#section20203190121410）。
+              enum:
+                - 0
+                - 1
+        ApnsInfo:
+          type: object
+          properties:
+            BadgeMode:
+              type: integer
+              description: 这个字段缺省或者为0表示需要计数，为1表示本条消息不需要计数，即右上角图标数字不增加。
+            Title:
+              type: string
+              description: 该字段用于标识 APNs 推送的标题，若填写则会覆盖最上层 Title。
+            SubTitle:
+              type: string
+              description: 该字段用于标识 APNs 推送的子标题。
+            Image:
+              type: string
+              description: 该字段用于标识 APNs 携带的图片地址，当客户端拿到该字段时，可以通过下载图片资源的方式将图片展示在弹窗上。
+            MutableContent:
+              type: integer
+              description: 为1表示开启 iOS 10 的推送扩展，默认为0。
+              default: 0
+    TIMMsgElement:
+      oneOf:
+        - $ref: '#/components/schemas/TIMTextElem'
+        - $ref: '#/components/schemas/TIMLocationElem'
+        - $ref: '#/components/schemas/TIMFaceElem'
+        - $ref: '#/components/schemas/TIMCustomElem'
+        - $ref: '#/components/schemas/TIMSoundElem'
+        - $ref: '#/components/schemas/TIMImageElem'
+        - $ref: '#/components/schemas/TIMFileElem'
+        - $ref: '#/components/schemas/TIMVideoFileElem'
+      discriminator:
+        propertyName: MsgType
+    TIMTextElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMTextElem
+          description: TIM 消息对象类型
+        MsgContent:
+          type: object
+          description: 对于每种 MsgType 用不同的 MsgContent 格式
+          required: [ Text ]
+          properties:
+            Text:
+              type: string
+    TIMLocationElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMLocationElem
+        MsgContent:
+          type: object
+          required: [ Longitude, Latitude, Desc ]
+          properties:
+            Longitude:
+              type: number
+            Latitude:
+              type: number
+            Desc:
+              type: string
+    TIMFaceElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMFaceElem
+        MsgContent:
+          type: object
+          required: [ Index, Data ]
+          properties:
+            Index:
+              type: integer
+            Data:
+              type: string
+    TIMCustomElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMCustomElem
+        MsgContent:
+          type: object
+          required: [ Data ]
+          properties:
+            Data:
+              type: string
+            Desc:
+              type: string
+            Ext:
+              type: string
+            Sound:
+              type: string
+    TIMSoundElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMSoundElem
+        MsgContent:
+          type: object
+          required: [ UUID, Url, Download_Flag ]
+          properties:
+            Url:
+              type: string
+            UUID:
+              type: string
+            Size:
+              type: integer
+            Second:
+              type: integer
+            Download_Flag:
+              type: integer
+              default: 2
+              enum:
+                - 2
+    ImageInfo:
+      type: object
+      required: [ Url, Type, Size, Width, Height ]
+      properties:
+        Type:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+        Size:
+          type: integer
+        Width:
+          type: integer
+        Height:
+          type: integer
+        URL:
+          type: string
+    TIMImageElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMImageElem
+        MsgContent:
+          type: object
+          required: [ UUID, ImageFormat ]
+          properties:
+            UUID:
+              type: string
+            ImageFormat:
+              type: integer
+              enum:
+                - 1
+                - 2
+                - 3
+                - 4
+                - 255
+            ImageInfoArray:
+              type: array
+              items:
+                $ref: '#/components/schemas/ImageInfo'
+            Type:
+              type: integer
+              enum:
+                - 1
+                - 2
+                - 3
+            Size:
+              type: integer
+            Width:
+              type: integer
+            Height:
+              type: integer
+            URL:
+              type: string
+    TIMFileElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMFileElem
+        MsgContent:
+          type: object
+          required: [ UUID, FileName, FileSize ]
+          properties:
+            Url:
+              type: string
+            UUID:
+              type: string
+            FileName:
+              type: string
+            FileSize:
+              type: integer
+            Download_Flag:
+              type: integer
+              enum:
+                - 2
+    TIMVideoFileElem:
+      type: object
+      required: [ MsgType, MsgContent ]
+      properties:
+        MsgType:
+          type: string
+          default: TIMVideoFileElem
+        MsgContent:
+          type: object
+          required: [ VideoUUID, VideoSecond, VideoSize, VideoFormat, ThumbUUID, ThumbSize, ThumbHeight, ThumbWidth, ThumbFormat ]
+          properties:
+            VideoUrl:
+              type: string
+            VideoUUID:
+              type: string
+            VideoSize:
+              type: integer
+            VideoSecond:
+              type: integer
+            VideoFormat:
+              type: string
+            VideoDownloadFlag:
+              type: integer
+              enum:
+                - 2
+            ThumbUrl:
+              type: string
+            ThumbUUID:
+              type: string
+            ThumbSize:
+              type: integer
+            ThumbWidth:
+              type: integer
+            ThumbHeight:
+              type: integer
+            ThumbFormat:
+              type: string
+            ThumbDownloadFlag:
+              type: integer
+              enum:
+                - 2
+
+    CommonResponse:
+      type: object
+      required:
+        - ErrorCode
+        - ErrorInfo
+      properties:
+        ActionStatus:
+          type: string
+          description: 请求处理的结果，OK 表示处理成功，FAIL 表示失败
+        ErrorInfo:
+          type: string
+          description: 错误信息
+        ErrorCode:
+          type: integer
+          description: 错误码，0表示成功，非0表示失败
+
+    # 账号管理
+    AccountImportRequest:
+      type: object
+      required:
+        - UserID
+      properties:
+        UserID:
+          type: string
+          description: 用户名，长度不超过32字节
+          maxLength: 32
+        Nick:
+          type: string
+          description: 用户昵称
+        FaceUrl:
+          type: string
+          description: 用户头像 URL
+
+    MultiAccountImportRequest:
+      type: object
+      required:
+        - Accounts
+      properties:
+        Accounts:
+          type: array
+          description: 用户名，单个用户名长度不超过32字节，单次最多导入100个用户名
+          maxItems: 100
+          items:
+            type: string
+            maxLength: 32
+    MultiAccountImportResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            FailAccounts:
+              description: 导入失败的帐号列表
+              type: array
+              items:
+                type: string
+    AccountDeleteRequest:
+      type: object
+      required:
+        - DeleteItem
+      properties:
+        DeleteItem:
+          type: array
+          description: 请求删除的帐号对象数组，单次请求最多支持100个帐号
+          maxItems: 100
+          items:
+            type: object
+            required: [ UserID ]
+            properties:
+              UserID:
+                description: 请求删除的帐号的 UserID
+                type: string
+    AccountDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 单个帐号的结果对象数组
+              items:
+                type: object
+                required:
+                  - UserID
+                  - ResultInfo
+                  - ResultCode
+                properties:
+                  ResultCode:
+                    type: integer
+                    description: 单个帐号的错误码，0表示成功，非0表示失败
+                  ResultInfo:
+                    type: string
+                    description: 单个帐号删除失败时的错误描述信息
+                  UserID:
+                    type: string
+                    description: 请求删除的帐号的 UserID
+    AccountCheckRequest:
+      type: object
+      required:
+        - CheckItem
+      properties:
+        CheckItem:
+          type: array
+          description: 请求检查的帐号对象数组，单次请求最多支持100个帐号
+          maxItems: 100
+          items:
+            type: object
+            required:
+              - UserID
+            properties:
+              UserID:
+                type: string
+                description: 请求检查的帐号的 UserID
+    AccountCheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 单个帐号的结果对象数组
+              items:
+                type: object
+                properties:
+                  ResultCode:
+                    type: integer
+                    description: 单个帐号的检查结果：0表示成功，非0表示失败
+                  ResultInfo:
+                    type: string
+                    description: 单个帐号检查失败时的错误描述信息
+                  UserID:
+                    type: string
+                    description: 请求检查的帐号的 UserID
+                  AccountStatus:
+                    type: string
+                    description: 单个帐号的导入状态：Imported 表示已导入，NotImported 表示未导入
+    KickRequest:
+      type: object
+      required:
+        - UserID
+      properties:
+        UserID:
+          type: string
+          description: 用户名
+    QueryOnlineStatusRequest:
+      type: object
+      required:
+        - To_Account
+      properties:
+        To_Account:
+          type: array
+          description: 需要查询这些 UserID 的登录状态，一次最多查询500个 UserID 的状态
+          maxItems: 500
+          items:
+            type: string
+        IsNeedDetail:
+          type: integer
+          description: 是否需要返回详细的登录平台信息。0表示不需要，1表示需要
+          enum:
+            - 0
+            - 1
+    QueryOnlineStatusResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            QueryResult:
+              type: array
+              description: 返回的用户在线状态结构化信息
+              items:
+                type: object
+                required:
+                  - To_Account
+                  - Status
+                properties:
+                  To_Account:
+                    type: string
+                    description: 返回的用户的 UserID
+                  Status:
+                    type: string
+                    description: 返回的用户状态，目前支持的状态有： 前台运行状态（Online）：客户端登录后和即时通信 IM 后台有长连接 后台运行状态（PushOnline）：iOS 和 Android 进程被 kill 或因网络问题掉线，进入 PushOnline 状态，此时仍然可以接收消息的离线推送。客户端切到后台，但是进程未被手机操作系统 kill 掉时，此时状态仍是 Online 未登录状态（Offline）：客户端主动退出登录或者客户端自上一次登录起7天之内未登录过 如果用户是多终端登录，则只要有一个终端的状态是 Online ，该字段值就是 Online
+                  Detail:
+                    type: object
+                    description: 详细的登录平台信息
+                    required:
+                      - Platform
+                      - Status
+                    properties:
+                      Platform:
+                        type: string
+                        description: 登录的平台类型。可能的返回值有："iPhone", "Android", "Web", "PC", "iPad", "Mac"。
+                      Status:
+                        type: string
+                        description: 该登录平台的状态
+            ErrorList:
+              type: array
+              description: 状态查询失败的帐号列表，在此列表中的目标帐号，状态查询失败或目标帐号不存在。若状态全部查询成功，则 ErrorList 为空
+              items:
+                type: object
+                required:
+                  - To_Account
+                  - ErrorCode
+                properties:
+                  To_Account:
+                    type: string
+                    description: 状态查询失败的目标帐号
+                  ErrorCode:
+                    type: integer
+                    description: 状态查询失败的错误码，若目标帐号的错误码为70107，表示该帐号不存在
+    # 单聊消息
+    SendSingleChatMsgRequest:
+      type: object
+      required: [ To_Account,MsgRandom,MsgBody ]
+      properties:
+        SyncOtherMachine:
+          type: integer
+          description: 1：把消息同步到 From_Account 在线终端和漫游上；2：消息不同步至 From_Account；若不填写默认情况下会将消息存 From_Account 漫游
+          enum:
+            - 1
+            - 2
+        From_Account:
+          type: string
+          description: 消息发送方 UserID（用于指定发送消息方帐号）
+        To_Account:
+          type: string
+          description: 消息接收方 UserID
+        MsgLifeTime:
+          type: integer
+          description: 消息离线保存时长（单位：秒），最长为7天（604800秒） 若设置该字段为0，则消息只发在线用户，不保存离线 若设置该字段超过7天（604800秒），仍只保存7天 若不设置该字段，则默认保存7天
+        MsgSeq:
+          type: integer
+          description: 消息序列号（32位无符号整数），后台会根据该字段去重及进行同秒内消息的排序，详细规则请看本接口的功能说明。若不填该字段，则由后台填入随机数
+        MsgRandom:
+          type: integer
+          description: 消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机
+        MsgTimeStamp:
+          type: integer
+          description: 消息时间戳，UNIX 时间戳（单位：秒）
+        ForbidCallbackControl:
+          type: array
+          description: 消息回调禁止开关，只对本条消息有效，ForbidBeforeSendMsgCallback 表示禁止发消息前回调，ForbidAfterSendMsgCallback 表示禁止发消息后回调
+          items:
+            type: string
+        SendMsgControl:
+          type: array
+          description: 消息发送控制选项，是一个 String 数组，只对本条消息有效。"NoUnread"表示该条消息不计入未读数。"NoLastMsg"表示该条消息不更新会话列表。"WithMuteNotifications"表示该条消息的接收方对发送方设置的免打扰选项生效（默认不生效）。
+          items:
+            type: string
+        MsgBody:
+          type: array
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+        CloudCustomData:
+          type: string
+        OfflinePushInfo:
+          $ref: '#/components/schemas/OfflinePushInfo'
+    SendSingleChatMsgResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MsgTime:
+              type: integer
+              description: 消息时间戳，UNIX 时间戳
+            MsgKey:
+              type: string
+              description: 消息唯一标识，用于撤回。长度不超过50个字符
+
+    BatchSendSingleChatMsgRequest:
+      type: object
+      required: [ To_Account,MsgRandom,MsgBody ]
+      properties:
+        SyncOtherMachine:
+          type: integer
+          description: 1：把消息同步到 From_Account 在线终端和漫游上 2：消息不同步至 From_Account；若不填写默认情况下会将消息存 From_Account 漫游
+          enum:
+            - 1
+            - 2
+        From_Account:
+          type: string
+          description: 管理员指定消息发送方帐号（若需设置 From_Account 信息，则该参数取值不能为空）
+        To_Account:
+          type: array
+          description: 消息接收方用户 UserID
+          items:
+            type: string
+        MsgLifeTime:
+          type: integer
+          description: 消息离线保存时长（单位：秒），最长为7天（604800秒）。若设置该字段为0，则消息只发在线用户，不保存离线及漫游
+          maximum: 604800
+        MsgSeq:
+          type: integer
+          description: 消息序列号（32位无符号整数），后台会根据该字段去重及进行同秒内消息的排序，详细规则请看本接口的功能说明。若不填该字段，则由后台填入随机数
+        MsgRandom:
+          type: integer
+          description: 消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机
+        SendMsgControl:
+          type: array
+          description: 消息发送控制选项，是一个 String 数组，只对本次请求有效。"NoUnread"表示该条消息不计入未读数。"NoLastMsg"表示该条消息不更新会话列表。"WithMuteNotifications"表示该条消息的接收方对发送方设置的免打扰选项生效（默认不生效）。
+          items:
+            type: string
+        MsgBody:
+          type: array
+          description: TIM 消息
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+        CloudCustomData:
+          type: string
+          description: 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+        OfflinePushInfo:
+          $ref: '#/components/schemas/OfflinePushInfo'
+    BatchSendSingleChatMsgResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MsgTime:
+              type: integer
+            MsgKey:
+              type: string
+            ErrorList:
+              type: array
+              items:
+                type: object
+                required:
+                  - To_Account
+                  - ErrorCode
+                properties:
+                  To_Account:
+                    type: string
+                  ErrorCode:
+                    type: integer
+
+    ImportMsgRequest:
+      type: object
+      required: [ SyncFromOldSystem, From_Account,To_Account,MsgTimeStamp,MsgRandom,MsgBody ]
+      properties:
+        SyncFromOldSystem:
+          type: integer
+          description: 该字段只能填1或2，其他值是非法值 1表示实时消息导入，消息计入未读计数 2表示历史消息导入，消息不计入未读
+          enum:
+            - 0
+            - 1
+        From_Account:
+          type: string
+          description: 消息发送方 UserID，用于指定发送消息方
+        To_Account:
+          type: string
+          description: 消息接收方 UserID
+        MsgSeq:
+          type: integer
+          description: 消息序列号（32位无符号整数），后台会根据该字段去重及进行同秒内消息的排序，详细规则请看本接口的功能说明。若不填该字段，则由后台填入随机数
+        MsgRandom:
+          type: integer
+          description: 消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机
+        MsgTimeStamp:
+          type: integer
+          description: 消息时间戳，UNIX 时间戳，单位为秒。后台会根据该字段去重，详细规则请看本接口的功能说明。
+        MsgBody:
+          type: array
+          description: 消息内容，具体格式请参考（https://cloud.tencent.com/document/product/269/2720）消息格式描述（注意，一条消息可包括多种消息元素，MsgBody 为 Array 类型）
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+        CloudCustomData:
+          type: string
+          description: 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+
+    GetRoamMsgRequest:
+      type: object
+      required: [ From_Account,To_Account,MaxCnt,MinTime,MaxTime ]
+      properties:
+        From_Account:
+          type: string
+          description: 会话其中一方的 UserID，若已指定发送消息方帐号，则为消息发送方
+        To_Account:
+          type: string
+          description: 会话其中一方的 UserID
+        MaxCnt:
+          type: integer
+          description: 请求的消息条数
+        MinTime:
+          type: integer
+          description: 请求的消息时间范围的最小值
+        MaxTime:
+          type: integer
+          description: 请求的消息时间范围的最大值
+        LastMsgKey:
+          type: string
+          description: 上一次拉取到的最后一条消息的 MsgKey，续拉时需要填该字段,填写方法见示例（https://cloud.tencent.com/document/product/269/42794）
+    GetRoamMsgResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            Complete:
+              type: integer
+              description: 是否全部拉取，0表示未全部拉取，需要续拉，1表示已全部拉取
+              enum:
+                - 0
+                - 1
+            MsgCnt:
+              type: integer
+              description: 本次拉取到的消息条数
+            LastMsgTime:
+              type: integer
+              description: 本次拉取到的消息里的最后一条消息的时间
+            LastMsgKey:
+              type: string
+              description: 本次拉取到的消息里的最后一条消息的标识
+            MsgList:
+              type: array
+              description: 返回的消息列表
+              items:
+                type: object
+                properties:
+                  From_Account:
+                    type: integer
+                    description: 消息发送方 UserID
+                  To_Account:
+                    type: integer
+                    description: 消息接收方 UserID
+                  MsgRandom:
+                    type: integer
+                    description: 消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机
+                  MsgTimeStamp:
+                    type: integer
+                    description: 消息时间戳，UNIX 时间戳（单位：秒
+                  MsgFlagBits:
+                    type: integer
+                    description: 该条消息的属性，0表示正常消息，8表示被撤回的消息
+                  MsgKey:
+                    type: string
+                    description: 标识该条消息，可用于 REST API（https://cloud.tencent.com/document/product/269/38980） 撤回单聊消息
+                  MsgBody:
+                    type: array
+                    description: 消息内容
+                    items:
+                      $ref: '#/components/schemas/TIMMsgElement'
+                  CloudCustomData:
+                    type: string
+                    description: 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+
+    MsgWithdrawRequest:
+      type: object
+      required: [ From_Account,To_Account,MsgKey ]
+      properties:
+        From_Account:
+          type: string
+          description: 消息发送方 UserID
+        To_Account:
+          type: string
+          description: 消息接收方 UserID
+        MsgKey:
+          type: string
+          description: 待撤回消息的唯一标识。该字段由REST API接口单发单聊消息（https://cloud.tencent.com/document/product/269/2282）和 批量发单聊消息（https://cloud.tencent.com/document/product/269/1612）返回
+
+    SetMsgReadRequest:
+      type: object
+      required: [ Report_Account,Peer_Account ]
+      properties:
+        Report_Account:
+          type: string
+          description: 进行消息已读的用户 UserId
+        Peer_Account:
+          type: string
+          description: 进行消息已读的单聊会话的另一方用户 UserId
+        MsgReadTime:
+          type: string
+          description: 时间戳（秒），该时间戳之前的消息全部已读。若不填，则取当前时间戳
+
+    GetC2cUnreadMsgNumRequest:
+      type: object
+      required: [ To_Account ]
+      properties:
+        To_Account:
+          type: string
+          description: 待查询的用户 UserId
+        Peer_Account:
+          type: array
+          description: 待查询的单聊会话对端的用户 UserId。若要查询单个会话的未读数，该字段必填该数组最大大小为10
+          maxItems: 10
+          items:
+            type: string
+    GetC2cUnreadMsgNumResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            AllC2CUnreadMsgNum:
+              type: integer
+              description: 单聊消息总未读数
+            C2CUnreadMsgNumList:
+              type: array
+              description: 单聊会话List
+              items:
+                type: object
+                properties:
+                  Peer_Account:
+                    type: string
+                    description: 单聊会话对端 UserId
+                  C2CUnreadMsgNum:
+                    type: string
+                    description: 该单聊会话的未读数
+            ErrorList:
+              type: array
+              items:
+                type: object
+                required:
+                  - Peer_Account
+                  - ErrorCode
+                properties:
+                  Peer_Account:
+                    type: string
+                    description: 查询错误的目标帐号
+                  ErrorCode:
+                    type: integer
+                    description: 查询错误的错误码。若目标帐号的错误码为70107表示该帐号不存在
+
+    # 全员推送
+    ImPushRequest:
+      type: object
+      required: [ MsgRandom,MsgBody ]
+      properties:
+        Condition:
+          type: object
+          description: Condition 共有4种条件类型，分别是：属性的或条件 AttrsOr、属性的与条件 AttrsAnd、标签的或条件 TagsOr、标签的与条件 TagsAnd。AttrsOr 和 AttrsAnd 可以并存，TagsOr 和 TagsAnd 也可以并存。但是标签和属性条件不能并存。如果没有 Condition，则推送给全部用户
+          items:
+            type: object
+            properties:
+              AttrsOr:
+                type: object
+                description: 属性的或条件
+              AttrsAnd:
+                type: object
+                description: 属性的与条件
+              TagsOr:
+                type: object
+                description: 标签的或条件
+              TagsAnd:
+                type: object
+                description: 标签的与条件
+        MsgRandom:
+          type: integer
+          description: 消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机
+        MsgBody:
+          type: array
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+        MsgLifeTime:
+          type: integer
+          description: 消息离线存储时间，单位秒，最多保存7天（604800秒）。默认为0，表示不离线存储，即只推在线用户
+          maximum: 604800
+        From_Account:
+          type: string
+          description: 消息推送方帐号
+        OfflinePushInfo:
+          $ref: '#/components/schemas/OfflinePushInfo'
+    ImPushResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            TaskId:
+              type: string
+              description: 推送任务 ID
+
+    ImSetAttrNameRequest:
+      type: object
+      required: [ AttrNames ]
+      properties:
+        AttrNames:
+          type: object
+
+    ImGetAttrNameRequest:
+      type: object
+    ImGetAttrNameResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            AttrNames:
+              type: object
+              description: 包含多个键对。每对键值对，表示第几个属性对应的名称。例如"0":"xxx"表示第0号属性的名称是 xxx
+
+    ImGetAttrRequest:
+      type: object
+      required: [ To_Account ]
+      properties:
+        To_Account:
+          type: array
+          description: 目标用户帐号列表
+          items:
+            type: string
+    ImGetAttrResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            UserAttrs:
+              type: array
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 用户帐号
+                  Attrs:
+                    type: object
+                    description: 属性内容
+
+    ImSetAttrRequest:
+      type: object
+      required: [ To_Account,Attrs ]
+      properties:
+        To_Account:
+          type: string
+          description: 目标用户帐号列表
+        Attrs:
+          type: object
+          description: 属性集合。每个属性是一个键值对，键为属性名，值为该用户对应的属性值。用户属性值不能超过50字节
+
+
+    ImRemoveAttrRequest:
+      type: object
+      required: [ To_Account,Attrs ]
+      properties:
+        To_Account:
+          type: string
+          description: 目标用户帐号列表
+        Attrs:
+          type: array
+          items:
+            type: string
+          description: 属性集合，注意这里只需要给出属性名即可
+
+    ImGetTagRequest:
+      type: object
+      required: [ To_Account ]
+      properties:
+        To_Account:
+          type: array
+          items:
+            type: string
+          description: 目标用户帐号列表
+    ImGetTagResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            UserTags:
+              type: array
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 用户帐号
+                  Tags:
+                    type: array
+                    description: Tags内容
+                    items:
+                      type: string
+    ImAddTagRequest:
+      type: object
+      required: [ To_Account,Tags ]
+      properties:
+        To_Account:
+          type: string
+          description: 目标用户帐号列表
+        Tags:
+          type: array
+          description: 标签集合
+          items:
+            type: string
+
+    ImRemoveTagRequest:
+      type: object
+      required: [ To_Account,Tags ]
+      properties:
+        UserTags:
+          type: array
+          description: 目标用户帐号列表
+          items:
+            type: string
+            properties:
+              To_Account:
+                type: string
+                description: 目标用户帐号列表
+              Tags:
+                type: array
+                items:
+                  type: string
+                description: 标签集合
+    ImRemoveAllTagRequest:
+      type: object
+      required: [ To_Account ]
+      properties:
+        To_Account:
+          type: array
+          description: 目标用户帐号
+          items:
+            type: string
+
+    PortraitSetRequest:
+      type: object
+      required: [ From_Account,ProfileItem ]
+      properties:
+        From_Account:
+          type: string
+          description: 消息发送方 UserID
+        ProfileItem:
+          type: array
+          description: 待设置的用户的资料对象数组，数组中每一个对象都包含了 Tag 和 Value
+          items:
+            type: object
+            required: [ Tag,Value ]
+            properties:
+              Tag:
+                type: string
+                description: 指定要设置的资料字段的名称，支持设置的资料字段有：1. 标配资料字段，详情可参见 标配资料字段（https://cloud.tencent.com/document/product/269/1500#.E6.A0.87.E9.85.8D.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）2. 自定义资料字段，详情可参见 自定义资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.87.AA.E5.AE.9A.E4.B9.89.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）
+              Value:
+                type: string
+                description: 待设置的资料字段的值，详情可参见 资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）
+    PortraitSetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+    PortraitGetRequest:
+      type: object
+      required: [ To_Account,TagList ]
+      properties:
+        To_Account:
+          type: array
+          description: 需要拉取这些 UserID 的资料；注意：每次拉取的用户数不得超过100，避免因回包数据量太大以致回包失败
+          items:
+            type: string
+        TagList:
+          type: array
+          description: 指定要拉取的资料字段的 Tag，支持的字段有：1. 标配资料字段，详情可参见 标配资料字段（https://cloud.tencent.com/document/product/269/1500#.E6.A0.87.E9.85.8D.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5） 2. 自定义资料字段，详情可参见 自定义资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.87.AA.E5.AE.9A.E4.B9.89.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）
+          items:
+            type: string
+
+    PortraitGetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            UserProfileItem:
+              type: array
+              description: 返回的用户资料结构化信息
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 返回的用户的 UserID
+                  ProfileItem:
+                    type: array
+                    description: 返回的用户的资料对象数组，数组中每一个对象都包含了 Tag 和 Value
+                    items:
+                      type: object
+                      properties:
+                        Tag:
+                          type: string
+                          description: 返回的资料对象的名称：1. 标配资料字段，详情可参见 标配资料字段（https://cloud.tencent.com/document/product/269/1500#.E6.A0.87.E9.85.8D.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）2. 自定义资料字段，详情可参见 自定义资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.87.AA.E5.AE.9A.E4.B9.89.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）
+                        Value:
+                          type: string
+                          description: 拉取的资料对象的值，详情可参见 资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+    # 关系链管理
+    FriendAddRequest:
+      type: object
+      required: [ From_Account,AddFriendItem ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要为该 UserID 添加好友
+        AddFriendItem:
+          type: array
+          description: 好友结构体对象
+          items:
+            type: object
+            required: [ To_Account,AddSource ]
+            properties:
+              To_Account:
+                type: string
+                description: 好友的 UserID
+              Remark:
+                type: string
+                description: From_Account 对 To_Account 的好友备注，详情可参见 标配好友字段(https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5)
+              GroupName:
+                type: string
+                description: From_Account 对 To_Account 的分组信息，添加好友时只允许设置一个分组，因此使用 String 类型即可，详情可参见 标配好友字段（https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+              AddSource:
+                type: string
+                description: 加好友来源字段，详情可参见 标配好友字段（https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+              AddWording:
+                type: string
+                description: From_Account 和 To_Account 形成好友关系时的附言信息，详情可参见 标配好友字段（标配好友字段）
+        AddType:
+          type: string
+          description: 加好友方式（默认双向加好友方式）：Add_Type_Single 表示单向加好友 Add_Type_Both 表示双向加好友
+        ForceAddFlags:
+          type: integer
+          description: 管理员强制加好友标记：1表示强制加好友，0表示常规加好友方式
+          enum:
+            - 0
+            - 1
+    FriendAddResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量加好友的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求添加的好友的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendImportRequest:
+      type: object
+      required: [ From_Account,AddFriendItem ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要为该 UserID 添加好友
+        AddFriendItem:
+          type: array
+          description: 好友结构体对象
+          items:
+            type: object
+            required: [ To_Account,AddSource ]
+            properties:
+              To_Account:
+                type: string
+                description: 好友的 UserID
+              Remark:
+                type: string
+                description: From_Account 对 To_Account 的好友备注，详情可参见 标配好友字段(https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5)
+              RemarkTime:
+                type: integer
+                description: From_Account 对 To_Account 的好友备注时间
+              GroupName:
+                type: array
+                description: From_Account 对 To_Account 的分组信息，详情可参见 标配好友字段(https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5)
+                items:
+                  type: string
+              AddSource:
+                type: string
+                description: 加好友来源字段，详情可参见 标配好友字段（https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+              AddWording:
+                type: string
+                description: From_Account 和 To_Account 形成好友关系时的附言信息，详情可参见 标配好友字段（标配好友字段）
+              AddTime:
+                type: integer
+                description: From_Account 和 To_Account 形成好友关系的时间
+              CustomItem:
+                type: array
+                description: From_Account 对 To_Account 的自定义好友数据，每一个成员都包含一个 Tag 字段和一个 Value 字段，详情可参见 自定义好友字段（https://cloud.tencent.com/document/product/269/1501#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+                items:
+                  type: object
+                  description: From_Account 对 To_Account 的自定义好友数据，每一个成员都包含一个 Tag 字段和一个 Value 字段，详情可参见 自定义好友字段（https://cloud.tencent.com/document/product/269/1501#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+                  properties:
+                    Tag:
+                      type: string
+                      description: 自定义好友字段的名称，使用前请通过即时通信 IM 控制台 >【应用配置】>【功能配置】申请自定义好友字段
+                    Value:
+                      type: string
+                      description: 自定义好友字段的值
+    FriendImportResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量加好友的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求添加的好友的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendUpdateRequest:
+      type: object
+      required: [ From_Account,UpdateItem ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要更新该 UserID 的关系链数据
+        UpdateItem:
+          type: array
+          description: 需要更新的好友对象数组
+          items:
+            type: object
+            required: [ To_Account,SnsItem ]
+            properties:
+              To_Account:
+                type: string
+                description: 好友的 UserID
+              SnsItem:
+                type: array
+                description: 需要更新的关系链数据对象数组
+                items:
+                  type: object
+                  required: [ Tag,Value ]
+                  properties:
+                    Tag:
+                      type: string
+                      description: 需要更新的关系链字段的字段名，目前只支持好友备注、好友分组、关系链自定义字段的更新操作，关系链字段的详细信息可参见 好友表（https://cloud.tencent.com/document/product/269/1501#.E5.A5.BD.E5.8F.8B.E8.A1.A8）
+                    Value:
+                      type: string
+                      description: 需要更新的关系链字段的值，关系链字段的值类型信息可参见 好友表（https://cloud.tencent.com/document/product/269/1501#.E5.A5.BD.E5.8F.8B.E8.A1.A8）
+    FriendUpdateResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量更新好友的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求更新的好友的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendDeleteRequest:
+      type: object
+      required: [ From_Account,UpdateItem ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要删除该 UserID 的好友
+        To_Account:
+          type: array
+          description: 待删除的好友的 UserID 列表，单次请求的 To_Account 数不得超过1000
+          maxItems: 1000
+          items:
+            type: string
+        DeleteType:
+          type: string
+          description: 删除模式，详情可参见 删除好友（https://cloud.tencent.com/document/product/269/1501#.E5.88.A0.E9.99.A4.E5.A5.BD.E5.8F.8B）
+    FriendDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量删除好友的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求删除的好友的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendDeleteAllRequest:
+      type: object
+      required: [ From_Account ]
+      properties:
+        From_Account:
+          type: string
+          description: 指定要清除好友数据的用户的 UserID
+        DeleteType:
+          type: string
+          description: 删除模式，默认删除单向好友，详情可参见 删除好友（https://cloud.tencent.com/document/product/269/1501#.E5.88.A0.E9.99.A4.E5.A5.BD.E5.8F.8B）
+    FriendDeleteAllResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendCheckRequest:
+      type: object
+      required: [ From_Account,To_Account,CheckType ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要校验该 UserID 的好友
+        To_Account:
+          type: array
+          description: 请求校验的好友的 UserID 列表，单次请求的 To_Account 数不得超过1000
+          maxItems: 1000
+          items:
+            type: string
+        CheckType:
+          type: string
+          description: 校验模式，详情可参见 校验好友（https://cloud.tencent.com/document/product/269/1501#.E6.A0.A1.E9.AA.8C.E5.A5.BD.E5.8F.8B）
+    FriendCheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            InfoItem:
+              type: array
+              description: 校验结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求校验的用户的 UserID
+                  Relation:
+                    type: string
+                    description: 校验成功时 To_Account 与 From_Account 之间的好友关系，详情可参见 校验好友（https://cloud.tencent.com/document/product/269/1501#.E6.A0.A1.E9.AA.8C.E5.A5.BD.E5.8F.8B）
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    FriendGetRequest:
+      type: object
+      required: [ From_Account,StartIndex ]
+      properties:
+        From_Account:
+          type: string
+          description: 指定要拉取好友数据的用户的 UserID
+        StartIndex:
+          type: integer
+          description: 分页的起始位置
+        StandardSequence:
+          type: integer
+          description: 上次拉好友数据时返回的 StandardSequence，如果 StandardSequence 字段的值与后台一致，后台不会返回标配好友数据
+        CustomSequence:
+          type: integer
+          description: 上次拉好友数据时返回的 CustomSequence，如果 CustomSequence 字段的值与后台一致，后台不会返回自定义好友数据
+    FriendGetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              items:
+                type: object
+                properties:
+                  ResultCode:
+                    type: integer
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+                  To_Account:
+                    type: string
+                    description: 请求添加为黑名单的用户 UserID
+            Fail_Account:
+              type: array
+              items:
+                type: string
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+            ErrorDisplay:
+              type: integer
+              description: 详细的客户端展示信息
+
+    FriendGetListRequest:
+      type: object
+      required: [ From_Account,To_Account,TagList ]
+      properties:
+        From_Account:
+          type: string
+          description: 指定要拉取好友数据的用户的 UserID
+        To_Account:
+          type: array
+          description: 好友的 UserID 列表 建议每次请求的好友数不超过100，避免因数据量太大导致回包失败
+          items:
+            type: string
+        TagList:
+          type: array
+          description: 指定要拉取的资料字段及好友字段：标配资料字段（https://cloud.tencent.com/document/product/269/1500#.E6.A0.87.E9.85.8D.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）、自定义资料字段（https://cloud.tencent.com/document/product/269/1500#.E8.87.AA.E5.AE.9A.E4.B9.89.E8.B5.84.E6.96.99.E5.AD.97.E6.AE.B5）、标配好友字段（https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）、自定义好友字段（https://cloud.tencent.com/document/product/269/1501#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）
+          items:
+            type: string
+    FriendGetListResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            InfoItem:
+              type: array
+              description: 好友对象数组，每一个好友对象都包含一个 To_Account 字段和一个 SnsProfileItem 数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求校验的用户的 UserID
+                  SnsProfileItem:
+                    type: array
+                    description: 保存好友数据的数组，数组每一个元素都包含一个 Tag 字段和一个 Value 字段
+                    items:
+                      type: object
+                      properties:
+                        Tag:
+                          type: string
+                          description: 字段的名称
+                        Value:
+                          type: string
+                          description: 字段的值
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/1643#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的 UserID 列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    BlackListAddRequest:
+      type: object
+      required: [ From_Account,To_Account ]
+      properties:
+        From_Account:
+          type: string
+          description: 请求为该 UserID 添加黑名单
+        To_Account:
+          type: array
+          description: 待添加为黑名单的用户 UserID 列表，单次请求的 To_Account 数不得超过1000
+          items:
+            type: string
+    BlackListAddResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量添加黑名单的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求添加为黑名单的用户 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/3719#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    BlackListDeleteRequest:
+      type: object
+      required: [ From_Account,To_Account ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要删除该 UserID 的黑名单
+        To_Account:
+          type: array
+          maxItems: 1000
+          description: 待删除的黑名单的 UserID 列表，单次请求的 To_Account 数不得超过1000
+          items:
+            type: string
+    BlackListDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 批量删除黑名单的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求删除的黑名单的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/3719#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    BlackListGetRequest:
+      type: object
+      required: [ From_Account,StartIndex,MaxLimited,LastSequence ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要拉取该 UserID 的黑名单
+        StartIndex:
+          type: integer
+          description: 拉取的起始位置
+        MaxLimited:
+          type: integer
+          description: 每页最多拉取的黑名单数
+        LastSequence:
+          type: integer
+          description: 上一次拉黑名单时后台返回给客户端的 Seq，初次拉取时为0
+    BlackListGetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            BlackListItem:
+              type: array
+              description: 黑名单对象数组，每一个黑名单对象都包括了 To_Account 和 AddBlackTimeStamp
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 黑名单的 UserID
+                  AddBlackTimeStamp:
+                    type: integer
+                    description: 添加黑名单的时间
+            StartIndex:
+              type: integer
+              description: 下页拉取的起始位置，0表示已拉完
+            CurruentSequence:
+              type: integer
+              description: 黑名单最新的 Seq
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    BlackListCheckRequest:
+      type: object
+      required: [ From_Account,To_Account,CheckType ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要校验该 UserID 的黑名单
+        To_Account:
+          type: array
+          description: 待校验的黑名单的 UserID 列表，单次请求的 To_Account 数不得超过1000
+          items:
+            type: string
+        CheckType:
+          type: string
+          description: 校验模式，详情可参见 校验黑名单（校验黑名单）
+    BlackListCheckResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            BlackListCheckItem:
+              type: array
+              description: 校验结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求校验的用户的 UserID
+                  Relation:
+                    type: string
+                    description: 校验成功时 To_Account 与 From_Account 之间的黑名单关系，详情可参见 校验黑名单（https://cloud.tencent.com/document/product/269/1501#.E6.A0.A1.E9.AA.8C.E9.BB.91.E5.90.8D.E5.8D.95）
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/3725#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    GroupAddRequest:
+      type: object
+      required: [ From_Account,GroupName ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要为该 UserID 添加新分组
+        To_Account:
+          type: array
+          description: 需要加入新增分组的好友的 UserID 列表
+          items:
+            type: string
+        GroupName:
+          type: array
+          description: 新增分组列表
+          items:
+            type: string
+    GroupAddResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 好友加入新增分组的结果对象数组
+              items:
+                type: object
+                properties:
+                  To_Account:
+                    type: string
+                    description: 请求加入新分组的好友的 UserID
+                  ResultCode:
+                    type: integer
+                    description: To_Account 的处理结果，0表示成功，非0表示失败，非0取值的详细描述请参见 错误码说明（https://cloud.tencent.com/document/product/269/10107#ErrorCode）
+                  ResultInfo:
+                    type: string
+                    description: To_Account 的错误描述信息，成功时该字段为空
+            Fail_Account:
+              type: array
+              description: 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
+              items:
+                type: string
+            CurrentSequence:
+              type: integer
+              description: 返回最新的分组 Sequence
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    GroupDeleteRequest:
+      type: object
+      required: [ From_Account,GroupName ]
+      properties:
+        From_Account:
+          type: string
+          description: 需要删除该 UserID 的分组
+        GroupName:
+          type: array
+          description: 新增分组列表
+          items:
+            type: string
+    GroupDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            CurrentSequence:
+              type: integer
+              description: 返回最新的分组 Sequence
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    GroupGetRequest:
+      type: object
+      required: [ From_Account ]
+      properties:
+        From_Account:
+          type: string
+          description: 指定要拉取分组的用户的 UserID
+        NeedFriend:
+          type: string
+          description: 是否需要拉取分组下的 User 列表, Need_Friend_Type_Yes： 需要拉取, 不填时默认不拉取, 只有 GroupName 为空时有效
+        GroupName:
+          type: array
+          description: 要拉取的分组名称
+          items:
+            type: string
+    GroupGetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ResultItem:
+              type: array
+              description: 拉取分组的结果对象数组
+              items:
+                type: object
+                properties:
+                  GroupName:
+                    type: string
+                    description: 分组名
+                  FriendNumber:
+                    type: integer
+                    description: 该分组下的好友数量
+                  To_Account:
+                    type: array
+                    description: 该分组下的好友的 UserID
+                    items:
+                      type: string
+            CurrentSequence:
+              type: integer
+              description: 返回最新的分组 Sequence
+              items:
+                type: string
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    # 最近联系人
+    GetRecentContactListGroupGetRequest:
+      type: object
+      required: [ From_Account,TimeStamp,StartIndex,TopTimeStamp,TopStartIndex,AssistFlags ]
+      properties:
+        From_Account:
+          type: string
+          description: 填 UserID，请求拉取该用户的会话列表
+        TimeStamp:
+          type: integer
+          description: 普通会话的起始时间，第一页填 0
+        StartIndex:
+          type: integer
+          description: 普通会话的起始位置，第一页填 0
+        TopTimeStamp:
+          type: integer
+          description: 置顶会话的起始时间，第一页填 0
+        TopStartIndex:
+          type: integer
+          description: 置顶会话的起始位置，第一页填 0
+        AssistFlags:
+          type: integer
+          description: 会话辅助标志位： bit 0 - 是否支持置顶会话 bit 1 - 是否返回空会话 bit 2 - 是否支持置顶会话分页
+    GetRecentContactListGroupGetResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            SessionItem:
+              type: array
+              description: 会话对象数组
+              items:
+                type: object
+                properties:
+                  Type:
+                    type: integer
+                    description: 会话类型：1 表示 C2C 会话；2 表示 G2C 会话
+                  To_Account:
+                    type: string
+                    description: C2C 会话才会返回，返回会话方的 UserID
+                  GroupId:
+                    type: string
+                    description: G2C 会话才会返回，返回群 ID
+                  MsgTime:
+                    type: integer
+                    description: 会话时间
+                  TopFlag:
+                    type: integer
+                    description: 置顶标记：0 标识普通会话；1 标识置顶会话
+            CompleteFlag:
+              type: integer
+              description: 结束标识：1 表示已返回全量会话，0 表示还有会话没拉完
+            TimeStamp:
+              type: integer
+              description: 普通会话下一页拉取的起始时间，分页拉取时通过请求包的 TimeStamp 字段带给移动通信后台
+            StartIndex:
+              type: integer
+              description: 普通会话下一页拉取的起始位置，分页拉取时通过请求包的 StartIndex 字段带给移动通信后台
+            TopTimeStamp:
+              type: integer
+              description: 置顶会话下一页拉取的起始时间，分页拉取时通过请求包的 TopTimeStamp 字段带给移动通信后台
+            TopStartIndex:
+              type: integer
+              description: 置顶会话下一页拉取的起始位置，分页拉取时通过请求包的 TopStartIndex 字段带给移动通信后台
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    GetRecentContactListGroupDeleteRequest:
+      type: object
+      required: [ From_Account,Type ]
+      properties:
+        From_Account:
+          type: string
+          description: 请求删除该 UserID 的会话
+        Type:
+          type: integer
+          description: 会话类型：1 表示 C2C 会话；2 表示 G2C 会话
+          enum:
+            - 1
+            - 2
+        To_Account:
+          type: string
+          description: C2C 会话才赋值，C2C 会话方的 UserID
+        ToGroupid:
+          type: string
+          description: G2C 会话才赋值，G2C 会话的群 ID
+        ClearRamble:
+          type: integer
+          description: 是否清理漫游消息：1 表示清理漫游消息；0 表示不清理漫游消息
+          enum:
+            - 1
+            - 0
+    GetRecentContactListGroupDeleteResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ErrorDisplay:
+              type: string
+              description: 详细的客户端展示信息
+
+    # 群组管理
+    GetAppidGroupListRequest:
+      type: object
+      properties:
+        Limit:
+          type: integer
+          description: 本次获取的群组 ID 数量的上限，不得超过 10000。如果不填，默认为最大值 10000
+          maximum: 10000
+          default: 10000
+        Next:
+          type: integer
+          description: 群太多时分页拉取标志，第一次填0，以后填上一次返回的值，返回的 Next 为0代表拉完了
+        GroupType:
+          type: string
+          description: 如果仅需要返回特定群组形态的群组，可以通过 GroupType 进行过滤，但此时返回的 TotalCount 的含义就变成了 App 中属于该群组形态的群组总数。不填为获取所有类型的群组。群组形态包括 Public（公开群），Private（即 Work，好友工作群），ChatRoom（即 Meeting，会议群），AVChatRoom（音视频聊天室），BChatRoom（在线成员广播大群）和社群（Community）
+
+    GetAppidGroupListResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            TotalCount:
+              type: integer
+              description: App 当前的群组总数。如果仅需要返回特定群组形态的群组，可以通过 GroupType 进行过滤，但此时返回的 TotalCount 的含义就变成了 App 中该群组形态的群组总数；例如：假设 App 旗下总共 50000 个群组，其中有 20000 个为公开群组，如果将请求包体中的 GroupType 设置为 Public，那么不论 Limit 和 Offset 怎样设置，应答包体中的 TotalCount 都为 20000，且 GroupIdList 中的群组全部为公开群组
+            GroupIdList:
+              type: array
+              description: 获取到的群组 ID 的集合
+              items:
+                type: object
+                properties:
+                  GroupId:
+                    type: string
+            Next:
+              type: integer
+              description: 分页拉取的标志
+    CreateGroupRequest:
+      type: object
+      required:
+        - Type
+        - Name
+      properties:
+        Owner_Account:
+          type: string
+          description: 群主 ID（需是 已导入(https://cloud.tencent.com/document/product/269/1608))的帐号）。填写后自动添加到群成员中；如果不填，群没有群主
+        Type:
+          $ref: '#/components/schemas/GroupType'
+        GroupId:
+          type: string
+          description: 为了使得群组 ID 更加简单，便于记忆传播，腾讯云支持 App 在通过 REST API 创建群组时 自定义群组 ID(https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E7.BE.A4.E7.BB.84-id)
+        Name:
+          type: string
+          maxLength: 30
+          description: 群名称，最长30字节，使用 UTF-8 编码，1个汉字占3个字节
+        Introduction:
+          type: string
+          maxLength: 240
+          description: 群简介，最长240字节，使用 UTF-8 编码，1个汉字占3个字节
+        Notification:
+          type: string
+          maxLength: 300
+          description: 群公告，最长300字节，使用 UTF-8 编码，1个汉字占3个字节
+        FaceUrl:
+          type: string
+          maxLength: 100
+          description: 群头像 URL，最长100字节
+        MaxMemberCount:
+          type: integer
+          description: 最大群成员数量，缺省时的默认值：付费套餐包上限，例如体验版是20，如果升级套餐包，需按照修改群基础资料修改这个字段
+        ApplyJoinOption:
+          type: string
+          description: 申请加群处理方式。包含 FreeAccess（自由加入），NeedPermission（需要验证），DisableApply（禁止加群），不填默认为 NeedPermission（需要验证） 仅当创建支持申请加群的 群组(https://cloud.tencent.com/document/product/269/1502#.E5.8A.A0.E7.BE.A4.E6.96.B9.E5.BC.8F.E5.B7.AE.E5.BC.82) 时，该字段有效
+          enum:
+            - FreeAccess
+            - NeedPermission
+            - DisableApply
+        AppDefinedData:
+          type: array
+          items:
+            $ref: '#/components/schemas/DefinedData'
+        MemberList:
+          type: array
+          description: 群组维度的自定义字段，默认情况是没有的，可以通过 即时通信 IM 控制台(https://console.cloud.tencent.com/im) 进行配置，详情请参阅 自定义字段(https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5)
+          maxItems: 100
+          items:
+            type: object
+            required: [ Member_Account ]
+            properties:
+              Member_Account:
+                type: string
+              Role:
+                type: string
+                description: 群内身份，包括 Owner 群主、Admin 群管理员以及 Member 群成员
+              JoinTime:
+                type: integer
+                description: 入群时间
+              MsgSeq:
+                type: integer
+                description: 该成员当前已读消息 Seq
+              MsgFlag:
+                type: string
+                description: 消息接收选项 消息接收选项，包括如下几种 AcceptAndNotify 表示接收并提示 AcceptNotNotify 表示接收不提示（不会触发 APNs 远程推送） Discard 表示屏蔽群消息（不会向客户端推送消息）
+              NameCard:
+                type: string
+                description: 可读可写。最长50字节，不可调整
+                maxLength: 50
+              LastSendMsgTime:
+                type: integer
+                description: 最后发送消息的时间	支持三个普通群，不支持直播群
+              AppMemberDefinedData:
+                type: array
+                description: 群成员维度的自定义字段，默认情况是没有的，可以通过 即时通信 IM 控制台(https://console.cloud.tencent.com/im) 进行配置，详情请参阅 自定义字段(https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5)
+                items:
+                  $ref: '#/components/schemas/DefinedData'
+    CreateGroupResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            GroupId:
+              type: string
+
+    GetGroupInfoRequest:
+      type: object
+      required: [ GroupIdList ]
+      properties:
+        GroupIdList:
+          type: array
+          description: 需要拉取的群组列表
+          items:
+            type: string
+        ResponseFilter:
+          type: object
+          description: 包含三个过滤器：GroupBaseInfoFilter，MemberInfoFilter，AppDefinedDataFilter_Group，分别是基础信息字段过滤器，成员信息字段过滤器，群组维度的自定义字段过滤器
+          properties:
+            GroupBaseInfoFilter:
+              type: array
+              description: 基础信息字段过滤器，指定需要获取的基础信息字段，基础信息字段详情请参阅 群基础资料（https://cloud.tencent.com/document/product/269/1502#GroupBaseInfoFilter）
+              items:
+                type: string
+            MemberInfoFilter:
+              type: array
+              description: 成员信息字段过滤器，指定需要获取的成员信息字段，成员信息字段详情请参阅 群成员资料（https://cloud.tencent.com/document/product/269/1502#SelfInfoFilter）
+              items:
+                type: string
+            AppDefinedDataFilter_Group:
+              type: array
+              description: 该字段用来群组维度的自定义字段过滤器，指定需要获取的群组维度的自定义字段，详情请参阅 自定义字段（https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5）
+              items:
+                type: string
+            AppDefinedDataFilter_GroupMember:
+              type: array
+              description: 该字段用来群成员维度的自定义字段过滤器，指定需要获取的群成员维度的自定义字段，详情请参阅 自定义字段（https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5）
+              items:
+                type: string
+    GetGroupInfoResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            GroupInfo:
+              type: array
+              description: 返回结果为群组信息数组，内容包括群基础资料字段、群成员资料字段、群组维度自定义字段和群成员维度自定义字段，字段详情请参阅 群组数据结构介绍（https://cloud.tencent.com/document/product/269/1502#.E7.BE.A4.E7.BB.84.E6.95.B0.E6.8D.AE.E7.BB.93.E6.9E.84.E4.BB.8B.E7.BB.8D）
+              items:
+                type: object
+                properties:
+                  GroupId:
+                    type: string
+                    description: 群组的唯一标识 只读。群组 ID，App 内保证唯一，其格式前缀为 @TGS#。另外，App 亦可自定义群组 ID
+                  Type:
+                    type: string
+                    description: 群组类型 只读。默认支持以下群组类型：好友工作群（Work）、陌生人社交群（Public）、临时会议群（Meeting）、直播群（AVChatRoom）、社群（Community），详情请参阅 群组类型介绍（https://cloud.tencent.com/document/product/269/1502#GroupType） 旧版本 SDK 中还包含 Private、ChatRoom 以及 BChatRoom 类型，不建议使用
+                  Name:
+                    type: string
+                    description: 群组名称 可读可写。最长30字节，不可调整
+                    maxLength: 30
+                  Introduction:
+                    type: string
+                    description: 群组简介，可读可写。最长240字节，不可调整
+                    maxLength: 240
+                  Notification:
+                    type: string
+                    description: 群组公告，可读可写。最长300字节，不可调整
+                    maxLength: 240
+                  FaceUrl:
+                    type: string
+                    description: 群组头像 URL，可读可写。最长100字节，不可调整
+                    maxLength: 100
+                  Owner_Account:
+                    type: string
+                    description: 群主 ID 只读
+                  CreateTime:
+                    type: integer
+                    description: 群组的创建时间 只读
+                  InfoSeq:
+                    type: integer
+                    description: 群资料的每次变都会增加该值 只读
+                  LastInfoTime:
+                    type: integer
+                    description: 群组最后一次信息变更时间	只读
+                  LastMsgTime:
+                    type: integer
+                    description: 群组内最后发消息的时间	只读
+                  NextMsgSeq:
+                    type: integer
+                    description: 群内下一条消息的 Seq	只读  群组内每一条消息都有一条唯一的消息 Seq，且该 Seq 是按照发消息顺序而连续的。从1开始，群内每增加一条消息，NextMsgSeq 就会增加1（默认情况下系统消息比如进退群等通知也属于消息，会导致 NextMsgSeq 加1）
+                  MemberNum:
+                    type: integer
+                    description: 当前成员数量	只读
+                  MaxMemberNum:
+                    type: integer
+                    description: 最大成员数量	缺省时的默认值：付费套餐包上限，例如体验版是20，如果升级套餐包，需按照修改群基础资料修改这个字段到对应数值
+                  ApplyJoinOption:
+                    type: string
+                    description: 申请加群选项	申请加群选项包括如下几种：DisableApply 表示禁止任何人申请加入 NeedPermission 表示需要群主或管理员审批 FreeAccess 表示允许无需审批自由加入群组
+
+    GetGroupMemberInfoRequest:
+      type: object
+      required: [ GroupId ]
+      properties:
+        GroupId:
+          type: string
+          description: 需要拉取成员信息的群组的 ID
+        MemberInfoFilter:
+          type: array
+          description: 需要获取哪些信息， 如果没有该字段则为群成员全部资料，成员信息字段详情请参阅 群成员资料（https://cloud.tencent.com/document/product/269/1502#SelfInfoFilter）
+          items:
+            type: string
+        MemberRoleFilter:
+          type: array
+          description: 拉取指定身份的群成员资料。如没有填写该字段，默认为所有身份成员资料，成员身份可以为：“Owner”，“Admin”，“Member”
+          items:
+            type: string
+        AppDefinedDataFilter_GroupMember:
+          type: array
+          description: 默认情况是没有的。该字段用来群成员维度的自定义字段过滤器，指定需要获取的群成员维度的自定义字段，群成员维度的自定义字段详情请参阅 自定义字段（https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5）
+          items:
+            type: string
+        Limit:
+          type: integer
+          description: 一次最多获取多少个成员的资料，不得超过6000。如果不填，则获取群内全部成员的信息
+        Offset:
+          type: integer
+          description: 从第几个成员开始获取，如果不填则默认为0，表示从第一个成员开始获取
+        Next:
+          type: string
+          description: 上一次拉取到的成员位置，社群必填，社群不支持 Offset 参数，使用 Next 参数，首次调用填写""，续拉使用返回中的 Next 值
+    GetGroupMemberInfoResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MemberNum:
+              type: integer
+              description: 本群组的群成员总数
+            MemberList:
+              type: array
+              description: 获取到的群成员列表，其中包含了全部或者指定的群成员信息，成员信息字段详情请参阅 群成员资料（https://cloud.tencent.com/document/product/269/1502#SelfInfoFilter）
+              items:
+                type: object
+                properties:
+                  Member_Account:
+                    type: string
+                    description: 群成员 ID 只读
+                  Role:
+                    type: string
+                    description: 群内身份	群内身份，包括 Owner 群主、Admin 群管理员以及 Member 群成员
+                  JoinTime:
+                    type: integer
+                    description: 入群时间	只读
+                  MsgSeq:
+                    type: integer
+                    description: 该成员当前已读消息 Seq	只读
+                  MsgFlag:
+                    type: string
+                    description: 消息接收选项	消息接收选项，包括如下几种：AcceptAndNotify 表示接收并提示；AcceptNotNotify 表示接收不提示（不会触发 APNs 远程推送）；Discard 表示屏蔽群消息（不会向客户端推送消息）
+                  LastSendMsgTime:
+                    type: integer
+                    description: 最后发送消息的时间	支持三个普通群，不支持直播群
+                  NameCard:
+                    type: string
+                    description: 群名片	可读可写。最长50字节，不可调整
+                    maxLength: 50
+            AppMemberDefinedData:
+              type: array
+              description: 返回的群成员自定义字段信息
+              items:
+                type: object
+                properties:
+                  Key:
+                    type: string
+                  Value:
+                    type: string
+            Next:
+              type: string
+              description: 下一次请求应该传的 Next 值，仅查询 Community（社群）时会返回该字段
+
+    ModifyGroupBaseInfoRequest:
+      type: object
+      required: [ GroupId ]
+      properties:
+        GroupId:
+          type: string
+          description: 需要拉取成员信息的群组的 ID
+        Name:
+          type: string
+          description: 群名称，最长30字节
+          maxLength: 30
+        Introduction:
+          type: string
+          description: 群简介，最长240字节
+          maxLength: 240
+        Notification:
+          type: string
+          description: 群公告，最长300字节
+          maxLength: 300
+        FaceUrl:
+          type: string
+          description: 群头像 URL，最长100字节
+          maxLength: 100
+        MaxMemberNum:
+          type: integer
+          description: 最大群成员数量；私有群、公开群和聊天室：该字段阈值请参考 群组系统（https://cloud.tencent.com/document/product/269/1502#.E7.BE.A4.E7.BB.84.E9.99.90.E5.88.B6.E5.B7.AE.E5.BC.82） 和 计费概述（https://cloud.tencent.com/document/product/269/40267#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85） 中的群成员人数上限相关说明；音视频聊天室和在线成员广播大群：该字段为无效字段，无需填写
+        ApplyJoinOption:
+          type: string
+          description: 申请加群处理方式。包含 FreeAccess（自由加入），NeedPermission（需要验证），DisableApply（禁止加群）
+        AppDefinedData:
+          type: array
+          description: 默认情况是没有的。开通群组维度的自定义字段详情请参见 自定义字段（https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5）
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+              Value:
+                type: string
+        ShutUpAllMember:
+          type: string
+          description: 群内群成员禁言，只有群管理员和群主以及系统管理员可以发言 设置全员禁言（选填）:"On"开启，"Off"关闭
+
+    AddGroupMemberRequest:
+      type: object
+      required:
+        - GroupId
+        - MemberList
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        Silence:
+          type: integer
+          description: 是否静默加人。0：非静默加人；1：静默加人。不填该字段默认为0
+          enum:
+            - 0
+            - 1
+        MemberList:
+          type: array
+          description: 待添加的群成员数组
+          items:
+            type: object
+            required:
+              - Member_Account
+            properties:
+              Member_Account:
+                type: string
+                description: 待添加的群成员 UserID
+    AddGroupMemberResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MemberList:
+              type: array
+              items:
+                type: object
+                required:
+                  - Member_Account
+                  - Result
+                properties:
+                  Member_Account:
+                    type: string
+                    description: 返回的群成员 UserID
+                  Result:
+                    type: integer
+                    description: 加人结果：0-失败；1-成功；2-已经是群成员；3-等待被邀请者确认
+
+    DeleteGroupMemberRequest:
+      type: object
+      required:
+        - GroupId
+        - MemberToDel_Account
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        Silence:
+          type: integer
+          description: 是否静默删人。0表示非静默删人，1表示静默删人。静默即删除成员时不通知群里所有成员，只通知被删除群成员。不填写该字段时默认为0
+          enum:
+            - 0
+            - 1
+        Reason:
+          type: string
+          description: 踢出用户原因
+        MemberToDel_Account:
+          type: array
+          description: 待删除的群成员
+          items:
+            type: string
+
+    ModifyGroupMemberInfoRequest:
+      type: object
+      required:
+        - GroupId
+        - Member_Account
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        Member_Account:
+          type: string
+          description: 要操作的群成员
+        Role:
+          type: string
+          description: 成员身份，Admin/Member 分别为设置/取消管理员
+        MsgFlag:
+          type: string
+          description: 消息屏蔽类型
+        NameCard:
+          type: string
+          description: 群名片（最大不超过50个字节）
+          maxLength: 50
+        AppMemberDefinedData:
+          type: array
+          description: 群成员维度的自定义字段，默认情况是没有的，可以通过 即时通信 IM 控制台（https://console.cloud.tencent.com/im） 进行配置，详情请参阅 群组系统（https://cloud.tencent.com/document/product/269/1502）
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 要操作的群成员自定义字段Key
+              Value:
+                type: string
+                description: 要设置的数据内容
+        ShutUpTime:
+          type: integer
+          description: 需禁言时间，单位为秒，0表示取消禁言
+
+    DestroyGroupRequest:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+
+    GetJoinedGroupListRequest:
+      type: object
+      required:
+        - Member_Account
+      properties:
+        Member_Account:
+          type: string
+          description: 需要查询的用户帐号
+        WithHugeGroups:
+          type: integer
+          description: 是否获取用户加入的 AVChatRoom(直播群)，0表示不获取，1表示获取。默认为0
+          enum:
+            - 0
+            - 1
+        WithNoActiveGroups:
+          type: integer
+          description: 是否获取用户已加入但未激活的 Private（即新版本中 Work，好友工作群) 群信息，0表示不获取，1表示获取。默认为0
+          enum:
+            - 0
+            - 1
+        Limit:
+          type: integer
+          description: 单次拉取的群组数量，如果不填代表所有群组
+        Offset:
+          type: integer
+          description: 从第多少个群组开始拉取
+        GroupType:
+          type: string
+          description: 拉取哪种群组类型，例如 Public(陌生人社交群)，Private（即新版本Work，好友工作群)，ChatRoom （即新版本Meeting，会议群），AVChatRoom(直播群)，Community（社群），不填为拉取所有
+        ResponseFilter:
+          type: object
+          description: 分别包含 GroupBaseInfoFilter 和 SelfInfoFilter 两个过滤器； GroupBaseInfoFilter 表示需要拉取哪些基础信息字段，详情请参阅 群组系统；SelfInfoFilter 表示需要拉取用户在每个群组中的哪些个人资料，详情请参阅 群组系统 。
+          properties:
+            GroupBaseInfoFilter:
+              type: array
+              description: 需要拉取哪些基础信息字段，详情请参阅 群组系统（https://cloud.tencent.com/document/product/269/1502#GroupBaseInfoFilter）
+              items:
+                type: string
+            SelfInfoFilter:
+              type: array
+              description: 需要拉取用户在每个群组中的哪些个人资料，详情请参阅 群组系统 （https://cloud.tencent.com/document/product/269/1502#SelfInfoFilter）。
+              items:
+                type: string
+    GetJoinedGroupListResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            TotalCount:
+              type: integer
+              description: 用户所加入的群组个数
+            GroupIdList:
+              type: array
+              description: 拉取到的群组信息，返回的结果是根据过滤器中设置的过滤字段进行过滤后的信息，字段详情请参阅 群组数据结构介绍（https://cloud.tencent.com/document/product/269/1502#.E7.BE.A4.E7.BB.84.E6.95.B0.E6.8D.AE.E7.BB.93.E6.9E.84.E4.BB.8B.E7.BB.8D）
+              items:
+                type: object
+                properties:
+                  GroupId:
+                    type: string
+                    description: 群组的唯一标识	只读了； 群组 ID，App 内保证唯一，其格式前缀为 @TGS#。另外，App 亦可自定义群组 ID
+                  Type:
+                    type: integer
+                    description: 只读 默认支持以下群组类型：好友工作群（Work）、陌生人社交群（Public）、临时会议群（Meeting）、直播群（AVChatRoom）、社群（Community），详情请参阅 群组类型介绍；旧版本 SDK 中还包含 Private、ChatRoom 以及 BChatRoom 类型，不建议使用
+                  Name:
+                    type: string
+                    description: 群组名称	可读可写。最长30字节，不可调整
+                    maxLength: 30
+                  Introduction:
+                    type: string
+                    description: 群组简介	可读可写。最长240字节，不可调整
+                    maxLength: 240
+                  Notification:
+                    type: string
+                    maxLength: 300
+                    description: 群组公告	可读可写。最长300字节，不可调整
+                  FaceUrl:
+                    type: string
+                    description: 群组头像 URL 可读可写。最长100字节，不可调整
+                    maxLength: 100
+                  Owner_Account:
+                    type: string
+                    description: 群主 ID	只读
+                  CreateTime:
+                    type: integer
+                    description: 群组的创建时间	只读
+                  InfoSeq:
+                    type: integer
+                    description: 群资料的每次变都会增加该值	只读
+                  LastInfoTime:
+                    type: integer
+                    description: 群组最后一次信息变更时间	只读
+                  LastMsgTime:
+                    type: integer
+                    description: 群组内最后发消息的时间	只读
+                  NextMsgSeq:
+                    type: integer
+                    description: 群内下一条消息的 Seq	只读  群组内每一条消息都有一条唯一的消息 Seq，且该 Seq 是按照发消息顺序而连续的。从1开始，群内每增加一条消息，NextMsgSeq 就会增加1（默认情况下系统消息比如进退群等通知也属于消息，会导致 NextMsgSeq 加1）
+                  MemberNum:
+                    type: integer
+                    description: 当前成员数量	只读
+                  MaxMemberNum:
+                    type: integer
+                    description: 最大成员数量	缺省时的默认值：付费套餐包上限，例如体验版是20，如果升级套餐包，需按照修改群基础资料修改这个字段到对应数值
+                  ApplyJoinOption:
+                    type: string
+                    description: 申请加群选项	申请加群选项包括如下几种：DisableApply 表示禁止任何人申请加入 NeedPermission 表示需要群主或管理员审批 FreeAccess 表示允许无需审批自由加入群组
+    GetRoleInGroupRequest:
+      type: object
+      required:
+        - GroupId
+        - User_Account
+      properties:
+        GroupId:
+          type: string
+          description: 需要查询的群组 ID
+        User_Account:
+          type: array
+          description: 表示需要查询的用户帐号，最多支持500个帐号
+          maxItems: 500
+          items:
+            type: string
+    GetRoleInGroupResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            UserIdList:
+              type: array
+              description: 拉取到的成员角色，包括：Owner(群主)，Admin(群管理员)，Member(普通群成员），NotMember(非群成员)
+              items:
+                type: object
+                properties:
+                  Member_Account:
+                    type: string
+                  Role:
+                    type: string
+                    description: 成员角色：Owner/Admin/Member/NotMember
+    ForbidSendMsgRequest:
+      type: object
+      required:
+        - GroupId
+        - Members_Account
+        - ShutUpTime
+      properties:
+        GroupId:
+          type: string
+          description: 需要查询的群组 ID
+        Members_Account:
+          type: array
+          description: 需要禁言的用户帐号，最多支持500个帐号
+          maxItems: 500
+          items:
+            type: string
+        ShutUpTime:
+          type: integer
+          description: 无符号类型。需禁言时间，单位为秒，为0时表示取消禁言，4294967295为永久禁言。
+    GetGroupShuttedUinRequest:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          type: string
+          description: 需要获取被禁言成员列表的群组 ID。
+    GetGroupShuttedUinResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ShuttedUinList:
+              type: array
+              description: 返回结果为禁言用户信息数组，内容包括被禁言的成员 ID，及其被禁言到的时间（使用 UTC 时间，即世界协调时间）
+              items:
+                type: object
+                properties:
+                  Member_Account:
+                    type: string
+                    description: 用户 ID
+                  ShuttedUntil:
+                    type: integer
+                    description: 禁言到的时间（使用 UTC 时间，即世界协调时间）
+    SendGroupMsgRequest:
+      type: object
+      required:
+        - GroupId
+        - Random
+        - MsgBody
+      properties:
+        GroupId:
+          type: string
+          description: 向哪个群组发送消息
+        Random:
+          type: integer
+          format: uint32
+          description: 无符号32位整数。如果5分钟内两条消息的随机值相同，后一条消息将被当做重复消息而丢弃
+        MsgPriority:
+          type: string
+          description: 消息的优先级
+        MsgBody:
+          type: array
+          description: 消息体，详细可参阅 消息格式描述(https://cloud.tencent.com/document/product/269/2720)
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+        From_Account:
+          type: string
+          description: 消息来源帐号，选填。如果不填写该字段，则默认消息的发送者为调用该接口时使用的 App 管理员帐号。除此之外，App 亦可通过该字段“伪造”消息的发送者，从而实现一些特殊的功能需求。需要注意的是，如果指定该字段，必须要确保字段中的帐号是存在的
+        OfflinePushInfo:
+          $ref: '#/components/schemas/OfflinePushInfo'
+        ForbidCallbackControl:
+          type: array
+          description: 消息回调禁止开关，只对单条消息有效，ForbidBeforeSendMsgCallback 表示禁止发消息前回调，ForbidAfterSendMsgCallback 表示禁止发消息后回调
+          items:
+            $ref: '#/components/schemas/ForbidCallbackControl'
+        OnlineOnlyFlag:
+          type: integer
+          description: 1表示消息仅发送在线成员，默认0表示发送所有成员，AVChatRoom(直播群)不支持该参数
+          enum:
+            - 0
+            - 1
+        SendMsgControl:
+          type: array
+          description: 消息发送权限，NoLastMsg 只对单条消息有效，表示不更新最近联系人会话；NoUnread 不计未读，只对单条消息有效。（如果该消息 OnlineOnlyFlag 设置为1，则不允许使用该字段。）
+          items:
+            $ref: '#/components/schemas/SendMsgControl'
+        CloudCustomData:
+          type: string
+          description: 消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）
+    SendGroupMsgResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MsgTime:
+              type: integer
+            MsgSeq:
+              type: integer
+
+    SendGroupSystemNotificationRequest:
+      type: object
+      required:
+        - GroupId
+        - Content
+      properties:
+        GroupId:
+          type: string
+          description: 向哪个群组发送系统通知
+        ToMembers_Account:
+          type: array
+          description: 接收者群成员列表，请填写接收者 UserID，最多填写500个，不填或为空表示全员下发
+          maxItems: 500
+          items:
+            type: string
+        Content:
+          type: string
+          description: 系统通知的内容
+    ChangeGroupOwnerRequest:
+      type: object
+      required:
+        - GroupId
+        - NewOwner_Account
+      properties:
+        GroupId:
+          type: string
+          description: 要被转移的群组 ID
+        NewOwner_Account:
+          type: string
+          description: 新群主 ID
+    GroupMsgRecallRequest:
+      type: object
+      required:
+        - GroupId
+        - MsgSeqList
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        MsgSeqList:
+          type: array
+          maxItems: 10
+          description: 被撤回的消息 seq 列表，一次请求最多可以撤回10条消息 seq
+          items:
+            type: object
+            required:
+              - MsgSeq
+            properties:
+              MsgSeq:
+                type: integer
+                description: 请求撤回的消息 seq
+    GroupMsgRecallResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            RecallRetList:
+              type: array
+              description: 消息撤回请求的详细结果
+              items:
+                type: object
+                properties:
+                  MsgSeq:
+                    type: integer
+                    description: 单个被撤回消息的 seq
+                  RetCode:
+                    type: integer
+                    description: 单个消息的被撤回结果：0表示成功；其它表示失败，参考下文错误码说明（https://cloud.tencent.com/document/product/269/12341#.E5.BA.94.E7.AD.94.E5.8C.85.E5.AD.97.E6.AE.B5.E8.AF.B4.E6.98.8E）
+            MsgSeq:
+              type: integer
+              description: 单个被撤回消息的 seq
+            RetCode:
+              type: integer
+              description: 单个消息的被撤回结果：0表示成功；其它表示失败，参考下文错误码说明
+    ImportGroupRequest:
+      type: object
+      required:
+        - Type
+        - Name
+      properties:
+        Owner_Account:
+          type: string
+          description: 群主 ID，自动添加到群成员中。如果不填，群没有群主
+        Type:
+          type: string
+          description: 群组类型，包括 Public（陌生人社交群），Private（同新版本中的Work，好友工作群）， ChatRoom（同新版本中的Meeting，会议群）、Community（社群）
+        GroupId:
+          type: string
+          description: 为了使得群组 ID 更加简单，便于记忆传播，腾讯云支持 App 在通过 REST API 创建群组时自定义群组 ID。详细请参阅 群组系统（https://cloud.tencent.com/document/product/269/1502）
+        Name:
+          type: string
+          description: 群名称，最长30字节
+          maxLength: 30
+        Introduction:
+          type: string
+          description: 群简介，最长240字节
+          maxLength: 240
+        Notification:
+          type: string
+          maxLength: 300
+          description: 群公告，最长300字节
+        FaceUrl:
+          type: string
+          maxLength: 100
+          description: 群头像 URL，最长100字节
+        MaxMemberCount:
+          type: integer
+          description: 最大群成员数量，最大为6000，不填默认为2000个
+          maximum: 6000
+        ApplyJoinOption:
+          type: string
+          description: 申请加群处理方式。包含 FreeAccess（自由加入），NeedPermission（需要验证），DisableApply（禁止加群），不填默认为NeedPermission（需要验证）
+          enum:
+            - FreeAccess
+            - NeedPermission
+            - DisableApply
+        AppDefinedData:
+          type: array
+          description: 群组维度的自定义字段，默认情况是没有的，需要开通，详细请参阅 群组系统(https://cloud.tencent.com/document/product/269/1502)
+          items:
+            $ref: '#/components/schemas/DefinedData'
+        CreateTime:
+          type: integer
+          description: 群组的创建时间
+    ImportGroupResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            GroupId:
+              type: string
+              description: 创建成功之后的群 ID，由 IM 云后台分配或者用户指定
+
+    ImportGroupMsgRequest:
+      type: object
+      required:
+        - GroupId
+        - MsgList
+        - From_Account
+        - SendTime
+        - MsgBody
+      properties:
+        GroupId:
+          type: string
+          description: 要导入消息的群 ID
+        RecentContactFlag:
+          type: integer
+          description: 会话更新识别，为1的时候标识触发会话更新，默认不触发（avchatroom 群不支持）。
+        MsgList:
+          type: string
+          description: 导入的消息列表
+        From_Account:
+          type: string
+          description: 指定消息发送者
+        SendTime:
+          type: integer
+          description: 消息发送时间
+        Random:
+          type: integer
+          description: 32位无符号整数；如果5分钟内两条消息的随机值相同，后一条消息将被当做重复消息而丢弃
+        MsgBody:
+          type: array
+          items:
+            $ref: '#/components/schemas/TIMMsgElement'
+
+    ImportGroupMsgResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            ImportMsgResult:
+              type: array
+              description: 具体的消息导入结果
+              items:
+                type: object
+                properties:
+                  Result:
+                    type: integer
+                    description: 单条消息导入结果 0表示单条消息成功 10004表示单条消息发送时间无效 80001表示单条消息包含脏字，拒绝存储此消息 80002表示为消息内容过长，目前支持8000字节的消息，请调整消息长度
+                  MsgTime:
+                    type: integer
+                    description: 消息的时间戳
+                  MsgSeq:
+                    type: integer
+                    description: 消息序列号，唯一标示一条消息
+    ImportGroupMemberRequest:
+      type: object
+      required:
+        - GroupId
+        - MemberList
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        MemberList:
+          type: array
+          description: 待添加的群成员数组
+          items:
+            type: object
+            required:
+              - Member_Account
+            properties:
+              Member_Account:
+                type: string
+                description: 待导入的群成员帐号
+              Role:
+                type: string
+                description: 待导入群成员角色；目前只支持填 Admin，不填则为普通成员 Member
+              JoinTime:
+                type: integer
+                description: 待导入群成员的入群时间
+              UnreadMsgNum:
+                type: integer
+                description: 待导入群成员的未读消息计数
+    ImportGroupMemberResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            MemberList:
+              type: array
+              description: 返回添加的群成员结果
+              items:
+                type: object
+                properties:
+                  Result:
+                    type: integer
+                    description: 导入结果：0表示失败；1表示成功；2 表示已经是群成员
+                  Member_Account:
+                    type: string
+                    description: 返回的群成员帐号
+    SetUnreadMsgNumRequest:
+      type: object
+      required:
+        - GroupId
+        - Member_Account
+        - UnreadMsgNum
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+        Member_Account:
+          type: string
+          description: 要操作的群成员
+        UnreadMsgNum:
+          type: integer
+          description: 成员未读消息数
+    DeleteGroupMsgBySenderRequest:
+      type: object
+      required:
+        - GroupId
+        - Sender_Account
+      properties:
+        GroupId:
+          type: string
+          description: 要撤回消息的群 ID
+        Sender_Account:
+          type: string
+          description: 被撤回消息的发送者 ID
+    GroupMsgGetSimpleRequest:
+      type: object
+      required:
+        - GroupId
+        - ReqMsgNumber
+      properties:
+        GroupId:
+          type: string
+          description: 要拉取历史消息的群组 ID
+        ReqMsgNumber:
+          type: integer
+          description: 拉取的历史消息的条数，目前一次请求最多返回20条历史消息，所以这里最好小于等于20
+          maximum: 20
+        ReqMsgSeq:
+          type: integer
+          description: 拉取消息的最大 seq
+        WithRecalledMsg:
+          type: integer
+          description: 是否带撤回的消息，填1表明需要拉取撤回后的消息；默认不拉取撤回后的消息
+    GroupMsgGetSimpleResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            GroupId:
+              type: string
+              description: 请求中的群组 ID
+            IsFinished:
+              type: integer
+              description: 是否返回了请求区间的全部消息 当成功返回了请求区间的全部消息时，值为1;当消息长度太长或者区间太大（超过20）导致无法返回全部消息时，值为0;当消息长度太长或者区间太大（超过20）且所有消息都过期时，值为2
+            RspMsgList:
+              type: array
+              description: 返回的消息列表
+              items:
+                type: object
+                properties:
+                  From_Account:
+                    type: string
+                    description: 消息的发送者
+                  IsPlaceMsg:
+                    type: integer
+                    description: 是否是空洞消息，当消息被删除或者消息过期后，MsgBody 为空，该字段为1，撤回的消息，该字段为2
+                  MsgPriority:
+                    type: integer
+                    description: 消息的优先级，用于消息去重，有客户端发消息时填写，如果没有填，服务端会自动生成，1表示 High 优先级消息，2表示 Normal 优先级消息，3表示 Low 优先级消息，4表示 Lowest 优先级消息
+                  MsgRandom:
+                    type: integer
+                    description: 消息随机值，用于对消息去重，有客户端发消息时填写，如果没有填，服务端会自动生成
+                  MsgSeq:
+                    type: integer
+                    description: 消息 seq，用于标识唯一消息，值越小发送的越早
+                  MsgTimeStamp:
+                    type: integer
+                    description: 消息被发送的时间戳，server 的时间
+                  MsgBody:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TIMMsgElement'
+                  IsSystemMsg:
+                    type: integer
+                    description: 字段为1时表示系统消息
+    GetOnlineMemberNumRequest:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          type: string
+          description: 操作的群 ID
+    GetOnlineMemberNumResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            OnlineMemberNum:
+              type: integer
+              description: 该群组的在线人数
+    GetGroupAttrRequest:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          type: string
+          description: 获取自定义属性的群id
+    GetGroupAttrResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            GroupAttrAry:
+              type: array
+              description: 自定义属性的键值对
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+    ModifyGroupAttrRequest:
+      type: object
+      required:
+        - GroupId
+        - GroupAttr
+      properties:
+        GroupId:
+          type: string
+          description: 修改自定义属性的群id
+        GroupAttr:
+          type: array
+          description: 自定义属性列表，key 为自定义属性的键，value 为自定义属性的值
+          items:
+            type: object
+            required: [ key,value ]
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+    ClearGroupAttrRequest:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          type: string
+          description: 清空自定义属性的群 id
+    SetGroupAttrRequest:
+      type: object
+      required:
+        - GroupId
+        - GroupAttr
+      properties:
+        GroupId:
+          type: string
+          description: 重置自定义属性的群id
+        GroupAttr:
+          type: array
+          description: 自定义属性列表，key 为自定义属性的键，value 为自定义属性的值
+          items:
+            type: object
+            required: [ key,value ]
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+    # 全局禁言管理
+    SetNoSpeakingRequest:
+      type: object
+      required:
+        - Set_Account
+      properties:
+        Set_Account:
+          type: string
+          description: 设置禁言配置的帐号
+        C2CmsgNospeakingTime:
+          type: integer
+          description: 单聊消息禁言时间，单位为秒，非负整数，最大值为4294967295（十六进制 0xFFFFFFFF） 0表示取消该帐号的单聊消息禁言 4294967295表示该帐号被设置永久禁言 其它值表示该帐号具体的禁言时间
+        GroupmsgNospeakingTime:
+          type: integer
+          description: 群组消息禁言时间，单位为秒，非负整数，最大值为4294967295（十六进制 0xFFFFFFFF） 0表示取消该帐号的群组消息禁言  4294967295表示该帐号被设置永久禁言 其它值表示该帐号的具体禁言时间
+    GetNoSpeakingRequest:
+      type: object
+      required:
+        - Get_Account
+      properties:
+        Get_Account:
+          type: string
+          description: 查询禁言信息的帐号
+    GetNoSpeakingResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            C2CmsgNospeakingTime:
+              type: number
+              description: 单聊消息禁言时长，单位为秒，非负整数。等于 0 代表没有被设置禁言；等于最大值4294967295（十六进制 0xFFFFFFFF）代表被设置永久禁言；其它代表该帐号禁言时长，如果等于3600表示该帐号被禁言一小时
+            GroupmsgNospeakingTime:
+              type: number
+              description: 群组消息禁言时长，单位为秒，非负整数。等于0代表没有被设置禁言；等于最大值4294967295（十六进制 0xFFFFFFFF）代表被设置永久禁言；其它代表该帐号禁言时长，如果等于3600表示该帐号被禁言一小时
+
+    # 运营管理
+    GetAppInfoRequest:
+      type: object
+      properties:
+        RequestField:
+          type: array
+          description: 该字段用来指定需要拉取的运营数据，不填默认拉取所有字段。详细可参阅下文 可拉取的运营字段（https://cloud.tencent.com/document/product/269/4193#operation）
+          items:
+            type: string
+    GetAppInfoResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            Result:
+              type: array
+              description: 请求最近30天的运营数据
+              items:
+                type: object
+                properties:
+                  AppName:
+                    type: string
+                    description: 应用名称
+                  AppId:
+                    type: string
+                    description: 应用 SDKAppID
+                  Company:
+                    type: string
+                    description: 所属客户名称
+                  ActiveUserNum:
+                    type: string
+                    description: 活跃用户数
+                  RegistUserNumOneDay:
+                    type: string
+                    description: 新增注册人数
+                  RegistUserNumTotal:
+                    type: string
+                    description: 累计注册人数
+                  LoginTimes:
+                    type: string
+                    description: 登录次数
+                  LoginUserNum:
+                    type: string
+                    description: 登录人数
+                  UpMsgNum:
+                    type: string
+                    description: 上行消息数
+                  SendMsgUserNum:
+                    type: string
+                    description: 发消息人数
+                  APNSMsgNum:
+                    type: string
+                    description: APNs 推送数
+                  C2CUpMsgNum:
+                    type: string
+                    description: 上行消息数（C2C）
+                  C2CDownMsgNum:
+                    type: string
+                    description: 下行消息数（C2C）
+                  C2CSendMsgUserNum:
+                    type: string
+                    description: 发消息人数（C2C）
+                  C2CAPNSMsgNum:
+                    type: string
+                    description: APNs 推送数（C2C）
+                  MaxOnlineNum:
+                    type: string
+                    description: 最高在线人数
+                  DownMsgNum:
+                    type: string
+                    description: 下行消息总数（C2C和群）
+                  ChainIncrease:
+                    type: string
+                    description: 关系链对数增加量
+                  ChainDecrease:
+                    type: string
+                    description: 关系链对数删除量
+                  GroupUpMsgNum:
+                    type: string
+                    description: 上行消息数（群）
+                  GroupDownMsgNum:
+                    type: string
+                    description: 下行消息数（群）
+                  GroupSendMsgUserNum:
+                    type: string
+                    description: 发消息人数（群）
+                  GroupAPNSMsgNum:
+                    type: string
+                    description: APNs 推送数（群）
+                  GroupSendMsgGroupNum:
+                    type: string
+                    description: 发消息群组数
+                  GroupJoinGroupTimes:
+                    type: string
+                    description: 入群总数
+                  GroupQuitGroupTimes:
+                    type: string
+                    description: 退群总数
+                  GroupNewGroupNum:
+                    type: string
+                    description: 新增群组数
+                  GroupAllGroupNum:
+                    type: string
+                    description: 累计群组数
+                  GroupDestroyGroupNum:
+                    type: string
+                    description: 解散群个数
+                  CallBackReq:
+                    type: string
+                    description: 回调请求数
+                  CallBackRsp:
+                    type: string
+                    description: 回调应答数
+                  Date:
+                    type: string
+                    description: 日期
+    GetOperateMsgHistoryRequest:
+      type: object
+      required:
+        - ChatType
+        - MsgTime
+      properties:
+        ChatType:
+          type: string
+          description: 消息类型，C2C 表示单发消息 Group 表示群组消息
+        MsgTime:
+          type: string
+          description: 需要下载的消息记录的时间段，2015120121表示获取2015年12月1日21:00 - 21:59的消息的下载地址。该字段需精确到小时。每次请求只能获取某天某小时的所有单发或群组消息记录
+
+    GetOperateMsgHistoryResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            File:
+              type: array
+              description: 消息记录文件下载信息
+              items:
+                type: object
+                properties:
+                  URL:
+                    type: string
+                    description: 消息记录文件下载地址
+                  ExpireTime:
+                    type: string
+                    description: 下载地址过期时间，请在过期前进行下载，若地址失效，请通过该接口重新获取
+                  FileSize:
+                    type: integer
+                    description: GZip 压缩前的文件大小（单位 Byte）
+                  FileMD5:
+                    type: string
+                    description: GZip 压缩前的文件 MD5
+                  GzipSize:
+                    type: integer
+                    description: GZip 压缩后的文件大小（单位 Byte）
+                  GzipMD5:
+                    type: string
+                    description: GZip 压缩后的文件 MD5
+    GetIPListRequest:
+      type: object
+    GetIPListResponse:
+      allOf:
+        - $ref: '#/components/schemas/CommonResponse'
+        - type: object
+          properties:
+            IPList:
+              type: array
+              description: 服务器 IP 列表
+              items:
+                type: string
