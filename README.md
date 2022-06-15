@@ -39,7 +39,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.tencentcloudapi.im</groupId>
   <artifactId>tencentcloud-im-sdk-java</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +49,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.1"
+compile "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.4"
 ```
 
 ### Others
@@ -62,7 +62,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/tencentcloud-im-sdk-java-1.0.1.jar`
+- `target/tencentcloud-im-sdk-java-1.0.4.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -378,6 +378,7 @@ Class | Method | HTTP request | Description
  - [ImRemoveAllTagRequest](docs/ImRemoveAllTagRequest.md)
  - [ImRemoveAttrRequest](docs/ImRemoveAttrRequest.md)
  - [ImRemoveTagRequest](docs/ImRemoveTagRequest.md)
+ - [ImRemoveTagRequestUserTagsInner](docs/ImRemoveTagRequestUserTagsInner.md)
  - [ImSetAttrNameRequest](docs/ImSetAttrNameRequest.md)
  - [ImSetAttrRequest](docs/ImSetAttrRequest.md)
  - [ImageInfo](docs/ImageInfo.md)
@@ -387,6 +388,7 @@ Class | Method | HTTP request | Description
  - [ImportGroupMemberResponseAllOf](docs/ImportGroupMemberResponseAllOf.md)
  - [ImportGroupMemberResponseAllOfMemberList](docs/ImportGroupMemberResponseAllOfMemberList.md)
  - [ImportGroupMsgRequest](docs/ImportGroupMsgRequest.md)
+ - [ImportGroupMsgRequestMsgListInner](docs/ImportGroupMsgRequestMsgListInner.md)
  - [ImportGroupMsgResponse](docs/ImportGroupMsgResponse.md)
  - [ImportGroupMsgResponseAllOf](docs/ImportGroupMsgResponseAllOf.md)
  - [ImportGroupMsgResponseAllOfImportMsgResult](docs/ImportGroupMsgResponseAllOfImportMsgResult.md)

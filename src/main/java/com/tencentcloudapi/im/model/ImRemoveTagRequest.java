@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.tencentcloudapi.im.model.ImRemoveTagRequestUserTagsInner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -27,21 +28,18 @@ import org.hibernate.validator.constraints.*;
 
 public class ImRemoveTagRequest {
   public static final String JSON_PROPERTY_USER_TAGS = "UserTags";
-  private List<String> userTags = null;
+  private List<ImRemoveTagRequestUserTagsInner> userTags = new ArrayList<>();
 
   public ImRemoveTagRequest() { 
   }
 
-  public ImRemoveTagRequest userTags(List<String> userTags) {
+  public ImRemoveTagRequest userTags(List<ImRemoveTagRequestUserTagsInner> userTags) {
     
     this.userTags = userTags;
     return this;
   }
 
-  public ImRemoveTagRequest addUserTagsItem(String userTagsItem) {
-    if (this.userTags == null) {
-      this.userTags = new ArrayList<>();
-    }
+  public ImRemoveTagRequest addUserTagsItem(ImRemoveTagRequestUserTagsInner userTagsItem) {
     this.userTags.add(userTagsItem);
     return this;
   }
@@ -50,19 +48,21 @@ public class ImRemoveTagRequest {
    * 目标用户帐号列表
    * @return userTags
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "目标用户帐号列表")
+  @javax.annotation.Nonnull
+  @NotNull
+  @Valid
+  @ApiModelProperty(required = true, value = "目标用户帐号列表")
   @JsonProperty(JSON_PROPERTY_USER_TAGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public List<String> getUserTags() {
+  public List<ImRemoveTagRequestUserTagsInner> getUserTags() {
     return userTags;
   }
 
 
   @JsonProperty(JSON_PROPERTY_USER_TAGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setUserTags(List<String> userTags) {
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setUserTags(List<ImRemoveTagRequestUserTagsInner> userTags) {
     this.userTags = userTags;
   }
 
