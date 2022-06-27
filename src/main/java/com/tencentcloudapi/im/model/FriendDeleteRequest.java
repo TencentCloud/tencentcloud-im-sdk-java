@@ -1,40 +1,59 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * FriendDeleteRequest
  */
-@JsonPropertyOrder({
-  FriendDeleteRequest.JSON_PROPERTY_FROM_ACCOUNT,
-  FriendDeleteRequest.JSON_PROPERTY_TO_ACCOUNT,
-  FriendDeleteRequest.JSON_PROPERTY_DELETE_TYPE
-})
 
 public class FriendDeleteRequest {
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private List<String> toAccount = null;
 
-  public static final String JSON_PROPERTY_DELETE_TYPE = "DeleteType";
+  public static final String SERIALIZED_NAME_DELETE_TYPE = "DeleteType";
+  @SerializedName(SERIALIZED_NAME_DELETE_TYPE)
   private String deleteType;
 
   public FriendDeleteRequest() { 
@@ -51,18 +70,13 @@ public class FriendDeleteRequest {
    * @return fromAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "需要删除该 UserID 的好友")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -87,17 +101,13 @@ public class FriendDeleteRequest {
    * @return toAccount
   **/
   @javax.annotation.Nullable
- @Size(max=1000)  @ApiModelProperty(value = "待删除的好友的 UserID 列表，单次请求的 To_Account 数不得超过1000")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "待删除的好友的 UserID 列表，单次请求的 To_Account 数不得超过1000")
 
   public List<String> getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setToAccount(List<String> toAccount) {
     this.toAccount = toAccount;
   }
@@ -115,19 +125,16 @@ public class FriendDeleteRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "删除模式，详情可参见 删除好友（https://cloud.tencent.com/document/product/269/1501#.E5.88.A0.E9.99.A4.E5.A5.BD.E5.8F.8B）")
-  @JsonProperty(JSON_PROPERTY_DELETE_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDeleteType() {
     return deleteType;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_DELETE_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDeleteType(String deleteType) {
     this.deleteType = deleteType;
   }
+
 
 
   @Override
@@ -171,5 +178,110 @@ public class FriendDeleteRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("From_Account");
+    openapiFields.add("To_Account");
+    openapiFields.add("DeleteType");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("From_Account");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to FriendDeleteRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (FriendDeleteRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in FriendDeleteRequest is not found in the empty JSON string", FriendDeleteRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!FriendDeleteRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FriendDeleteRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : FriendDeleteRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be an array in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      if (jsonObj.get("DeleteType") != null && !jsonObj.get("DeleteType").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `DeleteType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("DeleteType").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!FriendDeleteRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'FriendDeleteRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<FriendDeleteRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(FriendDeleteRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<FriendDeleteRequest>() {
+           @Override
+           public void write(JsonWriter out, FriendDeleteRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public FriendDeleteRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of FriendDeleteRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of FriendDeleteRequest
+  * @throws IOException if the JSON string is invalid with respect to FriendDeleteRequest
+  */
+  public static FriendDeleteRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, FriendDeleteRequest.class);
+  }
+
+ /**
+  * Convert an instance of FriendDeleteRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

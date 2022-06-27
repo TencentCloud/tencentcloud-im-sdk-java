@@ -1,40 +1,58 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.QueryOnlineStatusResponseAllOfDetail;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * QueryOnlineStatusResponseAllOfQueryResult
  */
-@JsonPropertyOrder({
-  QueryOnlineStatusResponseAllOfQueryResult.JSON_PROPERTY_TO_ACCOUNT,
-  QueryOnlineStatusResponseAllOfQueryResult.JSON_PROPERTY_STATUS,
-  QueryOnlineStatusResponseAllOfQueryResult.JSON_PROPERTY_DETAIL
-})
-@JsonTypeName("QueryOnlineStatusResponse_allOf_QueryResult")
 
 public class QueryOnlineStatusResponseAllOfQueryResult {
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private String toAccount;
 
-  public static final String JSON_PROPERTY_STATUS = "Status";
+  public static final String SERIALIZED_NAME_STATUS = "Status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
   private String status;
 
-  public static final String JSON_PROPERTY_DETAIL = "Detail";
+  public static final String SERIALIZED_NAME_DETAIL = "Detail";
+  @SerializedName(SERIALIZED_NAME_DETAIL)
   private QueryOnlineStatusResponseAllOfDetail detail;
 
   public QueryOnlineStatusResponseAllOfQueryResult() { 
@@ -51,18 +69,13 @@ public class QueryOnlineStatusResponseAllOfQueryResult {
    * @return toAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "返回的用户的 UserID")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
@@ -79,18 +92,13 @@ public class QueryOnlineStatusResponseAllOfQueryResult {
    * @return status
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "返回的用户状态，目前支持的状态有： 前台运行状态（Online）：客户端登录后和即时通信 IM 后台有长连接 后台运行状态（PushOnline）：iOS 和 Android 进程被 kill 或因网络问题掉线，进入 PushOnline 状态，此时仍然可以接收消息的离线推送。客户端切到后台，但是进程未被手机操作系统 kill 掉时，此时状态仍是 Online 未登录状态（Offline）：客户端主动退出登录或者客户端自上一次登录起7天之内未登录过 如果用户是多终端登录，则只要有一个终端的状态是 Online ，该字段值就是 Online")
-  @JsonProperty(JSON_PROPERTY_STATUS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getStatus() {
     return status;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_STATUS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStatus(String status) {
     this.status = status;
   }
@@ -107,21 +115,17 @@ public class QueryOnlineStatusResponseAllOfQueryResult {
    * @return detail
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_DETAIL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public QueryOnlineStatusResponseAllOfDetail getDetail() {
     return detail;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_DETAIL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDetail(QueryOnlineStatusResponseAllOfDetail detail) {
     this.detail = detail;
   }
+
 
 
   @Override
@@ -165,5 +169,111 @@ public class QueryOnlineStatusResponseAllOfQueryResult {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("To_Account");
+    openapiFields.add("Status");
+    openapiFields.add("Detail");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("To_Account");
+    openapiRequiredFields.add("Status");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to QueryOnlineStatusResponseAllOfQueryResult
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (QueryOnlineStatusResponseAllOfQueryResult.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in QueryOnlineStatusResponseAllOfQueryResult is not found in the empty JSON string", QueryOnlineStatusResponseAllOfQueryResult.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!QueryOnlineStatusResponseAllOfQueryResult.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `QueryOnlineStatusResponseAllOfQueryResult` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : QueryOnlineStatusResponseAllOfQueryResult.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      if (jsonObj.get("Status") != null && !jsonObj.get("Status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Status").toString()));
+      }
+      // validate the optional field `Detail`
+      if (jsonObj.getAsJsonObject("Detail") != null) {
+        QueryOnlineStatusResponseAllOfDetail.validateJsonObject(jsonObj.getAsJsonObject("Detail"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!QueryOnlineStatusResponseAllOfQueryResult.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'QueryOnlineStatusResponseAllOfQueryResult' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<QueryOnlineStatusResponseAllOfQueryResult> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(QueryOnlineStatusResponseAllOfQueryResult.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<QueryOnlineStatusResponseAllOfQueryResult>() {
+           @Override
+           public void write(JsonWriter out, QueryOnlineStatusResponseAllOfQueryResult value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public QueryOnlineStatusResponseAllOfQueryResult read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of QueryOnlineStatusResponseAllOfQueryResult given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of QueryOnlineStatusResponseAllOfQueryResult
+  * @throws IOException if the JSON string is invalid with respect to QueryOnlineStatusResponseAllOfQueryResult
+  */
+  public static QueryOnlineStatusResponseAllOfQueryResult fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, QueryOnlineStatusResponseAllOfQueryResult.class);
+  }
+
+ /**
+  * Convert an instance of QueryOnlineStatusResponseAllOfQueryResult to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

@@ -5,7 +5,10 @@ import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
 import com.tencentcloudapi.im.api.AccountApi;
 import com.tencentcloudapi.im.model.AccountCheckRequest;
+import com.tencentcloudapi.im.model.AccountCheckRequestCheckItemInner;
 import com.tencentcloudapi.im.model.AccountCheckResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountCheckExample {
 
@@ -24,6 +27,7 @@ public class AccountCheckExample {
         AccountApi apiInstance = new AccountApi(defaultClient);
         Integer random = 56; // Integer |
         AccountCheckRequest accountCheckRequest = new AccountCheckRequest(); // AccountCheckRequest |
+
         //TODO: Set the parameters
 
         try {

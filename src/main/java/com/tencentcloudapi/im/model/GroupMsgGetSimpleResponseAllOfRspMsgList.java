@@ -1,62 +1,80 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.TIMMsgElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GroupMsgGetSimpleResponseAllOfRspMsgList
  */
-@JsonPropertyOrder({
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_FROM_ACCOUNT,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_IS_PLACE_MSG,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_MSG_PRIORITY,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_MSG_RANDOM,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_MSG_SEQ,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_MSG_TIME_STAMP,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_MSG_BODY,
-  GroupMsgGetSimpleResponseAllOfRspMsgList.JSON_PROPERTY_IS_SYSTEM_MSG
-})
-@JsonTypeName("GroupMsgGetSimpleResponse_allOf_RspMsgList")
 
 public class GroupMsgGetSimpleResponseAllOfRspMsgList {
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_IS_PLACE_MSG = "IsPlaceMsg";
+  public static final String SERIALIZED_NAME_IS_PLACE_MSG = "IsPlaceMsg";
+  @SerializedName(SERIALIZED_NAME_IS_PLACE_MSG)
   private Integer isPlaceMsg;
 
-  public static final String JSON_PROPERTY_MSG_PRIORITY = "MsgPriority";
+  public static final String SERIALIZED_NAME_MSG_PRIORITY = "MsgPriority";
+  @SerializedName(SERIALIZED_NAME_MSG_PRIORITY)
   private Integer msgPriority;
 
-  public static final String JSON_PROPERTY_MSG_RANDOM = "MsgRandom";
+  public static final String SERIALIZED_NAME_MSG_RANDOM = "MsgRandom";
+  @SerializedName(SERIALIZED_NAME_MSG_RANDOM)
   private Integer msgRandom;
 
-  public static final String JSON_PROPERTY_MSG_SEQ = "MsgSeq";
+  public static final String SERIALIZED_NAME_MSG_SEQ = "MsgSeq";
+  @SerializedName(SERIALIZED_NAME_MSG_SEQ)
   private Integer msgSeq;
 
-  public static final String JSON_PROPERTY_MSG_TIME_STAMP = "MsgTimeStamp";
+  public static final String SERIALIZED_NAME_MSG_TIME_STAMP = "MsgTimeStamp";
+  @SerializedName(SERIALIZED_NAME_MSG_TIME_STAMP)
   private Integer msgTimeStamp;
 
-  public static final String JSON_PROPERTY_MSG_BODY = "MsgBody";
+  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
+  @SerializedName(SERIALIZED_NAME_MSG_BODY)
   private List<TIMMsgElement> msgBody = null;
 
-  public static final String JSON_PROPERTY_IS_SYSTEM_MSG = "IsSystemMsg";
+  public static final String SERIALIZED_NAME_IS_SYSTEM_MSG = "IsSystemMsg";
+  @SerializedName(SERIALIZED_NAME_IS_SYSTEM_MSG)
   private Integer isSystemMsg;
 
   public GroupMsgGetSimpleResponseAllOfRspMsgList() { 
@@ -74,16 +92,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息的发送者")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -101,16 +115,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "是否是空洞消息，当消息被删除或者消息过期后，MsgBody 为空，该字段为1，撤回的消息，该字段为2")
-  @JsonProperty(JSON_PROPERTY_IS_PLACE_MSG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getIsPlaceMsg() {
     return isPlaceMsg;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IS_PLACE_MSG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIsPlaceMsg(Integer isPlaceMsg) {
     this.isPlaceMsg = isPlaceMsg;
   }
@@ -128,16 +138,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息的优先级，用于消息去重，有客户端发消息时填写，如果没有填，服务端会自动生成，1表示 High 优先级消息，2表示 Normal 优先级消息，3表示 Low 优先级消息，4表示 Lowest 优先级消息")
-  @JsonProperty(JSON_PROPERTY_MSG_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgPriority() {
     return msgPriority;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_PRIORITY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgPriority(Integer msgPriority) {
     this.msgPriority = msgPriority;
   }
@@ -155,16 +161,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息随机值，用于对消息去重，有客户端发消息时填写，如果没有填，服务端会自动生成")
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgRandom() {
     return msgRandom;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgRandom(Integer msgRandom) {
     this.msgRandom = msgRandom;
   }
@@ -182,16 +184,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息 seq，用于标识唯一消息，值越小发送的越早")
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgSeq() {
     return msgSeq;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgSeq(Integer msgSeq) {
     this.msgSeq = msgSeq;
   }
@@ -209,16 +207,12 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息被发送的时间戳，server 的时间")
-  @JsonProperty(JSON_PROPERTY_MSG_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgTimeStamp() {
     return msgTimeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgTimeStamp(Integer msgTimeStamp) {
     this.msgTimeStamp = msgTimeStamp;
   }
@@ -243,18 +237,13 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
    * @return msgBody
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<TIMMsgElement> getMsgBody() {
     return msgBody;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgBody(List<TIMMsgElement> msgBody) {
     this.msgBody = msgBody;
   }
@@ -272,19 +261,16 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "字段为1时表示系统消息")
-  @JsonProperty(JSON_PROPERTY_IS_SYSTEM_MSG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getIsSystemMsg() {
     return isSystemMsg;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IS_SYSTEM_MSG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIsSystemMsg(Integer isSystemMsg) {
     this.isSystemMsg = isSystemMsg;
   }
+
 
 
   @Override
@@ -338,5 +324,112 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("From_Account");
+    openapiFields.add("IsPlaceMsg");
+    openapiFields.add("MsgPriority");
+    openapiFields.add("MsgRandom");
+    openapiFields.add("MsgSeq");
+    openapiFields.add("MsgTimeStamp");
+    openapiFields.add("MsgBody");
+    openapiFields.add("IsSystemMsg");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GroupMsgGetSimpleResponseAllOfRspMsgList
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GroupMsgGetSimpleResponseAllOfRspMsgList.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GroupMsgGetSimpleResponseAllOfRspMsgList is not found in the empty JSON string", GroupMsgGetSimpleResponseAllOfRspMsgList.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GroupMsgGetSimpleResponseAllOfRspMsgList.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GroupMsgGetSimpleResponseAllOfRspMsgList` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      JsonArray jsonArraymsgBody = jsonObj.getAsJsonArray("MsgBody");
+      if (jsonArraymsgBody != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("MsgBody").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `MsgBody` to be an array in the JSON string but got `%s`", jsonObj.get("MsgBody").toString()));
+        }
+
+        // validate the optional field `MsgBody` (array)
+        for (int i = 0; i < jsonArraymsgBody.size(); i++) {
+          TIMMsgElement.validateJsonObject(jsonArraymsgBody.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GroupMsgGetSimpleResponseAllOfRspMsgList.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GroupMsgGetSimpleResponseAllOfRspMsgList' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GroupMsgGetSimpleResponseAllOfRspMsgList> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GroupMsgGetSimpleResponseAllOfRspMsgList.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GroupMsgGetSimpleResponseAllOfRspMsgList>() {
+           @Override
+           public void write(JsonWriter out, GroupMsgGetSimpleResponseAllOfRspMsgList value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GroupMsgGetSimpleResponseAllOfRspMsgList read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GroupMsgGetSimpleResponseAllOfRspMsgList given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GroupMsgGetSimpleResponseAllOfRspMsgList
+  * @throws IOException if the JSON string is invalid with respect to GroupMsgGetSimpleResponseAllOfRspMsgList
+  */
+  public static GroupMsgGetSimpleResponseAllOfRspMsgList fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GroupMsgGetSimpleResponseAllOfRspMsgList.class);
+  }
+
+ /**
+  * Convert an instance of GroupMsgGetSimpleResponseAllOfRspMsgList to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

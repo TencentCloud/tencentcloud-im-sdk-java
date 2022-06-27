@@ -34,15 +34,13 @@ All URIs are relative to *https://console.tim.qq.com*
 | [**setUnreadMsgNum**](GroupApi.md#setUnreadMsgNum) | **POST** /v4/group_open_http_svc/set_unread_msg_num | 设置成员未读消息计数（https://cloud.tencent.com/document/product/269/1637） |
 
 
-
-## addGroupMember
-
+<a name="addGroupMember"></a>
+# **addGroupMember**
 > AddGroupMemberResponse addGroupMember(random, addGroupMemberRequest)
 
 增加群成员（https://cloud.tencent.com/document/product/269/1621）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -52,39 +50,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        AddGroupMemberRequest addGroupMemberRequest = new AddGroupMemberRequest(); // AddGroupMemberRequest | 
-        //TODO: Set the parameters
-
-        try {
-            AddGroupMemberResponse result = apiInstance.addGroupMember(random, addGroupMemberRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#addGroupMember");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    AddGroupMemberRequest addGroupMemberRequest = new AddGroupMemberRequest(); // AddGroupMemberRequest | 
+    try {
+      AddGroupMemberResponse result = apiInstance.addGroupMember(random, addGroupMemberRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#addGroupMember");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -101,24 +96,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## changeGroupOwner
-
+<a name="changeGroupOwner"></a>
+# **changeGroupOwner**
 > CommonResponse changeGroupOwner(random, changeGroupOwnerRequest)
 
 转让群主（https://cloud.tencent.com/document/product/269/1633）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -128,39 +120,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ChangeGroupOwnerRequest changeGroupOwnerRequest = new ChangeGroupOwnerRequest(); // ChangeGroupOwnerRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.changeGroupOwner(random, changeGroupOwnerRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#changeGroupOwner");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ChangeGroupOwnerRequest changeGroupOwnerRequest = new ChangeGroupOwnerRequest(); // ChangeGroupOwnerRequest | 
+    try {
+      CommonResponse result = apiInstance.changeGroupOwner(random, changeGroupOwnerRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#changeGroupOwner");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -177,24 +166,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## clearGroupAttr
-
+<a name="clearGroupAttr"></a>
+# **clearGroupAttr**
 > CommonResponse clearGroupAttr(random, clearGroupAttrRequest)
 
 清空群自定义属性（https://cloud.tencent.com/document/product/269/67009）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -204,39 +190,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ClearGroupAttrRequest clearGroupAttrRequest = new ClearGroupAttrRequest(); // ClearGroupAttrRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.clearGroupAttr(random, clearGroupAttrRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#clearGroupAttr");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ClearGroupAttrRequest clearGroupAttrRequest = new ClearGroupAttrRequest(); // ClearGroupAttrRequest | 
+    try {
+      CommonResponse result = apiInstance.clearGroupAttr(random, clearGroupAttrRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#clearGroupAttr");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -253,24 +236,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## createGroup
-
+<a name="createGroup"></a>
+# **createGroup**
 > CreateGroupResponse createGroup(random, createGroupRequest)
 
 创建群组（https://cloud.tencent.com/document/product/269/1615）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -280,39 +260,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        CreateGroupRequest createGroupRequest = new CreateGroupRequest(); // CreateGroupRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CreateGroupResponse result = apiInstance.createGroup(random, createGroupRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#createGroup");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    CreateGroupRequest createGroupRequest = new CreateGroupRequest(); // CreateGroupRequest | 
+    try {
+      CreateGroupResponse result = apiInstance.createGroup(random, createGroupRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#createGroup");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -329,24 +306,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## deleteGroupMember
-
+<a name="deleteGroupMember"></a>
+# **deleteGroupMember**
 > CommonResponse deleteGroupMember(random, deleteGroupMemberRequest)
 
 删除群成员（https://cloud.tencent.com/document/product/269/1622）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -356,39 +330,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        DeleteGroupMemberRequest deleteGroupMemberRequest = new DeleteGroupMemberRequest(); // DeleteGroupMemberRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.deleteGroupMember(random, deleteGroupMemberRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#deleteGroupMember");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    DeleteGroupMemberRequest deleteGroupMemberRequest = new DeleteGroupMemberRequest(); // DeleteGroupMemberRequest | 
+    try {
+      CommonResponse result = apiInstance.deleteGroupMember(random, deleteGroupMemberRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#deleteGroupMember");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -405,24 +376,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## deleteGroupMsgBySender
-
+<a name="deleteGroupMsgBySender"></a>
+# **deleteGroupMsgBySender**
 > CommonResponse deleteGroupMsgBySender(random, deleteGroupMsgBySenderRequest)
 
 删除指定用户发送的消息（https://cloud.tencent.com/document/product/269/2359）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -432,39 +400,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        DeleteGroupMsgBySenderRequest deleteGroupMsgBySenderRequest = new DeleteGroupMsgBySenderRequest(); // DeleteGroupMsgBySenderRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.deleteGroupMsgBySender(random, deleteGroupMsgBySenderRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#deleteGroupMsgBySender");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    DeleteGroupMsgBySenderRequest deleteGroupMsgBySenderRequest = new DeleteGroupMsgBySenderRequest(); // DeleteGroupMsgBySenderRequest | 
+    try {
+      CommonResponse result = apiInstance.deleteGroupMsgBySender(random, deleteGroupMsgBySenderRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#deleteGroupMsgBySender");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -481,24 +446,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## destroyGroup
-
+<a name="destroyGroup"></a>
+# **destroyGroup**
 > CommonResponse destroyGroup(random, destroyGroupRequest)
 
 解散群组(https://cloud.tencent.com/document/product/269/1624)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -508,39 +470,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        DestroyGroupRequest destroyGroupRequest = new DestroyGroupRequest(); // DestroyGroupRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.destroyGroup(random, destroyGroupRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#destroyGroup");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    DestroyGroupRequest destroyGroupRequest = new DestroyGroupRequest(); // DestroyGroupRequest | 
+    try {
+      CommonResponse result = apiInstance.destroyGroup(random, destroyGroupRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#destroyGroup");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -557,24 +516,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## forbidSendMsg
-
+<a name="forbidSendMsg"></a>
+# **forbidSendMsg**
 > CommonResponse forbidSendMsg(random, forbidSendMsgRequest)
 
 批量禁言和取消禁言(https://cloud.tencent.com/document/product/269/1627)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -584,39 +540,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ForbidSendMsgRequest forbidSendMsgRequest = new ForbidSendMsgRequest(); // ForbidSendMsgRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.forbidSendMsg(random, forbidSendMsgRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#forbidSendMsg");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ForbidSendMsgRequest forbidSendMsgRequest = new ForbidSendMsgRequest(); // ForbidSendMsgRequest | 
+    try {
+      CommonResponse result = apiInstance.forbidSendMsg(random, forbidSendMsgRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#forbidSendMsg");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -633,24 +586,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getAppidGroupList
-
+<a name="getAppidGroupList"></a>
+# **getAppidGroupList**
 > GetAppidGroupListResponse getAppidGroupList(random, getAppidGroupListRequest)
 
 获取 App 中的所有群组（https://cloud.tencent.com/document/product/269/1614）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -660,39 +610,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetAppidGroupListRequest getAppidGroupListRequest = new GetAppidGroupListRequest(); // GetAppidGroupListRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetAppidGroupListResponse result = apiInstance.getAppidGroupList(random, getAppidGroupListRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getAppidGroupList");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetAppidGroupListRequest getAppidGroupListRequest = new GetAppidGroupListRequest(); // GetAppidGroupListRequest | 
+    try {
+      GetAppidGroupListResponse result = apiInstance.getAppidGroupList(random, getAppidGroupListRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getAppidGroupList");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -709,24 +656,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getGroupAttr
-
+<a name="getGroupAttr"></a>
+# **getGroupAttr**
 > GetGroupAttrResponse getGroupAttr(random, getGroupAttrRequest)
 
 获取群自定义属性（https://cloud.tencent.com/document/product/269/67012）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -736,39 +680,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetGroupAttrRequest getGroupAttrRequest = new GetGroupAttrRequest(); // GetGroupAttrRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetGroupAttrResponse result = apiInstance.getGroupAttr(random, getGroupAttrRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getGroupAttr");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetGroupAttrRequest getGroupAttrRequest = new GetGroupAttrRequest(); // GetGroupAttrRequest | 
+    try {
+      GetGroupAttrResponse result = apiInstance.getGroupAttr(random, getGroupAttrRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getGroupAttr");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -785,24 +726,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getGroupInfo
-
+<a name="getGroupInfo"></a>
+# **getGroupInfo**
 > GetGroupInfoResponse getGroupInfo(random, getGroupInfoRequest)
 
 获取群详细资料（https://cloud.tencent.com/document/product/269/1616）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -812,39 +750,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetGroupInfoRequest getGroupInfoRequest = new GetGroupInfoRequest(); // GetGroupInfoRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetGroupInfoResponse result = apiInstance.getGroupInfo(random, getGroupInfoRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getGroupInfo");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetGroupInfoRequest getGroupInfoRequest = new GetGroupInfoRequest(); // GetGroupInfoRequest | 
+    try {
+      GetGroupInfoResponse result = apiInstance.getGroupInfo(random, getGroupInfoRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getGroupInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -861,24 +796,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getGroupMemberInfo
-
+<a name="getGroupMemberInfo"></a>
+# **getGroupMemberInfo**
 > GetGroupMemberInfoResponse getGroupMemberInfo(random, getGroupMemberInfoRequest)
 
 获取群成员详细资料（https://cloud.tencent.com/document/product/269/1617）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -888,39 +820,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetGroupMemberInfoRequest getGroupMemberInfoRequest = new GetGroupMemberInfoRequest(); // GetGroupMemberInfoRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetGroupMemberInfoResponse result = apiInstance.getGroupMemberInfo(random, getGroupMemberInfoRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getGroupMemberInfo");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetGroupMemberInfoRequest getGroupMemberInfoRequest = new GetGroupMemberInfoRequest(); // GetGroupMemberInfoRequest | 
+    try {
+      GetGroupMemberInfoResponse result = apiInstance.getGroupMemberInfo(random, getGroupMemberInfoRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getGroupMemberInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -937,24 +866,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getGroupShuttedUin
-
+<a name="getGroupShuttedUin"></a>
+# **getGroupShuttedUin**
 > GetGroupShuttedUinResponse getGroupShuttedUin(random, getGroupShuttedUinRequest)
 
 获取被禁言群成员列表(https://cloud.tencent.com/document/product/269/2925)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -964,39 +890,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetGroupShuttedUinRequest getGroupShuttedUinRequest = new GetGroupShuttedUinRequest(); // GetGroupShuttedUinRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetGroupShuttedUinResponse result = apiInstance.getGroupShuttedUin(random, getGroupShuttedUinRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getGroupShuttedUin");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetGroupShuttedUinRequest getGroupShuttedUinRequest = new GetGroupShuttedUinRequest(); // GetGroupShuttedUinRequest | 
+    try {
+      GetGroupShuttedUinResponse result = apiInstance.getGroupShuttedUin(random, getGroupShuttedUinRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getGroupShuttedUin");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1013,24 +936,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getJoinedGroupList
-
+<a name="getJoinedGroupList"></a>
+# **getJoinedGroupList**
 > GetJoinedGroupListResponse getJoinedGroupList(random, getJoinedGroupListRequest)
 
 获取用户所加入的群组(https://cloud.tencent.com/document/product/269/1625)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1040,39 +960,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetJoinedGroupListRequest getJoinedGroupListRequest = new GetJoinedGroupListRequest(); // GetJoinedGroupListRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetJoinedGroupListResponse result = apiInstance.getJoinedGroupList(random, getJoinedGroupListRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getJoinedGroupList");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetJoinedGroupListRequest getJoinedGroupListRequest = new GetJoinedGroupListRequest(); // GetJoinedGroupListRequest | 
+    try {
+      GetJoinedGroupListResponse result = apiInstance.getJoinedGroupList(random, getJoinedGroupListRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getJoinedGroupList");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1089,24 +1006,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getOnlineMemberNum
-
+<a name="getOnlineMemberNum"></a>
+# **getOnlineMemberNum**
 > GetOnlineMemberNumResponse getOnlineMemberNum(random, getOnlineMemberNumRequest)
 
 获取直播群在线人数（https://cloud.tencent.com/document/product/269/49180）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1116,39 +1030,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetOnlineMemberNumRequest getOnlineMemberNumRequest = new GetOnlineMemberNumRequest(); // GetOnlineMemberNumRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetOnlineMemberNumResponse result = apiInstance.getOnlineMemberNum(random, getOnlineMemberNumRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getOnlineMemberNum");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetOnlineMemberNumRequest getOnlineMemberNumRequest = new GetOnlineMemberNumRequest(); // GetOnlineMemberNumRequest | 
+    try {
+      GetOnlineMemberNumResponse result = apiInstance.getOnlineMemberNum(random, getOnlineMemberNumRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getOnlineMemberNum");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1165,24 +1076,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## getRoleInGroup
-
+<a name="getRoleInGroup"></a>
+# **getRoleInGroup**
 > GetRoleInGroupResponse getRoleInGroup(random, getRoleInGroupRequest)
 
 查询用户在群组中的身份(https://cloud.tencent.com/document/product/269/1626)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1192,39 +1100,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GetRoleInGroupRequest getRoleInGroupRequest = new GetRoleInGroupRequest(); // GetRoleInGroupRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GetRoleInGroupResponse result = apiInstance.getRoleInGroup(random, getRoleInGroupRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#getRoleInGroup");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GetRoleInGroupRequest getRoleInGroupRequest = new GetRoleInGroupRequest(); // GetRoleInGroupRequest | 
+    try {
+      GetRoleInGroupResponse result = apiInstance.getRoleInGroup(random, getRoleInGroupRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#getRoleInGroup");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1241,24 +1146,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## groupMsgGetSimple
-
+<a name="groupMsgGetSimple"></a>
+# **groupMsgGetSimple**
 > GroupMsgGetSimpleResponse groupMsgGetSimple(random, groupMsgGetSimpleRequest)
 
 拉取群历史消息（https://cloud.tencent.com/document/product/269/2738）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1268,39 +1170,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GroupMsgGetSimpleRequest groupMsgGetSimpleRequest = new GroupMsgGetSimpleRequest(); // GroupMsgGetSimpleRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GroupMsgGetSimpleResponse result = apiInstance.groupMsgGetSimple(random, groupMsgGetSimpleRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#groupMsgGetSimple");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GroupMsgGetSimpleRequest groupMsgGetSimpleRequest = new GroupMsgGetSimpleRequest(); // GroupMsgGetSimpleRequest | 
+    try {
+      GroupMsgGetSimpleResponse result = apiInstance.groupMsgGetSimple(random, groupMsgGetSimpleRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#groupMsgGetSimple");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1317,24 +1216,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## groupMsgRecall
-
+<a name="groupMsgRecall"></a>
+# **groupMsgRecall**
 > GroupMsgRecallResponse groupMsgRecall(random, groupMsgRecallRequest)
 
 撤回群消息（https://cloud.tencent.com/document/product/269/12341）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1344,39 +1240,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        GroupMsgRecallRequest groupMsgRecallRequest = new GroupMsgRecallRequest(); // GroupMsgRecallRequest | 
-        //TODO: Set the parameters
-
-        try {
-            GroupMsgRecallResponse result = apiInstance.groupMsgRecall(random, groupMsgRecallRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#groupMsgRecall");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    GroupMsgRecallRequest groupMsgRecallRequest = new GroupMsgRecallRequest(); // GroupMsgRecallRequest | 
+    try {
+      GroupMsgRecallResponse result = apiInstance.groupMsgRecall(random, groupMsgRecallRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#groupMsgRecall");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1393,24 +1286,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## importGroup
-
+<a name="importGroup"></a>
+# **importGroup**
 > ImportGroupResponse importGroup(random, importGroupRequest)
 
 导入群基础资料（https://cloud.tencent.com/document/product/269/1634）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1420,39 +1310,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ImportGroupRequest importGroupRequest = new ImportGroupRequest(); // ImportGroupRequest | 
-        //TODO: Set the parameters
-
-        try {
-            ImportGroupResponse result = apiInstance.importGroup(random, importGroupRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#importGroup");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ImportGroupRequest importGroupRequest = new ImportGroupRequest(); // ImportGroupRequest | 
+    try {
+      ImportGroupResponse result = apiInstance.importGroup(random, importGroupRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#importGroup");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1469,24 +1356,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## importGroupMember
-
+<a name="importGroupMember"></a>
+# **importGroupMember**
 > ImportGroupMemberResponse importGroupMember(random, importGroupMemberRequest)
 
 导入群成员（https://cloud.tencent.com/document/product/269/1636）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1496,39 +1380,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ImportGroupMemberRequest importGroupMemberRequest = new ImportGroupMemberRequest(); // ImportGroupMemberRequest | 
-        //TODO: Set the parameters
-
-        try {
-            ImportGroupMemberResponse result = apiInstance.importGroupMember(random, importGroupMemberRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#importGroupMember");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ImportGroupMemberRequest importGroupMemberRequest = new ImportGroupMemberRequest(); // ImportGroupMemberRequest | 
+    try {
+      ImportGroupMemberResponse result = apiInstance.importGroupMember(random, importGroupMemberRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#importGroupMember");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1545,24 +1426,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## importGroupMsg
-
+<a name="importGroupMsg"></a>
+# **importGroupMsg**
 > ImportGroupMsgResponse importGroupMsg(random, importGroupMsgRequest)
 
 导入群消息（https://cloud.tencent.com/document/product/269/1635）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1572,39 +1450,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ImportGroupMsgRequest importGroupMsgRequest = new ImportGroupMsgRequest(); // ImportGroupMsgRequest | 
-        //TODO: Set the parameters
-
-        try {
-            ImportGroupMsgResponse result = apiInstance.importGroupMsg(random, importGroupMsgRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#importGroupMsg");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ImportGroupMsgRequest importGroupMsgRequest = new ImportGroupMsgRequest(); // ImportGroupMsgRequest | 
+    try {
+      ImportGroupMsgResponse result = apiInstance.importGroupMsg(random, importGroupMsgRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#importGroupMsg");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1621,24 +1496,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## modifyGroupAttr
-
+<a name="modifyGroupAttr"></a>
+# **modifyGroupAttr**
 > CommonResponse modifyGroupAttr(random, modifyGroupAttrRequest)
 
 修改群自定义属性（https://cloud.tencent.com/document/product/269/67010）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1648,39 +1520,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ModifyGroupAttrRequest modifyGroupAttrRequest = new ModifyGroupAttrRequest(); // ModifyGroupAttrRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.modifyGroupAttr(random, modifyGroupAttrRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#modifyGroupAttr");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ModifyGroupAttrRequest modifyGroupAttrRequest = new ModifyGroupAttrRequest(); // ModifyGroupAttrRequest | 
+    try {
+      CommonResponse result = apiInstance.modifyGroupAttr(random, modifyGroupAttrRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#modifyGroupAttr");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1697,24 +1566,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## modifyGroupBaseInfo
-
+<a name="modifyGroupBaseInfo"></a>
+# **modifyGroupBaseInfo**
 > CommonResponse modifyGroupBaseInfo(random, modifyGroupBaseInfoRequest)
 
 修改群基础资料（https://cloud.tencent.com/document/product/269/1620）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1724,39 +1590,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ModifyGroupBaseInfoRequest modifyGroupBaseInfoRequest = new ModifyGroupBaseInfoRequest(); // ModifyGroupBaseInfoRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.modifyGroupBaseInfo(random, modifyGroupBaseInfoRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#modifyGroupBaseInfo");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ModifyGroupBaseInfoRequest modifyGroupBaseInfoRequest = new ModifyGroupBaseInfoRequest(); // ModifyGroupBaseInfoRequest | 
+    try {
+      CommonResponse result = apiInstance.modifyGroupBaseInfo(random, modifyGroupBaseInfoRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#modifyGroupBaseInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1773,24 +1636,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## modifyGroupMemberInfo
-
+<a name="modifyGroupMemberInfo"></a>
+# **modifyGroupMemberInfo**
 > CommonResponse modifyGroupMemberInfo(random, modifyGroupMemberInfoRequest)
 
 修改群成员资料(https://cloud.tencent.com/document/product/269/1623)
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1800,39 +1660,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        ModifyGroupMemberInfoRequest modifyGroupMemberInfoRequest = new ModifyGroupMemberInfoRequest(); // ModifyGroupMemberInfoRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.modifyGroupMemberInfo(random, modifyGroupMemberInfoRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#modifyGroupMemberInfo");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ModifyGroupMemberInfoRequest modifyGroupMemberInfoRequest = new ModifyGroupMemberInfoRequest(); // ModifyGroupMemberInfoRequest | 
+    try {
+      CommonResponse result = apiInstance.modifyGroupMemberInfo(random, modifyGroupMemberInfoRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#modifyGroupMemberInfo");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1849,24 +1706,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## sendGroupMsg
-
+<a name="sendGroupMsg"></a>
+# **sendGroupMsg**
 > SendGroupMsgResponse sendGroupMsg(random, sendGroupMsgRequest)
 
 在群组中发送普通消息（https://cloud.tencent.com/document/product/269/1629）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1876,39 +1730,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        SendGroupMsgRequest sendGroupMsgRequest = new SendGroupMsgRequest(); // SendGroupMsgRequest | 
-        //TODO: Set the parameters
-
-        try {
-            SendGroupMsgResponse result = apiInstance.sendGroupMsg(random, sendGroupMsgRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#sendGroupMsg");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    SendGroupMsgRequest sendGroupMsgRequest = new SendGroupMsgRequest(); // SendGroupMsgRequest | 
+    try {
+      SendGroupMsgResponse result = apiInstance.sendGroupMsg(random, sendGroupMsgRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#sendGroupMsg");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -1925,24 +1776,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## sendGroupSystemNotification
-
+<a name="sendGroupSystemNotification"></a>
+# **sendGroupSystemNotification**
 > CommonResponse sendGroupSystemNotification(random, sendGroupSystemNotificationRequest)
 
 在群组中发送系统通知（https://cloud.tencent.com/document/product/269/1630）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -1952,39 +1800,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        SendGroupSystemNotificationRequest sendGroupSystemNotificationRequest = new SendGroupSystemNotificationRequest(); // SendGroupSystemNotificationRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.sendGroupSystemNotification(random, sendGroupSystemNotificationRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#sendGroupSystemNotification");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    SendGroupSystemNotificationRequest sendGroupSystemNotificationRequest = new SendGroupSystemNotificationRequest(); // SendGroupSystemNotificationRequest | 
+    try {
+      CommonResponse result = apiInstance.sendGroupSystemNotification(random, sendGroupSystemNotificationRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#sendGroupSystemNotification");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -2001,24 +1846,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## setGroupAttr
-
+<a name="setGroupAttr"></a>
+# **setGroupAttr**
 > CommonResponse setGroupAttr(random, setGroupAttrRequest)
 
 重置群自定义属性（https://cloud.tencent.com/document/product/269/67011）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -2028,39 +1870,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        SetGroupAttrRequest setGroupAttrRequest = new SetGroupAttrRequest(); // SetGroupAttrRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.setGroupAttr(random, setGroupAttrRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#setGroupAttr");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    SetGroupAttrRequest setGroupAttrRequest = new SetGroupAttrRequest(); // SetGroupAttrRequest | 
+    try {
+      CommonResponse result = apiInstance.setGroupAttr(random, setGroupAttrRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#setGroupAttr");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -2077,24 +1916,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## setUnreadMsgNum
-
+<a name="setUnreadMsgNum"></a>
+# **setUnreadMsgNum**
 > CommonResponse setUnreadMsgNum(random, setUnreadMsgNumRequest)
 
 设置成员未读消息计数（https://cloud.tencent.com/document/product/269/1637）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -2104,39 +1940,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.GroupApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        GroupApi apiInstance = new GroupApi(defaultClient);
-        Integer random = 56; // Integer | 
-        SetUnreadMsgNumRequest setUnreadMsgNumRequest = new SetUnreadMsgNumRequest(); // SetUnreadMsgNumRequest | 
-        //TODO: Set the parameters
-
-        try {
-            CommonResponse result = apiInstance.setUnreadMsgNum(random, setUnreadMsgNumRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling GroupApi#setUnreadMsgNum");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    SetUnreadMsgNumRequest setUnreadMsgNumRequest = new SetUnreadMsgNumRequest(); // SetUnreadMsgNumRequest | 
+    try {
+      CommonResponse result = apiInstance.setUnreadMsgNum(random, setUnreadMsgNumRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#setUnreadMsgNum");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -2153,9 +1986,8 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

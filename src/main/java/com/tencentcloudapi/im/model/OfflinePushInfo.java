@@ -1,39 +1,53 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.OfflinePushInfoAndroidInfo;
 import com.tencentcloudapi.im.model.OfflinePushInfoApnsInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * OfflinePushInfo
  */
-@JsonPropertyOrder({
-  OfflinePushInfo.JSON_PROPERTY_PUSH_FLAG,
-  OfflinePushInfo.JSON_PROPERTY_TITLE,
-  OfflinePushInfo.JSON_PROPERTY_DESC,
-  OfflinePushInfo.JSON_PROPERTY_EXT,
-  OfflinePushInfo.JSON_PROPERTY_ANDROID_INFO,
-  OfflinePushInfo.JSON_PROPERTY_APNS_INFO
-})
 
 public class OfflinePushInfo {
   /**
    * 0表示推送，1表示不离线推送。
    */
+  @JsonAdapter(PushFlagEnum.Adapter.class)
   public enum PushFlagEnum {
     NUMBER_0(0),
     
@@ -45,7 +59,6 @@ public class OfflinePushInfo {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -55,7 +68,6 @@ public class OfflinePushInfo {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static PushFlagEnum fromValue(Integer value) {
       for (PushFlagEnum b : PushFlagEnum.values()) {
         if (b.value.equals(value)) {
@@ -64,24 +76,43 @@ public class OfflinePushInfo {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<PushFlagEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PushFlagEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PushFlagEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return PushFlagEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_PUSH_FLAG = "PushFlag";
+  public static final String SERIALIZED_NAME_PUSH_FLAG = "PushFlag";
+  @SerializedName(SERIALIZED_NAME_PUSH_FLAG)
   private PushFlagEnum pushFlag;
 
-  public static final String JSON_PROPERTY_TITLE = "Title";
+  public static final String SERIALIZED_NAME_TITLE = "Title";
+  @SerializedName(SERIALIZED_NAME_TITLE)
   private String title;
 
-  public static final String JSON_PROPERTY_DESC = "Desc";
+  public static final String SERIALIZED_NAME_DESC = "Desc";
+  @SerializedName(SERIALIZED_NAME_DESC)
   private String desc;
 
-  public static final String JSON_PROPERTY_EXT = "Ext";
+  public static final String SERIALIZED_NAME_EXT = "Ext";
+  @SerializedName(SERIALIZED_NAME_EXT)
   private String ext;
 
-  public static final String JSON_PROPERTY_ANDROID_INFO = "AndroidInfo";
+  public static final String SERIALIZED_NAME_ANDROID_INFO = "AndroidInfo";
+  @SerializedName(SERIALIZED_NAME_ANDROID_INFO)
   private OfflinePushInfoAndroidInfo androidInfo;
 
-  public static final String JSON_PROPERTY_APNS_INFO = "ApnsInfo";
+  public static final String SERIALIZED_NAME_APNS_INFO = "ApnsInfo";
+  @SerializedName(SERIALIZED_NAME_APNS_INFO)
   private OfflinePushInfoApnsInfo apnsInfo;
 
   public OfflinePushInfo() { 
@@ -99,16 +130,12 @@ public class OfflinePushInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "0表示推送，1表示不离线推送。")
-  @JsonProperty(JSON_PROPERTY_PUSH_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public PushFlagEnum getPushFlag() {
     return pushFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PUSH_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setPushFlag(PushFlagEnum pushFlag) {
     this.pushFlag = pushFlag;
   }
@@ -126,16 +153,12 @@ public class OfflinePushInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "离线推送标题。该字段为 iOS 和 Android 共用。")
-  @JsonProperty(JSON_PROPERTY_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTitle() {
     return title;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTitle(String title) {
     this.title = title;
   }
@@ -153,16 +176,12 @@ public class OfflinePushInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "离线推送内容。该字段会覆盖上面各种消息元素 TIMMsgElement 的离线推送展示文本。若发送的消息只有一个 TIMCustomElem 自定义消息元素，该 Desc 字段会覆盖 TIMCustomElem 中的 Desc 字段。如果两个 Desc 字段都不填，将收不到该自定义消息的离线推送。")
-  @JsonProperty(JSON_PROPERTY_DESC)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getDesc() {
     return desc;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_DESC)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDesc(String desc) {
     this.desc = desc;
   }
@@ -180,16 +199,12 @@ public class OfflinePushInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "离线推送透传内容。由于国内各 Android 手机厂商的推送平台要求各不一样，请保证此字段为 JSON 格式，否则可能会导致收不到某些厂商的离线推送。")
-  @JsonProperty(JSON_PROPERTY_EXT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getExt() {
     return ext;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_EXT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setExt(String ext) {
     this.ext = ext;
   }
@@ -206,18 +221,13 @@ public class OfflinePushInfo {
    * @return androidInfo
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_ANDROID_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OfflinePushInfoAndroidInfo getAndroidInfo() {
     return androidInfo;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ANDROID_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAndroidInfo(OfflinePushInfoAndroidInfo androidInfo) {
     this.androidInfo = androidInfo;
   }
@@ -234,21 +244,17 @@ public class OfflinePushInfo {
    * @return apnsInfo
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_APNS_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OfflinePushInfoApnsInfo getApnsInfo() {
     return apnsInfo;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_APNS_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setApnsInfo(OfflinePushInfoApnsInfo apnsInfo) {
     this.apnsInfo = apnsInfo;
   }
+
 
 
   @Override
@@ -298,5 +304,112 @@ public class OfflinePushInfo {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("PushFlag");
+    openapiFields.add("Title");
+    openapiFields.add("Desc");
+    openapiFields.add("Ext");
+    openapiFields.add("AndroidInfo");
+    openapiFields.add("ApnsInfo");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to OfflinePushInfo
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (OfflinePushInfo.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in OfflinePushInfo is not found in the empty JSON string", OfflinePushInfo.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!OfflinePushInfo.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `OfflinePushInfo` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("Title") != null && !jsonObj.get("Title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Title").toString()));
+      }
+      if (jsonObj.get("Desc") != null && !jsonObj.get("Desc").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Desc` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Desc").toString()));
+      }
+      if (jsonObj.get("Ext") != null && !jsonObj.get("Ext").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Ext` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Ext").toString()));
+      }
+      // validate the optional field `AndroidInfo`
+      if (jsonObj.getAsJsonObject("AndroidInfo") != null) {
+        OfflinePushInfoAndroidInfo.validateJsonObject(jsonObj.getAsJsonObject("AndroidInfo"));
+      }
+      // validate the optional field `ApnsInfo`
+      if (jsonObj.getAsJsonObject("ApnsInfo") != null) {
+        OfflinePushInfoApnsInfo.validateJsonObject(jsonObj.getAsJsonObject("ApnsInfo"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!OfflinePushInfo.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'OfflinePushInfo' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<OfflinePushInfo> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(OfflinePushInfo.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<OfflinePushInfo>() {
+           @Override
+           public void write(JsonWriter out, OfflinePushInfo value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public OfflinePushInfo read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of OfflinePushInfo given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of OfflinePushInfo
+  * @throws IOException if the JSON string is invalid with respect to OfflinePushInfo
+  */
+  public static OfflinePushInfo fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, OfflinePushInfo.class);
+  }
+
+ /**
+  * Convert an instance of OfflinePushInfo to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

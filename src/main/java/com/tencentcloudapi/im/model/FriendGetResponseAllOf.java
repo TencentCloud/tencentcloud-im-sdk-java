@@ -1,42 +1,60 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.FriendGetResponseAllOfResultItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * FriendGetResponseAllOf
  */
-@JsonPropertyOrder({
-  FriendGetResponseAllOf.JSON_PROPERTY_RESULT_ITEM,
-  FriendGetResponseAllOf.JSON_PROPERTY_FAIL_ACCOUNT,
-  FriendGetResponseAllOf.JSON_PROPERTY_ERROR_DISPLAY
-})
-@JsonTypeName("FriendGetResponse_allOf")
 
 public class FriendGetResponseAllOf {
-  public static final String JSON_PROPERTY_RESULT_ITEM = "ResultItem";
+  public static final String SERIALIZED_NAME_RESULT_ITEM = "ResultItem";
+  @SerializedName(SERIALIZED_NAME_RESULT_ITEM)
   private List<FriendGetResponseAllOfResultItem> resultItem = null;
 
-  public static final String JSON_PROPERTY_FAIL_ACCOUNT = "Fail_Account";
+  public static final String SERIALIZED_NAME_FAIL_ACCOUNT = "Fail_Account";
+  @SerializedName(SERIALIZED_NAME_FAIL_ACCOUNT)
   private List<String> failAccount = null;
 
-  public static final String JSON_PROPERTY_ERROR_DISPLAY = "ErrorDisplay";
+  public static final String SERIALIZED_NAME_ERROR_DISPLAY = "ErrorDisplay";
+  @SerializedName(SERIALIZED_NAME_ERROR_DISPLAY)
   private Integer errorDisplay;
 
   public FriendGetResponseAllOf() { 
@@ -61,18 +79,13 @@ public class FriendGetResponseAllOf {
    * @return resultItem
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_RESULT_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<FriendGetResponseAllOfResultItem> getResultItem() {
     return resultItem;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_RESULT_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setResultItem(List<FriendGetResponseAllOfResultItem> resultItem) {
     this.resultItem = resultItem;
   }
@@ -98,16 +111,12 @@ public class FriendGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "返回处理失败的用户列表，仅当存在失败用户时才返回该字段")
-  @JsonProperty(JSON_PROPERTY_FAIL_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getFailAccount() {
     return failAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FAIL_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFailAccount(List<String> failAccount) {
     this.failAccount = failAccount;
   }
@@ -125,19 +134,16 @@ public class FriendGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "详细的客户端展示信息")
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getErrorDisplay() {
     return errorDisplay;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setErrorDisplay(Integer errorDisplay) {
     this.errorDisplay = errorDisplay;
   }
+
 
 
   @Override
@@ -181,5 +187,108 @@ public class FriendGetResponseAllOf {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("ResultItem");
+    openapiFields.add("Fail_Account");
+    openapiFields.add("ErrorDisplay");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to FriendGetResponseAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (FriendGetResponseAllOf.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in FriendGetResponseAllOf is not found in the empty JSON string", FriendGetResponseAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!FriendGetResponseAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FriendGetResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      JsonArray jsonArrayresultItem = jsonObj.getAsJsonArray("ResultItem");
+      if (jsonArrayresultItem != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("ResultItem").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `ResultItem` to be an array in the JSON string but got `%s`", jsonObj.get("ResultItem").toString()));
+        }
+
+        // validate the optional field `ResultItem` (array)
+        for (int i = 0; i < jsonArrayresultItem.size(); i++) {
+          FriendGetResponseAllOfResultItem.validateJsonObject(jsonArrayresultItem.get(i).getAsJsonObject());
+        };
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("Fail_Account") != null && !jsonObj.get("Fail_Account").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Fail_Account` to be an array in the JSON string but got `%s`", jsonObj.get("Fail_Account").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!FriendGetResponseAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'FriendGetResponseAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<FriendGetResponseAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(FriendGetResponseAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<FriendGetResponseAllOf>() {
+           @Override
+           public void write(JsonWriter out, FriendGetResponseAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public FriendGetResponseAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of FriendGetResponseAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of FriendGetResponseAllOf
+  * @throws IOException if the JSON string is invalid with respect to FriendGetResponseAllOf
+  */
+  public static FriendGetResponseAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, FriendGetResponseAllOf.class);
+  }
+
+ /**
+  * Convert an instance of FriendGetResponseAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

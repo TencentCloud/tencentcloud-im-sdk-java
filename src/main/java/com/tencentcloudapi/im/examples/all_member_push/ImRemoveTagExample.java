@@ -1,4 +1,6 @@
 package com.tencentcloudapi.im.examples.all_member_push;
+import com.tencentcloudapi.im.model.ImRemoveTagRequestUserTagsInner;
+import java.util.ArrayList;
 
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;

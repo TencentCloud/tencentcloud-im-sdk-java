@@ -1,46 +1,64 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.TIMMsgElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ImportGroupMsgRequestMsgListInner
  */
-@JsonPropertyOrder({
-  ImportGroupMsgRequestMsgListInner.JSON_PROPERTY_FROM_ACCOUNT,
-  ImportGroupMsgRequestMsgListInner.JSON_PROPERTY_SEND_TIME,
-  ImportGroupMsgRequestMsgListInner.JSON_PROPERTY_RANDOM,
-  ImportGroupMsgRequestMsgListInner.JSON_PROPERTY_MSG_BODY
-})
-@JsonTypeName("ImportGroupMsgRequest_MsgList_inner")
 
 public class ImportGroupMsgRequestMsgListInner {
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_SEND_TIME = "SendTime";
+  public static final String SERIALIZED_NAME_SEND_TIME = "SendTime";
+  @SerializedName(SERIALIZED_NAME_SEND_TIME)
   private Integer sendTime;
 
-  public static final String JSON_PROPERTY_RANDOM = "Random";
+  public static final String SERIALIZED_NAME_RANDOM = "Random";
+  @SerializedName(SERIALIZED_NAME_RANDOM)
   private Integer random;
 
-  public static final String JSON_PROPERTY_MSG_BODY = "MsgBody";
+  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
+  @SerializedName(SERIALIZED_NAME_MSG_BODY)
   private List<TIMMsgElement> msgBody = null;
 
   public ImportGroupMsgRequestMsgListInner() { 
@@ -58,16 +76,12 @@ public class ImportGroupMsgRequestMsgListInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "指定消息发送者")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -85,16 +99,12 @@ public class ImportGroupMsgRequestMsgListInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息发送时间")
-  @JsonProperty(JSON_PROPERTY_SEND_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getSendTime() {
     return sendTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SEND_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSendTime(Integer sendTime) {
     this.sendTime = sendTime;
   }
@@ -112,16 +122,12 @@ public class ImportGroupMsgRequestMsgListInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "32位无符号整数；如果5分钟内两条消息的随机值相同，后一条消息将被当做重复消息而丢弃")
-  @JsonProperty(JSON_PROPERTY_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getRandom() {
     return random;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRandom(Integer random) {
     this.random = random;
   }
@@ -146,21 +152,17 @@ public class ImportGroupMsgRequestMsgListInner {
    * @return msgBody
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<TIMMsgElement> getMsgBody() {
     return msgBody;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgBody(List<TIMMsgElement> msgBody) {
     this.msgBody = msgBody;
   }
+
 
 
   @Override
@@ -206,5 +208,108 @@ public class ImportGroupMsgRequestMsgListInner {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("From_Account");
+    openapiFields.add("SendTime");
+    openapiFields.add("Random");
+    openapiFields.add("MsgBody");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ImportGroupMsgRequestMsgListInner
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ImportGroupMsgRequestMsgListInner.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ImportGroupMsgRequestMsgListInner is not found in the empty JSON string", ImportGroupMsgRequestMsgListInner.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ImportGroupMsgRequestMsgListInner.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportGroupMsgRequestMsgListInner` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      JsonArray jsonArraymsgBody = jsonObj.getAsJsonArray("MsgBody");
+      if (jsonArraymsgBody != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("MsgBody").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `MsgBody` to be an array in the JSON string but got `%s`", jsonObj.get("MsgBody").toString()));
+        }
+
+        // validate the optional field `MsgBody` (array)
+        for (int i = 0; i < jsonArraymsgBody.size(); i++) {
+          TIMMsgElement.validateJsonObject(jsonArraymsgBody.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ImportGroupMsgRequestMsgListInner.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ImportGroupMsgRequestMsgListInner' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ImportGroupMsgRequestMsgListInner> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ImportGroupMsgRequestMsgListInner.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ImportGroupMsgRequestMsgListInner>() {
+           @Override
+           public void write(JsonWriter out, ImportGroupMsgRequestMsgListInner value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ImportGroupMsgRequestMsgListInner read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ImportGroupMsgRequestMsgListInner given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ImportGroupMsgRequestMsgListInner
+  * @throws IOException if the JSON string is invalid with respect to ImportGroupMsgRequestMsgListInner
+  */
+  public static ImportGroupMsgRequestMsgListInner fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ImportGroupMsgRequestMsgListInner.class);
+  }
+
+ /**
+  * Convert an instance of ImportGroupMsgRequestMsgListInner to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

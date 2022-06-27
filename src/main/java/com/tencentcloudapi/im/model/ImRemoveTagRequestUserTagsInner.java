@@ -1,37 +1,55 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ImRemoveTagRequestUserTagsInner
  */
-@JsonPropertyOrder({
-  ImRemoveTagRequestUserTagsInner.JSON_PROPERTY_TO_ACCOUNT,
-  ImRemoveTagRequestUserTagsInner.JSON_PROPERTY_TAGS
-})
-@JsonTypeName("ImRemoveTagRequest_UserTags_inner")
 
 public class ImRemoveTagRequestUserTagsInner {
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private String toAccount;
 
-  public static final String JSON_PROPERTY_TAGS = "Tags";
+  public static final String SERIALIZED_NAME_TAGS = "Tags";
+  @SerializedName(SERIALIZED_NAME_TAGS)
   private List<String> tags = null;
 
   public ImRemoveTagRequestUserTagsInner() { 
@@ -49,16 +67,12 @@ public class ImRemoveTagRequestUserTagsInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "目标用户帐号列表")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
@@ -84,19 +98,16 @@ public class ImRemoveTagRequestUserTagsInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "标签集合")
-  @JsonProperty(JSON_PROPERTY_TAGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getTags() {
     return tags;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TAGS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTags(List<String> tags) {
     this.tags = tags;
   }
+
 
 
   @Override
@@ -138,5 +149,98 @@ public class ImRemoveTagRequestUserTagsInner {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("To_Account");
+    openapiFields.add("Tags");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ImRemoveTagRequestUserTagsInner
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ImRemoveTagRequestUserTagsInner.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ImRemoveTagRequestUserTagsInner is not found in the empty JSON string", ImRemoveTagRequestUserTagsInner.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ImRemoveTagRequestUserTagsInner.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImRemoveTagRequestUserTagsInner` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("Tags") != null && !jsonObj.get("Tags").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Tags` to be an array in the JSON string but got `%s`", jsonObj.get("Tags").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ImRemoveTagRequestUserTagsInner.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ImRemoveTagRequestUserTagsInner' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ImRemoveTagRequestUserTagsInner> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ImRemoveTagRequestUserTagsInner.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ImRemoveTagRequestUserTagsInner>() {
+           @Override
+           public void write(JsonWriter out, ImRemoveTagRequestUserTagsInner value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ImRemoveTagRequestUserTagsInner read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ImRemoveTagRequestUserTagsInner given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ImRemoveTagRequestUserTagsInner
+  * @throws IOException if the JSON string is invalid with respect to ImRemoveTagRequestUserTagsInner
+  */
+  public static ImRemoveTagRequestUserTagsInner fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ImRemoveTagRequestUserTagsInner.class);
+  }
+
+ /**
+  * Convert an instance of ImRemoveTagRequestUserTagsInner to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

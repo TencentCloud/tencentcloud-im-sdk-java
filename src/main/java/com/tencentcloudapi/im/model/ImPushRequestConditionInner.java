@@ -1,43 +1,61 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ImPushRequestConditionInner
  */
-@JsonPropertyOrder({
-  ImPushRequestConditionInner.JSON_PROPERTY_ATTRS_OR,
-  ImPushRequestConditionInner.JSON_PROPERTY_ATTRS_AND,
-  ImPushRequestConditionInner.JSON_PROPERTY_TAGS_OR,
-  ImPushRequestConditionInner.JSON_PROPERTY_TAGS_AND
-})
-@JsonTypeName("ImPushRequest_Condition_inner")
 
 public class ImPushRequestConditionInner {
-  public static final String JSON_PROPERTY_ATTRS_OR = "AttrsOr";
+  public static final String SERIALIZED_NAME_ATTRS_OR = "AttrsOr";
+  @SerializedName(SERIALIZED_NAME_ATTRS_OR)
   private Object attrsOr;
 
-  public static final String JSON_PROPERTY_ATTRS_AND = "AttrsAnd";
+  public static final String SERIALIZED_NAME_ATTRS_AND = "AttrsAnd";
+  @SerializedName(SERIALIZED_NAME_ATTRS_AND)
   private Object attrsAnd;
 
-  public static final String JSON_PROPERTY_TAGS_OR = "TagsOr";
+  public static final String SERIALIZED_NAME_TAGS_OR = "TagsOr";
+  @SerializedName(SERIALIZED_NAME_TAGS_OR)
   private Object tagsOr;
 
-  public static final String JSON_PROPERTY_TAGS_AND = "TagsAnd";
+  public static final String SERIALIZED_NAME_TAGS_AND = "TagsAnd";
+  @SerializedName(SERIALIZED_NAME_TAGS_AND)
   private Object tagsAnd;
 
   public ImPushRequestConditionInner() { 
@@ -55,16 +73,12 @@ public class ImPushRequestConditionInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "属性的或条件")
-  @JsonProperty(JSON_PROPERTY_ATTRS_OR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Object getAttrsOr() {
     return attrsOr;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ATTRS_OR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAttrsOr(Object attrsOr) {
     this.attrsOr = attrsOr;
   }
@@ -82,16 +96,12 @@ public class ImPushRequestConditionInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "属性的与条件")
-  @JsonProperty(JSON_PROPERTY_ATTRS_AND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Object getAttrsAnd() {
     return attrsAnd;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ATTRS_AND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAttrsAnd(Object attrsAnd) {
     this.attrsAnd = attrsAnd;
   }
@@ -109,16 +119,12 @@ public class ImPushRequestConditionInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "标签的或条件")
-  @JsonProperty(JSON_PROPERTY_TAGS_OR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Object getTagsOr() {
     return tagsOr;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TAGS_OR)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTagsOr(Object tagsOr) {
     this.tagsOr = tagsOr;
   }
@@ -136,19 +142,16 @@ public class ImPushRequestConditionInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "标签的与条件")
-  @JsonProperty(JSON_PROPERTY_TAGS_AND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Object getTagsAnd() {
     return tagsAnd;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TAGS_AND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTagsAnd(Object tagsAnd) {
     this.tagsAnd = tagsAnd;
   }
+
 
 
   @Override
@@ -194,5 +197,93 @@ public class ImPushRequestConditionInner {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("AttrsOr");
+    openapiFields.add("AttrsAnd");
+    openapiFields.add("TagsOr");
+    openapiFields.add("TagsAnd");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ImPushRequestConditionInner
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ImPushRequestConditionInner.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ImPushRequestConditionInner is not found in the empty JSON string", ImPushRequestConditionInner.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ImPushRequestConditionInner.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImPushRequestConditionInner` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ImPushRequestConditionInner.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ImPushRequestConditionInner' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ImPushRequestConditionInner> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ImPushRequestConditionInner.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ImPushRequestConditionInner>() {
+           @Override
+           public void write(JsonWriter out, ImPushRequestConditionInner value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ImPushRequestConditionInner read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ImPushRequestConditionInner given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ImPushRequestConditionInner
+  * @throws IOException if the JSON string is invalid with respect to ImPushRequestConditionInner
+  */
+  public static ImPushRequestConditionInner fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ImPushRequestConditionInner.class);
+  }
+
+ /**
+  * Convert an instance of ImPushRequestConditionInner to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

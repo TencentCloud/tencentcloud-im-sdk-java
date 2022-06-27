@@ -1,42 +1,60 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.PortraitGetResponseAllOfUserProfileItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * PortraitGetResponseAllOf
  */
-@JsonPropertyOrder({
-  PortraitGetResponseAllOf.JSON_PROPERTY_USER_PROFILE_ITEM,
-  PortraitGetResponseAllOf.JSON_PROPERTY_FAIL_ACCOUNT,
-  PortraitGetResponseAllOf.JSON_PROPERTY_ERROR_DISPLAY
-})
-@JsonTypeName("PortraitGetResponse_allOf")
 
 public class PortraitGetResponseAllOf {
-  public static final String JSON_PROPERTY_USER_PROFILE_ITEM = "UserProfileItem";
+  public static final String SERIALIZED_NAME_USER_PROFILE_ITEM = "UserProfileItem";
+  @SerializedName(SERIALIZED_NAME_USER_PROFILE_ITEM)
   private List<PortraitGetResponseAllOfUserProfileItem> userProfileItem = null;
 
-  public static final String JSON_PROPERTY_FAIL_ACCOUNT = "Fail_Account";
+  public static final String SERIALIZED_NAME_FAIL_ACCOUNT = "Fail_Account";
+  @SerializedName(SERIALIZED_NAME_FAIL_ACCOUNT)
   private List<String> failAccount = null;
 
-  public static final String JSON_PROPERTY_ERROR_DISPLAY = "ErrorDisplay";
+  public static final String SERIALIZED_NAME_ERROR_DISPLAY = "ErrorDisplay";
+  @SerializedName(SERIALIZED_NAME_ERROR_DISPLAY)
   private String errorDisplay;
 
   public PortraitGetResponseAllOf() { 
@@ -61,18 +79,13 @@ public class PortraitGetResponseAllOf {
    * @return userProfileItem
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "返回的用户资料结构化信息")
-  @JsonProperty(JSON_PROPERTY_USER_PROFILE_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<PortraitGetResponseAllOfUserProfileItem> getUserProfileItem() {
     return userProfileItem;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_USER_PROFILE_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setUserProfileItem(List<PortraitGetResponseAllOfUserProfileItem> userProfileItem) {
     this.userProfileItem = userProfileItem;
   }
@@ -98,16 +111,12 @@ public class PortraitGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "返回处理失败的用户列表，仅当存在失败用户时才返回该字段")
-  @JsonProperty(JSON_PROPERTY_FAIL_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getFailAccount() {
     return failAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FAIL_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFailAccount(List<String> failAccount) {
     this.failAccount = failAccount;
   }
@@ -125,19 +134,16 @@ public class PortraitGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "详细的客户端展示信息")
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorDisplay() {
     return errorDisplay;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setErrorDisplay(String errorDisplay) {
     this.errorDisplay = errorDisplay;
   }
+
 
 
   @Override
@@ -181,5 +187,111 @@ public class PortraitGetResponseAllOf {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("UserProfileItem");
+    openapiFields.add("Fail_Account");
+    openapiFields.add("ErrorDisplay");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to PortraitGetResponseAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (PortraitGetResponseAllOf.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PortraitGetResponseAllOf is not found in the empty JSON string", PortraitGetResponseAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!PortraitGetResponseAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PortraitGetResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      JsonArray jsonArrayuserProfileItem = jsonObj.getAsJsonArray("UserProfileItem");
+      if (jsonArrayuserProfileItem != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("UserProfileItem").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `UserProfileItem` to be an array in the JSON string but got `%s`", jsonObj.get("UserProfileItem").toString()));
+        }
+
+        // validate the optional field `UserProfileItem` (array)
+        for (int i = 0; i < jsonArrayuserProfileItem.size(); i++) {
+          PortraitGetResponseAllOfUserProfileItem.validateJsonObject(jsonArrayuserProfileItem.get(i).getAsJsonObject());
+        };
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("Fail_Account") != null && !jsonObj.get("Fail_Account").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Fail_Account` to be an array in the JSON string but got `%s`", jsonObj.get("Fail_Account").toString()));
+      }
+      if (jsonObj.get("ErrorDisplay") != null && !jsonObj.get("ErrorDisplay").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ErrorDisplay` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ErrorDisplay").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!PortraitGetResponseAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PortraitGetResponseAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<PortraitGetResponseAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PortraitGetResponseAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<PortraitGetResponseAllOf>() {
+           @Override
+           public void write(JsonWriter out, PortraitGetResponseAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public PortraitGetResponseAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of PortraitGetResponseAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of PortraitGetResponseAllOf
+  * @throws IOException if the JSON string is invalid with respect to PortraitGetResponseAllOf
+  */
+  public static PortraitGetResponseAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PortraitGetResponseAllOf.class);
+  }
+
+ /**
+  * Convert an instance of PortraitGetResponseAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

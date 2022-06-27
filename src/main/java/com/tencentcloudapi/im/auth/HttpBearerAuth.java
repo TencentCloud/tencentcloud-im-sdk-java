@@ -1,11 +1,18 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
 
 
 package com.tencentcloudapi.im.auth;
 
+import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Pair;
 
+import java.net.URI;
 import java.util.Map;
 import java.util.List;
+
 
 public class HttpBearerAuth implements Authentication {
   private final String scheme;
@@ -34,8 +41,9 @@ public class HttpBearerAuth implements Authentication {
   }
 
   @Override
-  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams) {
-    if(bearerToken == null) {
+  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams,
+                            String payload, String method, URI uri) throws ApiException {
+    if (bearerToken == null) {
       return;
     }
 

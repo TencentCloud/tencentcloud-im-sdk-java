@@ -1,20 +1,25 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import com.google.gson.annotations.SerializedName;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.io.IOException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 
 /**
  * Gets or Sets ForbidCallbackControl
  */
+@JsonAdapter(ForbidCallbackControl.Adapter.class)
 public enum ForbidCallbackControl {
   
   FORBIDBEFORESENDMSGCALLBACK("ForbidBeforeSendMsgCallback"),
@@ -27,7 +32,6 @@ public enum ForbidCallbackControl {
     this.value = value;
   }
 
-  @JsonValue
   public String getValue() {
     return value;
   }
@@ -37,7 +41,6 @@ public enum ForbidCallbackControl {
     return String.valueOf(value);
   }
 
-  @JsonCreator
   public static ForbidCallbackControl fromValue(String value) {
     for (ForbidCallbackControl b : ForbidCallbackControl.values()) {
       if (b.value.equals(value)) {
@@ -45,6 +48,19 @@ public enum ForbidCallbackControl {
       }
     }
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
+  }
+
+  public static class Adapter extends TypeAdapter<ForbidCallbackControl> {
+    @Override
+    public void write(final JsonWriter jsonWriter, final ForbidCallbackControl enumeration) throws IOException {
+      jsonWriter.value(enumeration.getValue());
+    }
+
+    @Override
+    public ForbidCallbackControl read(final JsonReader jsonReader) throws IOException {
+      String value = jsonReader.nextString();
+      return ForbidCallbackControl.fromValue(value);
+    }
   }
 }
 

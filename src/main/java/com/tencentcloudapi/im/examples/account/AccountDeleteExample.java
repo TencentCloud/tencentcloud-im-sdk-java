@@ -28,7 +28,6 @@ public class AccountDeleteExample {
         Integer random = 56; // Integer |
         AccountDeleteRequest accountDeleteRequest = new AccountDeleteRequest(); // AccountDeleteRequest |
         //TODO: Set the parameters
-
         try {
             AccountDeleteResponse result = apiInstance.accountDelete(random, accountDeleteRequest);
             System.out.println(result);

@@ -1,46 +1,58 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.ImageInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * TIMImageElemMsgContent
  */
-@JsonPropertyOrder({
-  TIMImageElemMsgContent.JSON_PROPERTY_U_U_I_D,
-  TIMImageElemMsgContent.JSON_PROPERTY_IMAGE_FORMAT,
-  TIMImageElemMsgContent.JSON_PROPERTY_IMAGE_INFO_ARRAY,
-  TIMImageElemMsgContent.JSON_PROPERTY_TYPE,
-  TIMImageElemMsgContent.JSON_PROPERTY_SIZE,
-  TIMImageElemMsgContent.JSON_PROPERTY_WIDTH,
-  TIMImageElemMsgContent.JSON_PROPERTY_HEIGHT,
-  TIMImageElemMsgContent.JSON_PROPERTY_U_R_L
-})
-@JsonTypeName("TIMImageElem_MsgContent")
 
 public class TIMImageElemMsgContent {
-  public static final String JSON_PROPERTY_U_U_I_D = "UUID";
+  public static final String SERIALIZED_NAME_U_U_I_D = "UUID";
+  @SerializedName(SERIALIZED_NAME_U_U_I_D)
   private String UUID;
 
   /**
    * Gets or Sets imageFormat
    */
+  @JsonAdapter(ImageFormatEnum.Adapter.class)
   public enum ImageFormatEnum {
     NUMBER_1(1),
     
@@ -58,7 +70,6 @@ public class TIMImageElemMsgContent {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -68,7 +79,6 @@ public class TIMImageElemMsgContent {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static ImageFormatEnum fromValue(Integer value) {
       for (ImageFormatEnum b : ImageFormatEnum.values()) {
         if (b.value.equals(value)) {
@@ -77,17 +87,33 @@ public class TIMImageElemMsgContent {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<ImageFormatEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ImageFormatEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ImageFormatEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return ImageFormatEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_IMAGE_FORMAT = "ImageFormat";
+  public static final String SERIALIZED_NAME_IMAGE_FORMAT = "ImageFormat";
+  @SerializedName(SERIALIZED_NAME_IMAGE_FORMAT)
   private ImageFormatEnum imageFormat;
 
-  public static final String JSON_PROPERTY_IMAGE_INFO_ARRAY = "ImageInfoArray";
+  public static final String SERIALIZED_NAME_IMAGE_INFO_ARRAY = "ImageInfoArray";
+  @SerializedName(SERIALIZED_NAME_IMAGE_INFO_ARRAY)
   private List<ImageInfo> imageInfoArray = null;
 
   /**
    * Gets or Sets type
    */
+  @JsonAdapter(TypeEnum.Adapter.class)
   public enum TypeEnum {
     NUMBER_1(1),
     
@@ -101,7 +127,6 @@ public class TIMImageElemMsgContent {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -111,7 +136,6 @@ public class TIMImageElemMsgContent {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static TypeEnum fromValue(Integer value) {
       for (TypeEnum b : TypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -120,21 +144,39 @@ public class TIMImageElemMsgContent {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<TypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public TypeEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return TypeEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_TYPE = "Type";
+  public static final String SERIALIZED_NAME_TYPE = "Type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
-  public static final String JSON_PROPERTY_SIZE = "Size";
+  public static final String SERIALIZED_NAME_SIZE = "Size";
+  @SerializedName(SERIALIZED_NAME_SIZE)
   private Integer size;
 
-  public static final String JSON_PROPERTY_WIDTH = "Width";
+  public static final String SERIALIZED_NAME_WIDTH = "Width";
+  @SerializedName(SERIALIZED_NAME_WIDTH)
   private Integer width;
 
-  public static final String JSON_PROPERTY_HEIGHT = "Height";
+  public static final String SERIALIZED_NAME_HEIGHT = "Height";
+  @SerializedName(SERIALIZED_NAME_HEIGHT)
   private Integer height;
 
-  public static final String JSON_PROPERTY_U_R_L = "URL";
+  public static final String SERIALIZED_NAME_U_R_L = "URL";
+  @SerializedName(SERIALIZED_NAME_U_R_L)
   private String URL;
 
   public TIMImageElemMsgContent() { 
@@ -151,18 +193,13 @@ public class TIMImageElemMsgContent {
    * @return UUID
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getUUID() {
     return UUID;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUUID(String UUID) {
     this.UUID = UUID;
   }
@@ -179,18 +216,13 @@ public class TIMImageElemMsgContent {
    * @return imageFormat
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_IMAGE_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public ImageFormatEnum getImageFormat() {
     return imageFormat;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IMAGE_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setImageFormat(ImageFormatEnum imageFormat) {
     this.imageFormat = imageFormat;
   }
@@ -215,18 +247,13 @@ public class TIMImageElemMsgContent {
    * @return imageInfoArray
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_IMAGE_INFO_ARRAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ImageInfo> getImageInfoArray() {
     return imageInfoArray;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IMAGE_INFO_ARRAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setImageInfoArray(List<ImageInfo> imageInfoArray) {
     this.imageInfoArray = imageInfoArray;
   }
@@ -244,16 +271,12 @@ public class TIMImageElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public TypeEnum getType() {
     return type;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setType(TypeEnum type) {
     this.type = type;
   }
@@ -271,16 +294,12 @@ public class TIMImageElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_SIZE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getSize() {
     return size;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SIZE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSize(Integer size) {
     this.size = size;
   }
@@ -298,16 +317,12 @@ public class TIMImageElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_WIDTH)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getWidth() {
     return width;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_WIDTH)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setWidth(Integer width) {
     this.width = width;
   }
@@ -325,16 +340,12 @@ public class TIMImageElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_HEIGHT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getHeight() {
     return height;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_HEIGHT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setHeight(Integer height) {
     this.height = height;
   }
@@ -352,19 +363,16 @@ public class TIMImageElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_U_R_L)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getURL() {
     return URL;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_U_R_L)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setURL(String URL) {
     this.URL = URL;
   }
+
 
 
   @Override
@@ -418,5 +426,124 @@ public class TIMImageElemMsgContent {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("UUID");
+    openapiFields.add("ImageFormat");
+    openapiFields.add("ImageInfoArray");
+    openapiFields.add("Type");
+    openapiFields.add("Size");
+    openapiFields.add("Width");
+    openapiFields.add("Height");
+    openapiFields.add("URL");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("UUID");
+    openapiRequiredFields.add("ImageFormat");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to TIMImageElemMsgContent
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (TIMImageElemMsgContent.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in TIMImageElemMsgContent is not found in the empty JSON string", TIMImageElemMsgContent.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!TIMImageElemMsgContent.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TIMImageElemMsgContent` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : TIMImageElemMsgContent.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("UUID") != null && !jsonObj.get("UUID").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `UUID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("UUID").toString()));
+      }
+      JsonArray jsonArrayimageInfoArray = jsonObj.getAsJsonArray("ImageInfoArray");
+      if (jsonArrayimageInfoArray != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("ImageInfoArray").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `ImageInfoArray` to be an array in the JSON string but got `%s`", jsonObj.get("ImageInfoArray").toString()));
+        }
+
+        // validate the optional field `ImageInfoArray` (array)
+        for (int i = 0; i < jsonArrayimageInfoArray.size(); i++) {
+          ImageInfo.validateJsonObject(jsonArrayimageInfoArray.get(i).getAsJsonObject());
+        };
+      }
+      if (jsonObj.get("URL") != null && !jsonObj.get("URL").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `URL` to be a primitive type in the JSON string but got `%s`", jsonObj.get("URL").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!TIMImageElemMsgContent.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'TIMImageElemMsgContent' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<TIMImageElemMsgContent> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(TIMImageElemMsgContent.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<TIMImageElemMsgContent>() {
+           @Override
+           public void write(JsonWriter out, TIMImageElemMsgContent value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public TIMImageElemMsgContent read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of TIMImageElemMsgContent given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of TIMImageElemMsgContent
+  * @throws IOException if the JSON string is invalid with respect to TIMImageElemMsgContent
+  */
+  public static TIMImageElemMsgContent fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, TIMImageElemMsgContent.class);
+  }
+
+ /**
+  * Convert an instance of TIMImageElemMsgContent to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

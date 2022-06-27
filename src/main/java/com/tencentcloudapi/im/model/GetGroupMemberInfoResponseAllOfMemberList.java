@@ -1,55 +1,73 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GetGroupMemberInfoResponseAllOfMemberList
  */
-@JsonPropertyOrder({
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_MEMBER_ACCOUNT,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_ROLE,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_JOIN_TIME,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_MSG_SEQ,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_MSG_FLAG,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_LAST_SEND_MSG_TIME,
-  GetGroupMemberInfoResponseAllOfMemberList.JSON_PROPERTY_NAME_CARD
-})
-@JsonTypeName("GetGroupMemberInfoResponse_allOf_MemberList")
 
 public class GetGroupMemberInfoResponseAllOfMemberList {
-  public static final String JSON_PROPERTY_MEMBER_ACCOUNT = "Member_Account";
+  public static final String SERIALIZED_NAME_MEMBER_ACCOUNT = "Member_Account";
+  @SerializedName(SERIALIZED_NAME_MEMBER_ACCOUNT)
   private String memberAccount;
 
-  public static final String JSON_PROPERTY_ROLE = "Role";
+  public static final String SERIALIZED_NAME_ROLE = "Role";
+  @SerializedName(SERIALIZED_NAME_ROLE)
   private String role;
 
-  public static final String JSON_PROPERTY_JOIN_TIME = "JoinTime";
+  public static final String SERIALIZED_NAME_JOIN_TIME = "JoinTime";
+  @SerializedName(SERIALIZED_NAME_JOIN_TIME)
   private Integer joinTime;
 
-  public static final String JSON_PROPERTY_MSG_SEQ = "MsgSeq";
+  public static final String SERIALIZED_NAME_MSG_SEQ = "MsgSeq";
+  @SerializedName(SERIALIZED_NAME_MSG_SEQ)
   private Integer msgSeq;
 
-  public static final String JSON_PROPERTY_MSG_FLAG = "MsgFlag";
+  public static final String SERIALIZED_NAME_MSG_FLAG = "MsgFlag";
+  @SerializedName(SERIALIZED_NAME_MSG_FLAG)
   private String msgFlag;
 
-  public static final String JSON_PROPERTY_LAST_SEND_MSG_TIME = "LastSendMsgTime";
+  public static final String SERIALIZED_NAME_LAST_SEND_MSG_TIME = "LastSendMsgTime";
+  @SerializedName(SERIALIZED_NAME_LAST_SEND_MSG_TIME)
   private Integer lastSendMsgTime;
 
-  public static final String JSON_PROPERTY_NAME_CARD = "NameCard";
+  public static final String SERIALIZED_NAME_NAME_CARD = "NameCard";
+  @SerializedName(SERIALIZED_NAME_NAME_CARD)
   private String nameCard;
 
   public GetGroupMemberInfoResponseAllOfMemberList() { 
@@ -67,16 +85,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "群成员 ID 只读")
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMemberAccount() {
     return memberAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMemberAccount(String memberAccount) {
     this.memberAccount = memberAccount;
   }
@@ -94,16 +108,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "群内身份 群内身份，包括 Owner 群主、Admin 群管理员以及 Member 群成员")
-  @JsonProperty(JSON_PROPERTY_ROLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRole() {
     return role;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ROLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRole(String role) {
     this.role = role;
   }
@@ -121,16 +131,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "入群时间 只读")
-  @JsonProperty(JSON_PROPERTY_JOIN_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getJoinTime() {
     return joinTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_JOIN_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setJoinTime(Integer joinTime) {
     this.joinTime = joinTime;
   }
@@ -148,16 +154,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "该成员当前已读消息 Seq 只读")
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgSeq() {
     return msgSeq;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgSeq(Integer msgSeq) {
     this.msgSeq = msgSeq;
   }
@@ -175,16 +177,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息接收选项 消息接收选项，包括如下几种：AcceptAndNotify 表示接收并提示；AcceptNotNotify 表示接收不提示（不会触发 APNs 远程推送）；Discard 表示屏蔽群消息（不会向客户端推送消息）")
-  @JsonProperty(JSON_PROPERTY_MSG_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMsgFlag() {
     return msgFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgFlag(String msgFlag) {
     this.msgFlag = msgFlag;
   }
@@ -202,16 +200,12 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "最后发送消息的时间 支持三个普通群，不支持直播群")
-  @JsonProperty(JSON_PROPERTY_LAST_SEND_MSG_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getLastSendMsgTime() {
     return lastSendMsgTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_LAST_SEND_MSG_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLastSendMsgTime(Integer lastSendMsgTime) {
     this.lastSendMsgTime = lastSendMsgTime;
   }
@@ -228,20 +222,17 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
    * @return nameCard
   **/
   @javax.annotation.Nullable
- @Size(max=50)  @ApiModelProperty(value = "群名片 可读可写。最长50字节，不可调整")
-  @JsonProperty(JSON_PROPERTY_NAME_CARD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群名片 可读可写。最长50字节，不可调整")
 
   public String getNameCard() {
     return nameCard;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME_CARD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNameCard(String nameCard) {
     this.nameCard = nameCard;
   }
+
 
 
   @Override
@@ -293,5 +284,108 @@ public class GetGroupMemberInfoResponseAllOfMemberList {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("Member_Account");
+    openapiFields.add("Role");
+    openapiFields.add("JoinTime");
+    openapiFields.add("MsgSeq");
+    openapiFields.add("MsgFlag");
+    openapiFields.add("LastSendMsgTime");
+    openapiFields.add("NameCard");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GetGroupMemberInfoResponseAllOfMemberList
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GetGroupMemberInfoResponseAllOfMemberList.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetGroupMemberInfoResponseAllOfMemberList is not found in the empty JSON string", GetGroupMemberInfoResponseAllOfMemberList.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GetGroupMemberInfoResponseAllOfMemberList.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetGroupMemberInfoResponseAllOfMemberList` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("Member_Account") != null && !jsonObj.get("Member_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Member_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Member_Account").toString()));
+      }
+      if (jsonObj.get("Role") != null && !jsonObj.get("Role").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Role").toString()));
+      }
+      if (jsonObj.get("MsgFlag") != null && !jsonObj.get("MsgFlag").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `MsgFlag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("MsgFlag").toString()));
+      }
+      if (jsonObj.get("NameCard") != null && !jsonObj.get("NameCard").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `NameCard` to be a primitive type in the JSON string but got `%s`", jsonObj.get("NameCard").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GetGroupMemberInfoResponseAllOfMemberList.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetGroupMemberInfoResponseAllOfMemberList' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GetGroupMemberInfoResponseAllOfMemberList> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetGroupMemberInfoResponseAllOfMemberList.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GetGroupMemberInfoResponseAllOfMemberList>() {
+           @Override
+           public void write(JsonWriter out, GetGroupMemberInfoResponseAllOfMemberList value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GetGroupMemberInfoResponseAllOfMemberList read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GetGroupMemberInfoResponseAllOfMemberList given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GetGroupMemberInfoResponseAllOfMemberList
+  * @throws IOException if the JSON string is invalid with respect to GetGroupMemberInfoResponseAllOfMemberList
+  */
+  public static GetGroupMemberInfoResponseAllOfMemberList fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetGroupMemberInfoResponseAllOfMemberList.class);
+  }
+
+ /**
+  * Convert an instance of GetGroupMemberInfoResponseAllOfMemberList to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

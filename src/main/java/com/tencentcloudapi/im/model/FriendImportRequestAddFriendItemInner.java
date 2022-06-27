@@ -1,62 +1,80 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.FriendImportRequestAddFriendItemInnerCustomItemInner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * FriendImportRequestAddFriendItemInner
  */
-@JsonPropertyOrder({
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_TO_ACCOUNT,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_REMARK,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_REMARK_TIME,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_GROUP_NAME,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_ADD_SOURCE,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_ADD_WORDING,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_ADD_TIME,
-  FriendImportRequestAddFriendItemInner.JSON_PROPERTY_CUSTOM_ITEM
-})
-@JsonTypeName("FriendImportRequest_AddFriendItem_inner")
 
 public class FriendImportRequestAddFriendItemInner {
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private String toAccount;
 
-  public static final String JSON_PROPERTY_REMARK = "Remark";
+  public static final String SERIALIZED_NAME_REMARK = "Remark";
+  @SerializedName(SERIALIZED_NAME_REMARK)
   private String remark;
 
-  public static final String JSON_PROPERTY_REMARK_TIME = "RemarkTime";
+  public static final String SERIALIZED_NAME_REMARK_TIME = "RemarkTime";
+  @SerializedName(SERIALIZED_NAME_REMARK_TIME)
   private Integer remarkTime;
 
-  public static final String JSON_PROPERTY_GROUP_NAME = "GroupName";
+  public static final String SERIALIZED_NAME_GROUP_NAME = "GroupName";
+  @SerializedName(SERIALIZED_NAME_GROUP_NAME)
   private List<String> groupName = null;
 
-  public static final String JSON_PROPERTY_ADD_SOURCE = "AddSource";
+  public static final String SERIALIZED_NAME_ADD_SOURCE = "AddSource";
+  @SerializedName(SERIALIZED_NAME_ADD_SOURCE)
   private String addSource;
 
-  public static final String JSON_PROPERTY_ADD_WORDING = "AddWording";
+  public static final String SERIALIZED_NAME_ADD_WORDING = "AddWording";
+  @SerializedName(SERIALIZED_NAME_ADD_WORDING)
   private String addWording;
 
-  public static final String JSON_PROPERTY_ADD_TIME = "AddTime";
+  public static final String SERIALIZED_NAME_ADD_TIME = "AddTime";
+  @SerializedName(SERIALIZED_NAME_ADD_TIME)
   private Integer addTime;
 
-  public static final String JSON_PROPERTY_CUSTOM_ITEM = "CustomItem";
+  public static final String SERIALIZED_NAME_CUSTOM_ITEM = "CustomItem";
+  @SerializedName(SERIALIZED_NAME_CUSTOM_ITEM)
   private List<FriendImportRequestAddFriendItemInnerCustomItemInner> customItem = null;
 
   public FriendImportRequestAddFriendItemInner() { 
@@ -73,18 +91,13 @@ public class FriendImportRequestAddFriendItemInner {
    * @return toAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "好友的 UserID")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
@@ -102,16 +115,12 @@ public class FriendImportRequestAddFriendItemInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "From_Account 对 To_Account 的好友备注，详情可参见 标配好友字段(https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5)")
-  @JsonProperty(JSON_PROPERTY_REMARK)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRemark() {
     return remark;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_REMARK)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRemark(String remark) {
     this.remark = remark;
   }
@@ -129,16 +138,12 @@ public class FriendImportRequestAddFriendItemInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "From_Account 对 To_Account 的好友备注时间")
-  @JsonProperty(JSON_PROPERTY_REMARK_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getRemarkTime() {
     return remarkTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_REMARK_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRemarkTime(Integer remarkTime) {
     this.remarkTime = remarkTime;
   }
@@ -164,16 +169,12 @@ public class FriendImportRequestAddFriendItemInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "From_Account 对 To_Account 的分组信息，详情可参见 标配好友字段(https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5)")
-  @JsonProperty(JSON_PROPERTY_GROUP_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getGroupName() {
     return groupName;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroupName(List<String> groupName) {
     this.groupName = groupName;
   }
@@ -190,18 +191,13 @@ public class FriendImportRequestAddFriendItemInner {
    * @return addSource
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "加好友来源字段，详情可参见 标配好友字段（https://cloud.tencent.com/document/product/269/1501#.E6.A0.87.E9.85.8D.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）")
-  @JsonProperty(JSON_PROPERTY_ADD_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getAddSource() {
     return addSource;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADD_SOURCE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAddSource(String addSource) {
     this.addSource = addSource;
   }
@@ -219,16 +215,12 @@ public class FriendImportRequestAddFriendItemInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "From_Account 和 To_Account 形成好友关系时的附言信息，详情可参见 标配好友字段（标配好友字段）")
-  @JsonProperty(JSON_PROPERTY_ADD_WORDING)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getAddWording() {
     return addWording;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADD_WORDING)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddWording(String addWording) {
     this.addWording = addWording;
   }
@@ -246,16 +238,12 @@ public class FriendImportRequestAddFriendItemInner {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "From_Account 和 To_Account 形成好友关系的时间")
-  @JsonProperty(JSON_PROPERTY_ADD_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getAddTime() {
     return addTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADD_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddTime(Integer addTime) {
     this.addTime = addTime;
   }
@@ -280,21 +268,17 @@ public class FriendImportRequestAddFriendItemInner {
    * @return customItem
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "From_Account 对 To_Account 的自定义好友数据，每一个成员都包含一个 Tag 字段和一个 Value 字段，详情可参见 自定义好友字段（https://cloud.tencent.com/document/product/269/1501#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.A5.BD.E5.8F.8B.E5.AD.97.E6.AE.B5）")
-  @JsonProperty(JSON_PROPERTY_CUSTOM_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<FriendImportRequestAddFriendItemInnerCustomItemInner> getCustomItem() {
     return customItem;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CUSTOM_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCustomItem(List<FriendImportRequestAddFriendItemInnerCustomItemInner> customItem) {
     this.customItem = customItem;
   }
+
 
 
   @Override
@@ -348,5 +332,134 @@ public class FriendImportRequestAddFriendItemInner {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("To_Account");
+    openapiFields.add("Remark");
+    openapiFields.add("RemarkTime");
+    openapiFields.add("GroupName");
+    openapiFields.add("AddSource");
+    openapiFields.add("AddWording");
+    openapiFields.add("AddTime");
+    openapiFields.add("CustomItem");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("To_Account");
+    openapiRequiredFields.add("AddSource");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to FriendImportRequestAddFriendItemInner
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (FriendImportRequestAddFriendItemInner.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in FriendImportRequestAddFriendItemInner is not found in the empty JSON string", FriendImportRequestAddFriendItemInner.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!FriendImportRequestAddFriendItemInner.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FriendImportRequestAddFriendItemInner` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : FriendImportRequestAddFriendItemInner.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      if (jsonObj.get("Remark") != null && !jsonObj.get("Remark").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Remark` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Remark").toString()));
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("GroupName") != null && !jsonObj.get("GroupName").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupName` to be an array in the JSON string but got `%s`", jsonObj.get("GroupName").toString()));
+      }
+      if (jsonObj.get("AddSource") != null && !jsonObj.get("AddSource").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `AddSource` to be a primitive type in the JSON string but got `%s`", jsonObj.get("AddSource").toString()));
+      }
+      if (jsonObj.get("AddWording") != null && !jsonObj.get("AddWording").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `AddWording` to be a primitive type in the JSON string but got `%s`", jsonObj.get("AddWording").toString()));
+      }
+      JsonArray jsonArraycustomItem = jsonObj.getAsJsonArray("CustomItem");
+      if (jsonArraycustomItem != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("CustomItem").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `CustomItem` to be an array in the JSON string but got `%s`", jsonObj.get("CustomItem").toString()));
+        }
+
+        // validate the optional field `CustomItem` (array)
+        for (int i = 0; i < jsonArraycustomItem.size(); i++) {
+          FriendImportRequestAddFriendItemInnerCustomItemInner.validateJsonObject(jsonArraycustomItem.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!FriendImportRequestAddFriendItemInner.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'FriendImportRequestAddFriendItemInner' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<FriendImportRequestAddFriendItemInner> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(FriendImportRequestAddFriendItemInner.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<FriendImportRequestAddFriendItemInner>() {
+           @Override
+           public void write(JsonWriter out, FriendImportRequestAddFriendItemInner value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public FriendImportRequestAddFriendItemInner read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of FriendImportRequestAddFriendItemInner given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of FriendImportRequestAddFriendItemInner
+  * @throws IOException if the JSON string is invalid with respect to FriendImportRequestAddFriendItemInner
+  */
+  public static FriendImportRequestAddFriendItemInner fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, FriendImportRequestAddFriendItemInner.class);
+  }
+
+ /**
+  * Convert an instance of FriendImportRequestAddFriendItemInner to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

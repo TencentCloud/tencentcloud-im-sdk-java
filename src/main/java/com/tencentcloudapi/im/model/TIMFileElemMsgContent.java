@@ -1,49 +1,67 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * TIMFileElemMsgContent
  */
-@JsonPropertyOrder({
-  TIMFileElemMsgContent.JSON_PROPERTY_URL,
-  TIMFileElemMsgContent.JSON_PROPERTY_U_U_I_D,
-  TIMFileElemMsgContent.JSON_PROPERTY_FILE_NAME,
-  TIMFileElemMsgContent.JSON_PROPERTY_FILE_SIZE,
-  TIMFileElemMsgContent.JSON_PROPERTY_DOWNLOAD_FLAG
-})
-@JsonTypeName("TIMFileElem_MsgContent")
 
 public class TIMFileElemMsgContent {
-  public static final String JSON_PROPERTY_URL = "Url";
+  public static final String SERIALIZED_NAME_URL = "Url";
+  @SerializedName(SERIALIZED_NAME_URL)
   private String url;
 
-  public static final String JSON_PROPERTY_U_U_I_D = "UUID";
+  public static final String SERIALIZED_NAME_U_U_I_D = "UUID";
+  @SerializedName(SERIALIZED_NAME_U_U_I_D)
   private String UUID;
 
-  public static final String JSON_PROPERTY_FILE_NAME = "FileName";
+  public static final String SERIALIZED_NAME_FILE_NAME = "FileName";
+  @SerializedName(SERIALIZED_NAME_FILE_NAME)
   private String fileName;
 
-  public static final String JSON_PROPERTY_FILE_SIZE = "FileSize";
+  public static final String SERIALIZED_NAME_FILE_SIZE = "FileSize";
+  @SerializedName(SERIALIZED_NAME_FILE_SIZE)
   private Integer fileSize;
 
   /**
    * Gets or Sets downloadFlag
    */
+  @JsonAdapter(DownloadFlagEnum.Adapter.class)
   public enum DownloadFlagEnum {
     NUMBER_2(2);
 
@@ -53,7 +71,6 @@ public class TIMFileElemMsgContent {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -63,7 +80,6 @@ public class TIMFileElemMsgContent {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static DownloadFlagEnum fromValue(Integer value) {
       for (DownloadFlagEnum b : DownloadFlagEnum.values()) {
         if (b.value.equals(value)) {
@@ -72,9 +88,23 @@ public class TIMFileElemMsgContent {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<DownloadFlagEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final DownloadFlagEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public DownloadFlagEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return DownloadFlagEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_DOWNLOAD_FLAG = "Download_Flag";
+  public static final String SERIALIZED_NAME_DOWNLOAD_FLAG = "Download_Flag";
+  @SerializedName(SERIALIZED_NAME_DOWNLOAD_FLAG)
   private DownloadFlagEnum downloadFlag;
 
   public TIMFileElemMsgContent() { 
@@ -92,16 +122,12 @@ public class TIMFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getUrl() {
     return url;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setUrl(String url) {
     this.url = url;
   }
@@ -118,18 +144,13 @@ public class TIMFileElemMsgContent {
    * @return UUID
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getUUID() {
     return UUID;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUUID(String UUID) {
     this.UUID = UUID;
   }
@@ -146,18 +167,13 @@ public class TIMFileElemMsgContent {
    * @return fileName
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_FILE_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getFileName() {
     return fileName;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FILE_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFileName(String fileName) {
     this.fileName = fileName;
   }
@@ -174,18 +190,13 @@ public class TIMFileElemMsgContent {
    * @return fileSize
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_FILE_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getFileSize() {
     return fileSize;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FILE_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFileSize(Integer fileSize) {
     this.fileSize = fileSize;
   }
@@ -203,19 +214,16 @@ public class TIMFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public DownloadFlagEnum getDownloadFlag() {
     return downloadFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setDownloadFlag(DownloadFlagEnum downloadFlag) {
     this.downloadFlag = downloadFlag;
   }
+
 
 
   @Override
@@ -263,5 +271,113 @@ public class TIMFileElemMsgContent {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("Url");
+    openapiFields.add("UUID");
+    openapiFields.add("FileName");
+    openapiFields.add("FileSize");
+    openapiFields.add("Download_Flag");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("UUID");
+    openapiRequiredFields.add("FileName");
+    openapiRequiredFields.add("FileSize");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to TIMFileElemMsgContent
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (TIMFileElemMsgContent.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in TIMFileElemMsgContent is not found in the empty JSON string", TIMFileElemMsgContent.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!TIMFileElemMsgContent.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TIMFileElemMsgContent` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : TIMFileElemMsgContent.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("Url") != null && !jsonObj.get("Url").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Url").toString()));
+      }
+      if (jsonObj.get("UUID") != null && !jsonObj.get("UUID").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `UUID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("UUID").toString()));
+      }
+      if (jsonObj.get("FileName") != null && !jsonObj.get("FileName").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `FileName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("FileName").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!TIMFileElemMsgContent.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'TIMFileElemMsgContent' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<TIMFileElemMsgContent> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(TIMFileElemMsgContent.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<TIMFileElemMsgContent>() {
+           @Override
+           public void write(JsonWriter out, TIMFileElemMsgContent value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public TIMFileElemMsgContent read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of TIMFileElemMsgContent given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of TIMFileElemMsgContent
+  * @throws IOException if the JSON string is invalid with respect to TIMFileElemMsgContent
+  */
+  public static TIMFileElemMsgContent fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, TIMFileElemMsgContent.class);
+  }
+
+ /**
+  * Convert an instance of TIMFileElemMsgContent to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

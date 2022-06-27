@@ -6,6 +6,7 @@ import com.tencentcloudapi.im.Configuration;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 import com.tencentcloudapi.im.model.CommonResponse;
 import com.tencentcloudapi.im.model.ImSetAttrRequest;
+import org.json.JSONObject;
 
 /**
  * 设置用户属性（https://cloud.tencent.com/document/product/269/45938）

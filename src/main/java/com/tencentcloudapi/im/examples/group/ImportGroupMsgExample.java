@@ -1,11 +1,17 @@
 package com.tencentcloudapi.im.examples.group;
+import com.tencentcloudapi.im.model.TIMFaceElemMsgContent;
 
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
 import com.tencentcloudapi.im.api.GroupApi;
 import com.tencentcloudapi.im.model.ImportGroupMsgRequest;
+import com.tencentcloudapi.im.model.ImportGroupMsgRequestMsgListInner;
 import com.tencentcloudapi.im.model.ImportGroupMsgResponse;
+import com.tencentcloudapi.im.model.TIMFaceElem;
+import com.tencentcloudapi.im.model.TIMMsgElement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 导入群消息（https://cloud.tencent.com/document/product/269/1635）
@@ -27,6 +33,11 @@ public class ImportGroupMsgExample {
         GroupApi apiInstance = new GroupApi(defaultClient);
         Integer random = 56; // Integer |
         ImportGroupMsgRequest importGroupMsgRequest = new ImportGroupMsgRequest(); // ImportGroupMsgRequest |
+        importGroupMsgRequest.setGroupId("");
+        importGroupMsgRequest.setRecentContactFlag(0);
+
+        List<ImportGroupMsgRequestMsgListInner> msgList = new ArrayList<>();
+        ImportGroupMsgRequestMsgListInner importGroupMsgRequestMsgListInner = new ImportGroupMsgRequestMsgListInner();
         //TODO: Set the parameters
 
         try {

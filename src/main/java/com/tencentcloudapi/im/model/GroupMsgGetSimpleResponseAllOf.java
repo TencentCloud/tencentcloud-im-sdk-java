@@ -1,42 +1,60 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.GroupMsgGetSimpleResponseAllOfRspMsgList;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GroupMsgGetSimpleResponseAllOf
  */
-@JsonPropertyOrder({
-  GroupMsgGetSimpleResponseAllOf.JSON_PROPERTY_GROUP_ID,
-  GroupMsgGetSimpleResponseAllOf.JSON_PROPERTY_IS_FINISHED,
-  GroupMsgGetSimpleResponseAllOf.JSON_PROPERTY_RSP_MSG_LIST
-})
-@JsonTypeName("GroupMsgGetSimpleResponse_allOf")
 
 public class GroupMsgGetSimpleResponseAllOf {
-  public static final String JSON_PROPERTY_GROUP_ID = "GroupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_IS_FINISHED = "IsFinished";
+  public static final String SERIALIZED_NAME_IS_FINISHED = "IsFinished";
+  @SerializedName(SERIALIZED_NAME_IS_FINISHED)
   private Integer isFinished;
 
-  public static final String JSON_PROPERTY_RSP_MSG_LIST = "RspMsgList";
+  public static final String SERIALIZED_NAME_RSP_MSG_LIST = "RspMsgList";
+  @SerializedName(SERIALIZED_NAME_RSP_MSG_LIST)
   private List<GroupMsgGetSimpleResponseAllOfRspMsgList> rspMsgList = null;
 
   public GroupMsgGetSimpleResponseAllOf() { 
@@ -54,16 +72,12 @@ public class GroupMsgGetSimpleResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "请求中的群组 ID")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getGroupId() {
     return groupId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -81,16 +95,12 @@ public class GroupMsgGetSimpleResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "是否返回了请求区间的全部消息 当成功返回了请求区间的全部消息时，值为1;当消息长度太长或者区间太大（超过20）导致无法返回全部消息时，值为0;当消息长度太长或者区间太大（超过20）且所有消息都过期时，值为2")
-  @JsonProperty(JSON_PROPERTY_IS_FINISHED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getIsFinished() {
     return isFinished;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IS_FINISHED)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIsFinished(Integer isFinished) {
     this.isFinished = isFinished;
   }
@@ -115,21 +125,17 @@ public class GroupMsgGetSimpleResponseAllOf {
    * @return rspMsgList
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "返回的消息列表")
-  @JsonProperty(JSON_PROPERTY_RSP_MSG_LIST)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<GroupMsgGetSimpleResponseAllOfRspMsgList> getRspMsgList() {
     return rspMsgList;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_RSP_MSG_LIST)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRspMsgList(List<GroupMsgGetSimpleResponseAllOfRspMsgList> rspMsgList) {
     this.rspMsgList = rspMsgList;
   }
+
 
 
   @Override
@@ -173,5 +179,107 @@ public class GroupMsgGetSimpleResponseAllOf {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("GroupId");
+    openapiFields.add("IsFinished");
+    openapiFields.add("RspMsgList");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GroupMsgGetSimpleResponseAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GroupMsgGetSimpleResponseAllOf.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GroupMsgGetSimpleResponseAllOf is not found in the empty JSON string", GroupMsgGetSimpleResponseAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GroupMsgGetSimpleResponseAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GroupMsgGetSimpleResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("GroupId") != null && !jsonObj.get("GroupId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupId").toString()));
+      }
+      JsonArray jsonArrayrspMsgList = jsonObj.getAsJsonArray("RspMsgList");
+      if (jsonArrayrspMsgList != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("RspMsgList").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `RspMsgList` to be an array in the JSON string but got `%s`", jsonObj.get("RspMsgList").toString()));
+        }
+
+        // validate the optional field `RspMsgList` (array)
+        for (int i = 0; i < jsonArrayrspMsgList.size(); i++) {
+          GroupMsgGetSimpleResponseAllOfRspMsgList.validateJsonObject(jsonArrayrspMsgList.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GroupMsgGetSimpleResponseAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GroupMsgGetSimpleResponseAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GroupMsgGetSimpleResponseAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GroupMsgGetSimpleResponseAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GroupMsgGetSimpleResponseAllOf>() {
+           @Override
+           public void write(JsonWriter out, GroupMsgGetSimpleResponseAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GroupMsgGetSimpleResponseAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GroupMsgGetSimpleResponseAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GroupMsgGetSimpleResponseAllOf
+  * @throws IOException if the JSON string is invalid with respect to GroupMsgGetSimpleResponseAllOf
+  */
+  public static GroupMsgGetSimpleResponseAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GroupMsgGetSimpleResponseAllOf.class);
+  }
+
+ /**
+  * Convert an instance of GroupMsgGetSimpleResponseAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

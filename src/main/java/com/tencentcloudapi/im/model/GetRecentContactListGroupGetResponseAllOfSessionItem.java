@@ -1,47 +1,65 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GetRecentContactListGroupGetResponseAllOfSessionItem
  */
-@JsonPropertyOrder({
-  GetRecentContactListGroupGetResponseAllOfSessionItem.JSON_PROPERTY_TYPE,
-  GetRecentContactListGroupGetResponseAllOfSessionItem.JSON_PROPERTY_TO_ACCOUNT,
-  GetRecentContactListGroupGetResponseAllOfSessionItem.JSON_PROPERTY_GROUP_ID,
-  GetRecentContactListGroupGetResponseAllOfSessionItem.JSON_PROPERTY_MSG_TIME,
-  GetRecentContactListGroupGetResponseAllOfSessionItem.JSON_PROPERTY_TOP_FLAG
-})
-@JsonTypeName("GetRecentContactListGroupGetResponse_allOf_SessionItem")
 
 public class GetRecentContactListGroupGetResponseAllOfSessionItem {
-  public static final String JSON_PROPERTY_TYPE = "Type";
+  public static final String SERIALIZED_NAME_TYPE = "Type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   private Integer type;
 
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private String toAccount;
 
-  public static final String JSON_PROPERTY_GROUP_ID = "GroupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_MSG_TIME = "MsgTime";
+  public static final String SERIALIZED_NAME_MSG_TIME = "MsgTime";
+  @SerializedName(SERIALIZED_NAME_MSG_TIME)
   private Integer msgTime;
 
-  public static final String JSON_PROPERTY_TOP_FLAG = "TopFlag";
+  public static final String SERIALIZED_NAME_TOP_FLAG = "TopFlag";
+  @SerializedName(SERIALIZED_NAME_TOP_FLAG)
   private Integer topFlag;
 
   public GetRecentContactListGroupGetResponseAllOfSessionItem() { 
@@ -59,16 +77,12 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "会话类型：1 表示 C2C 会话；2 表示 G2C 会话")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getType() {
     return type;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setType(Integer type) {
     this.type = type;
   }
@@ -86,16 +100,12 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "C2C 会话才会返回，返回会话方的 UserID")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
@@ -113,16 +123,12 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "G2C 会话才会返回，返回群 ID")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getGroupId() {
     return groupId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -140,16 +146,12 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "会话时间")
-  @JsonProperty(JSON_PROPERTY_MSG_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgTime() {
     return msgTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgTime(Integer msgTime) {
     this.msgTime = msgTime;
   }
@@ -167,19 +169,16 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "置顶标记：0 标识普通会话；1 标识置顶会话")
-  @JsonProperty(JSON_PROPERTY_TOP_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getTopFlag() {
     return topFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOP_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTopFlag(Integer topFlag) {
     this.topFlag = topFlag;
   }
+
 
 
   @Override
@@ -227,5 +226,100 @@ public class GetRecentContactListGroupGetResponseAllOfSessionItem {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("Type");
+    openapiFields.add("To_Account");
+    openapiFields.add("GroupId");
+    openapiFields.add("MsgTime");
+    openapiFields.add("TopFlag");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GetRecentContactListGroupGetResponseAllOfSessionItem
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GetRecentContactListGroupGetResponseAllOfSessionItem.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetRecentContactListGroupGetResponseAllOfSessionItem is not found in the empty JSON string", GetRecentContactListGroupGetResponseAllOfSessionItem.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GetRecentContactListGroupGetResponseAllOfSessionItem.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetRecentContactListGroupGetResponseAllOfSessionItem` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      if (jsonObj.get("GroupId") != null && !jsonObj.get("GroupId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupId").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GetRecentContactListGroupGetResponseAllOfSessionItem.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetRecentContactListGroupGetResponseAllOfSessionItem' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GetRecentContactListGroupGetResponseAllOfSessionItem> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetRecentContactListGroupGetResponseAllOfSessionItem.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GetRecentContactListGroupGetResponseAllOfSessionItem>() {
+           @Override
+           public void write(JsonWriter out, GetRecentContactListGroupGetResponseAllOfSessionItem value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GetRecentContactListGroupGetResponseAllOfSessionItem read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GetRecentContactListGroupGetResponseAllOfSessionItem given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GetRecentContactListGroupGetResponseAllOfSessionItem
+  * @throws IOException if the JSON string is invalid with respect to GetRecentContactListGroupGetResponseAllOfSessionItem
+  */
+  public static GetRecentContactListGroupGetResponseAllOfSessionItem fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetRecentContactListGroupGetResponseAllOfSessionItem.class);
+  }
+
+ /**
+  * Convert an instance of GetRecentContactListGroupGetResponseAllOfSessionItem to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

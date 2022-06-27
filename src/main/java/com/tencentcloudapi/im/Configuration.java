@@ -1,5 +1,11 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im;
+
 
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();

@@ -1,8 +1,14 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im;
 
 import java.util.Collection;
 import java.util.Iterator;
+
 
 public class StringUtil {
   /**

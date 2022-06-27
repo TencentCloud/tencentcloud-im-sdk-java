@@ -1,38 +1,57 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GetAppidGroupListRequest
  */
-@JsonPropertyOrder({
-  GetAppidGroupListRequest.JSON_PROPERTY_LIMIT,
-  GetAppidGroupListRequest.JSON_PROPERTY_NEXT,
-  GetAppidGroupListRequest.JSON_PROPERTY_GROUP_TYPE
-})
 
 public class GetAppidGroupListRequest {
-  public static final String JSON_PROPERTY_LIMIT = "Limit";
+  public static final String SERIALIZED_NAME_LIMIT = "Limit";
+  @SerializedName(SERIALIZED_NAME_LIMIT)
   private Integer limit = 10000;
 
-  public static final String JSON_PROPERTY_NEXT = "Next";
+  public static final String SERIALIZED_NAME_NEXT = "Next";
+  @SerializedName(SERIALIZED_NAME_NEXT)
   private Integer next;
 
-  public static final String JSON_PROPERTY_GROUP_TYPE = "GroupType";
+  public static final String SERIALIZED_NAME_GROUP_TYPE = "GroupType";
+  @SerializedName(SERIALIZED_NAME_GROUP_TYPE)
   private String groupType;
 
   public GetAppidGroupListRequest() { 
@@ -50,17 +69,13 @@ public class GetAppidGroupListRequest {
    * @return limit
   **/
   @javax.annotation.Nullable
- @Max(10000)  @ApiModelProperty(value = "本次获取的群组 ID 数量的上限，不得超过 10000。如果不填，默认为最大值 10000")
-  @JsonProperty(JSON_PROPERTY_LIMIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "本次获取的群组 ID 数量的上限，不得超过 10000。如果不填，默认为最大值 10000")
 
   public Integer getLimit() {
     return limit;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_LIMIT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setLimit(Integer limit) {
     this.limit = limit;
   }
@@ -78,16 +93,12 @@ public class GetAppidGroupListRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "群太多时分页拉取标志，第一次填0，以后填上一次返回的值，返回的 Next 为0代表拉完了")
-  @JsonProperty(JSON_PROPERTY_NEXT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getNext() {
     return next;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NEXT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNext(Integer next) {
     this.next = next;
   }
@@ -105,19 +116,16 @@ public class GetAppidGroupListRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "如果仅需要返回特定群组形态的群组，可以通过 GroupType 进行过滤，但此时返回的 TotalCount 的含义就变成了 App 中属于该群组形态的群组总数。不填为获取所有类型的群组。群组形态包括 Public（公开群），Private（即 Work，好友工作群），ChatRoom（即 Meeting，会议群），AVChatRoom（音视频聊天室），BChatRoom（在线成员广播大群）和社群（Community）")
-  @JsonProperty(JSON_PROPERTY_GROUP_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getGroupType() {
     return groupType;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGroupType(String groupType) {
     this.groupType = groupType;
   }
+
 
 
   @Override
@@ -161,5 +169,95 @@ public class GetAppidGroupListRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("Limit");
+    openapiFields.add("Next");
+    openapiFields.add("GroupType");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GetAppidGroupListRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GetAppidGroupListRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetAppidGroupListRequest is not found in the empty JSON string", GetAppidGroupListRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GetAppidGroupListRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetAppidGroupListRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("GroupType") != null && !jsonObj.get("GroupType").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupType").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GetAppidGroupListRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetAppidGroupListRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GetAppidGroupListRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetAppidGroupListRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GetAppidGroupListRequest>() {
+           @Override
+           public void write(JsonWriter out, GetAppidGroupListRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GetAppidGroupListRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GetAppidGroupListRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GetAppidGroupListRequest
+  * @throws IOException if the JSON string is invalid with respect to GetAppidGroupListRequest
+  */
+  public static GetAppidGroupListRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetAppidGroupListRequest.class);
+  }
+
+ /**
+  * Convert an instance of GetAppidGroupListRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

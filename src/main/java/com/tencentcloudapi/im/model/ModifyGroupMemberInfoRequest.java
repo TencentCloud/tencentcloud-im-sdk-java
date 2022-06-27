@@ -1,57 +1,76 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.ModifyGroupMemberInfoRequestAppMemberDefinedDataInner;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ModifyGroupMemberInfoRequest
  */
-@JsonPropertyOrder({
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_GROUP_ID,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_MEMBER_ACCOUNT,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_ROLE,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_MSG_FLAG,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_NAME_CARD,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_APP_MEMBER_DEFINED_DATA,
-  ModifyGroupMemberInfoRequest.JSON_PROPERTY_SHUT_UP_TIME
-})
 
 public class ModifyGroupMemberInfoRequest {
-  public static final String JSON_PROPERTY_GROUP_ID = "GroupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_MEMBER_ACCOUNT = "Member_Account";
+  public static final String SERIALIZED_NAME_MEMBER_ACCOUNT = "Member_Account";
+  @SerializedName(SERIALIZED_NAME_MEMBER_ACCOUNT)
   private String memberAccount;
 
-  public static final String JSON_PROPERTY_ROLE = "Role";
+  public static final String SERIALIZED_NAME_ROLE = "Role";
+  @SerializedName(SERIALIZED_NAME_ROLE)
   private String role;
 
-  public static final String JSON_PROPERTY_MSG_FLAG = "MsgFlag";
+  public static final String SERIALIZED_NAME_MSG_FLAG = "MsgFlag";
+  @SerializedName(SERIALIZED_NAME_MSG_FLAG)
   private String msgFlag;
 
-  public static final String JSON_PROPERTY_NAME_CARD = "NameCard";
+  public static final String SERIALIZED_NAME_NAME_CARD = "NameCard";
+  @SerializedName(SERIALIZED_NAME_NAME_CARD)
   private String nameCard;
 
-  public static final String JSON_PROPERTY_APP_MEMBER_DEFINED_DATA = "AppMemberDefinedData";
+  public static final String SERIALIZED_NAME_APP_MEMBER_DEFINED_DATA = "AppMemberDefinedData";
+  @SerializedName(SERIALIZED_NAME_APP_MEMBER_DEFINED_DATA)
   private List<ModifyGroupMemberInfoRequestAppMemberDefinedDataInner> appMemberDefinedData = null;
 
-  public static final String JSON_PROPERTY_SHUT_UP_TIME = "ShutUpTime";
+  public static final String SERIALIZED_NAME_SHUT_UP_TIME = "ShutUpTime";
+  @SerializedName(SERIALIZED_NAME_SHUT_UP_TIME)
   private Integer shutUpTime;
 
   public ModifyGroupMemberInfoRequest() { 
@@ -68,18 +87,13 @@ public class ModifyGroupMemberInfoRequest {
    * @return groupId
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "操作的群 ID")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getGroupId() {
     return groupId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -96,18 +110,13 @@ public class ModifyGroupMemberInfoRequest {
    * @return memberAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "要操作的群成员")
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getMemberAccount() {
     return memberAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMemberAccount(String memberAccount) {
     this.memberAccount = memberAccount;
   }
@@ -125,16 +134,12 @@ public class ModifyGroupMemberInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "成员身份，Admin/Member 分别为设置/取消管理员")
-  @JsonProperty(JSON_PROPERTY_ROLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getRole() {
     return role;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ROLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setRole(String role) {
     this.role = role;
   }
@@ -152,16 +157,12 @@ public class ModifyGroupMemberInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息屏蔽类型")
-  @JsonProperty(JSON_PROPERTY_MSG_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getMsgFlag() {
     return msgFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgFlag(String msgFlag) {
     this.msgFlag = msgFlag;
   }
@@ -178,17 +179,13 @@ public class ModifyGroupMemberInfoRequest {
    * @return nameCard
   **/
   @javax.annotation.Nullable
- @Size(max=50)  @ApiModelProperty(value = "群名片（最大不超过50个字节）")
-  @JsonProperty(JSON_PROPERTY_NAME_CARD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群名片（最大不超过50个字节）")
 
   public String getNameCard() {
     return nameCard;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME_CARD)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNameCard(String nameCard) {
     this.nameCard = nameCard;
   }
@@ -213,18 +210,13 @@ public class ModifyGroupMemberInfoRequest {
    * @return appMemberDefinedData
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "群成员维度的自定义字段，默认情况是没有的，可以通过 即时通信 IM 控制台（https://console.cloud.tencent.com/im） 进行配置，详情请参阅 群组系统（https://cloud.tencent.com/document/product/269/1502）")
-  @JsonProperty(JSON_PROPERTY_APP_MEMBER_DEFINED_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<ModifyGroupMemberInfoRequestAppMemberDefinedDataInner> getAppMemberDefinedData() {
     return appMemberDefinedData;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_APP_MEMBER_DEFINED_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppMemberDefinedData(List<ModifyGroupMemberInfoRequestAppMemberDefinedDataInner> appMemberDefinedData) {
     this.appMemberDefinedData = appMemberDefinedData;
   }
@@ -242,19 +234,16 @@ public class ModifyGroupMemberInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "需禁言时间，单位为秒，0表示取消禁言")
-  @JsonProperty(JSON_PROPERTY_SHUT_UP_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getShutUpTime() {
     return shutUpTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SHUT_UP_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setShutUpTime(Integer shutUpTime) {
     this.shutUpTime = shutUpTime;
   }
+
 
 
   @Override
@@ -306,5 +295,132 @@ public class ModifyGroupMemberInfoRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("GroupId");
+    openapiFields.add("Member_Account");
+    openapiFields.add("Role");
+    openapiFields.add("MsgFlag");
+    openapiFields.add("NameCard");
+    openapiFields.add("AppMemberDefinedData");
+    openapiFields.add("ShutUpTime");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("GroupId");
+    openapiRequiredFields.add("Member_Account");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ModifyGroupMemberInfoRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ModifyGroupMemberInfoRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ModifyGroupMemberInfoRequest is not found in the empty JSON string", ModifyGroupMemberInfoRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ModifyGroupMemberInfoRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ModifyGroupMemberInfoRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ModifyGroupMemberInfoRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("GroupId") != null && !jsonObj.get("GroupId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupId").toString()));
+      }
+      if (jsonObj.get("Member_Account") != null && !jsonObj.get("Member_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Member_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Member_Account").toString()));
+      }
+      if (jsonObj.get("Role") != null && !jsonObj.get("Role").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Role").toString()));
+      }
+      if (jsonObj.get("MsgFlag") != null && !jsonObj.get("MsgFlag").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `MsgFlag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("MsgFlag").toString()));
+      }
+      if (jsonObj.get("NameCard") != null && !jsonObj.get("NameCard").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `NameCard` to be a primitive type in the JSON string but got `%s`", jsonObj.get("NameCard").toString()));
+      }
+      JsonArray jsonArrayappMemberDefinedData = jsonObj.getAsJsonArray("AppMemberDefinedData");
+      if (jsonArrayappMemberDefinedData != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("AppMemberDefinedData").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `AppMemberDefinedData` to be an array in the JSON string but got `%s`", jsonObj.get("AppMemberDefinedData").toString()));
+        }
+
+        // validate the optional field `AppMemberDefinedData` (array)
+        for (int i = 0; i < jsonArrayappMemberDefinedData.size(); i++) {
+          ModifyGroupMemberInfoRequestAppMemberDefinedDataInner.validateJsonObject(jsonArrayappMemberDefinedData.get(i).getAsJsonObject());
+        };
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ModifyGroupMemberInfoRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ModifyGroupMemberInfoRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ModifyGroupMemberInfoRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ModifyGroupMemberInfoRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ModifyGroupMemberInfoRequest>() {
+           @Override
+           public void write(JsonWriter out, ModifyGroupMemberInfoRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ModifyGroupMemberInfoRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ModifyGroupMemberInfoRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ModifyGroupMemberInfoRequest
+  * @throws IOException if the JSON string is invalid with respect to ModifyGroupMemberInfoRequest
+  */
+  public static ModifyGroupMemberInfoRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ModifyGroupMemberInfoRequest.class);
+  }
+
+ /**
+  * Convert an instance of ModifyGroupMemberInfoRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

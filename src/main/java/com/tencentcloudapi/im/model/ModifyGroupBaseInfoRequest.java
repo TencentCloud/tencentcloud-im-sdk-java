@@ -1,65 +1,84 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.GetGroupMemberInfoResponseAllOfAppMemberDefinedData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ModifyGroupBaseInfoRequest
  */
-@JsonPropertyOrder({
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_GROUP_ID,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_NAME,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_INTRODUCTION,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_NOTIFICATION,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_FACE_URL,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_MAX_MEMBER_NUM,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_APPLY_JOIN_OPTION,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_APP_DEFINED_DATA,
-  ModifyGroupBaseInfoRequest.JSON_PROPERTY_SHUT_UP_ALL_MEMBER
-})
 
 public class ModifyGroupBaseInfoRequest {
-  public static final String JSON_PROPERTY_GROUP_ID = "GroupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_NAME = "Name";
+  public static final String SERIALIZED_NAME_NAME = "Name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
 
-  public static final String JSON_PROPERTY_INTRODUCTION = "Introduction";
+  public static final String SERIALIZED_NAME_INTRODUCTION = "Introduction";
+  @SerializedName(SERIALIZED_NAME_INTRODUCTION)
   private String introduction;
 
-  public static final String JSON_PROPERTY_NOTIFICATION = "Notification";
+  public static final String SERIALIZED_NAME_NOTIFICATION = "Notification";
+  @SerializedName(SERIALIZED_NAME_NOTIFICATION)
   private String notification;
 
-  public static final String JSON_PROPERTY_FACE_URL = "FaceUrl";
+  public static final String SERIALIZED_NAME_FACE_URL = "FaceUrl";
+  @SerializedName(SERIALIZED_NAME_FACE_URL)
   private String faceUrl;
 
-  public static final String JSON_PROPERTY_MAX_MEMBER_NUM = "MaxMemberNum";
+  public static final String SERIALIZED_NAME_MAX_MEMBER_NUM = "MaxMemberNum";
+  @SerializedName(SERIALIZED_NAME_MAX_MEMBER_NUM)
   private Integer maxMemberNum;
 
-  public static final String JSON_PROPERTY_APPLY_JOIN_OPTION = "ApplyJoinOption";
+  public static final String SERIALIZED_NAME_APPLY_JOIN_OPTION = "ApplyJoinOption";
+  @SerializedName(SERIALIZED_NAME_APPLY_JOIN_OPTION)
   private String applyJoinOption;
 
-  public static final String JSON_PROPERTY_APP_DEFINED_DATA = "AppDefinedData";
+  public static final String SERIALIZED_NAME_APP_DEFINED_DATA = "AppDefinedData";
+  @SerializedName(SERIALIZED_NAME_APP_DEFINED_DATA)
   private List<GetGroupMemberInfoResponseAllOfAppMemberDefinedData> appDefinedData = null;
 
-  public static final String JSON_PROPERTY_SHUT_UP_ALL_MEMBER = "ShutUpAllMember";
+  public static final String SERIALIZED_NAME_SHUT_UP_ALL_MEMBER = "ShutUpAllMember";
+  @SerializedName(SERIALIZED_NAME_SHUT_UP_ALL_MEMBER)
   private String shutUpAllMember;
 
   public ModifyGroupBaseInfoRequest() { 
@@ -76,18 +95,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return groupId
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "需要拉取成员信息的群组的 ID")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getGroupId() {
     return groupId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -104,17 +118,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return name
   **/
   @javax.annotation.Nullable
- @Size(max=30)  @ApiModelProperty(value = "群名称，最长30字节")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群名称，最长30字节")
 
   public String getName() {
     return name;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -131,17 +141,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return introduction
   **/
   @javax.annotation.Nullable
- @Size(max=240)  @ApiModelProperty(value = "群简介，最长240字节")
-  @JsonProperty(JSON_PROPERTY_INTRODUCTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群简介，最长240字节")
 
   public String getIntroduction() {
     return introduction;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_INTRODUCTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setIntroduction(String introduction) {
     this.introduction = introduction;
   }
@@ -158,17 +164,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return notification
   **/
   @javax.annotation.Nullable
- @Size(max=300)  @ApiModelProperty(value = "群公告，最长300字节")
-  @JsonProperty(JSON_PROPERTY_NOTIFICATION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群公告，最长300字节")
 
   public String getNotification() {
     return notification;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NOTIFICATION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setNotification(String notification) {
     this.notification = notification;
   }
@@ -185,17 +187,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return faceUrl
   **/
   @javax.annotation.Nullable
- @Size(max=100)  @ApiModelProperty(value = "群头像 URL，最长100字节")
-  @JsonProperty(JSON_PROPERTY_FACE_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "群头像 URL，最长100字节")
 
   public String getFaceUrl() {
     return faceUrl;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FACE_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFaceUrl(String faceUrl) {
     this.faceUrl = faceUrl;
   }
@@ -213,16 +211,12 @@ public class ModifyGroupBaseInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "最大群成员数量；私有群、公开群和聊天室：该字段阈值请参考 群组系统（https://cloud.tencent.com/document/product/269/1502#.E7.BE.A4.E7.BB.84.E9.99.90.E5.88.B6.E5.B7.AE.E5.BC.82） 和 计费概述（https://cloud.tencent.com/document/product/269/40267#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85） 中的群成员人数上限相关说明；音视频聊天室和在线成员广播大群：该字段为无效字段，无需填写")
-  @JsonProperty(JSON_PROPERTY_MAX_MEMBER_NUM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMaxMemberNum() {
     return maxMemberNum;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MAX_MEMBER_NUM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMaxMemberNum(Integer maxMemberNum) {
     this.maxMemberNum = maxMemberNum;
   }
@@ -240,16 +234,12 @@ public class ModifyGroupBaseInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "申请加群处理方式。包含 FreeAccess（自由加入），NeedPermission（需要验证），DisableApply（禁止加群）")
-  @JsonProperty(JSON_PROPERTY_APPLY_JOIN_OPTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getApplyJoinOption() {
     return applyJoinOption;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_APPLY_JOIN_OPTION)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setApplyJoinOption(String applyJoinOption) {
     this.applyJoinOption = applyJoinOption;
   }
@@ -274,18 +264,13 @@ public class ModifyGroupBaseInfoRequest {
    * @return appDefinedData
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "默认情况是没有的。开通群组维度的自定义字段详情请参见 自定义字段（https://cloud.tencent.com/document/product/269/1502#.E8.87.AA.E5.AE.9A.E4.B9.89.E5.AD.97.E6.AE.B5）")
-  @JsonProperty(JSON_PROPERTY_APP_DEFINED_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<GetGroupMemberInfoResponseAllOfAppMemberDefinedData> getAppDefinedData() {
     return appDefinedData;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_APP_DEFINED_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAppDefinedData(List<GetGroupMemberInfoResponseAllOfAppMemberDefinedData> appDefinedData) {
     this.appDefinedData = appDefinedData;
   }
@@ -303,19 +288,16 @@ public class ModifyGroupBaseInfoRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "群内群成员禁言，只有群管理员和群主以及系统管理员可以发言 设置全员禁言（选填）:\"On\"开启，\"Off\"关闭")
-  @JsonProperty(JSON_PROPERTY_SHUT_UP_ALL_MEMBER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getShutUpAllMember() {
     return shutUpAllMember;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SHUT_UP_ALL_MEMBER)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setShutUpAllMember(String shutUpAllMember) {
     this.shutUpAllMember = shutUpAllMember;
   }
+
 
 
   @Override
@@ -371,5 +353,139 @@ public class ModifyGroupBaseInfoRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("GroupId");
+    openapiFields.add("Name");
+    openapiFields.add("Introduction");
+    openapiFields.add("Notification");
+    openapiFields.add("FaceUrl");
+    openapiFields.add("MaxMemberNum");
+    openapiFields.add("ApplyJoinOption");
+    openapiFields.add("AppDefinedData");
+    openapiFields.add("ShutUpAllMember");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("GroupId");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ModifyGroupBaseInfoRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ModifyGroupBaseInfoRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ModifyGroupBaseInfoRequest is not found in the empty JSON string", ModifyGroupBaseInfoRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ModifyGroupBaseInfoRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ModifyGroupBaseInfoRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ModifyGroupBaseInfoRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("GroupId") != null && !jsonObj.get("GroupId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupId").toString()));
+      }
+      if (jsonObj.get("Name") != null && !jsonObj.get("Name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Name").toString()));
+      }
+      if (jsonObj.get("Introduction") != null && !jsonObj.get("Introduction").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Introduction` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Introduction").toString()));
+      }
+      if (jsonObj.get("Notification") != null && !jsonObj.get("Notification").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Notification` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Notification").toString()));
+      }
+      if (jsonObj.get("FaceUrl") != null && !jsonObj.get("FaceUrl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `FaceUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("FaceUrl").toString()));
+      }
+      if (jsonObj.get("ApplyJoinOption") != null && !jsonObj.get("ApplyJoinOption").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ApplyJoinOption` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ApplyJoinOption").toString()));
+      }
+      JsonArray jsonArrayappDefinedData = jsonObj.getAsJsonArray("AppDefinedData");
+      if (jsonArrayappDefinedData != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("AppDefinedData").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `AppDefinedData` to be an array in the JSON string but got `%s`", jsonObj.get("AppDefinedData").toString()));
+        }
+
+        // validate the optional field `AppDefinedData` (array)
+        for (int i = 0; i < jsonArrayappDefinedData.size(); i++) {
+          GetGroupMemberInfoResponseAllOfAppMemberDefinedData.validateJsonObject(jsonArrayappDefinedData.get(i).getAsJsonObject());
+        };
+      }
+      if (jsonObj.get("ShutUpAllMember") != null && !jsonObj.get("ShutUpAllMember").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ShutUpAllMember` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ShutUpAllMember").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ModifyGroupBaseInfoRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ModifyGroupBaseInfoRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ModifyGroupBaseInfoRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ModifyGroupBaseInfoRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ModifyGroupBaseInfoRequest>() {
+           @Override
+           public void write(JsonWriter out, ModifyGroupBaseInfoRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ModifyGroupBaseInfoRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ModifyGroupBaseInfoRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ModifyGroupBaseInfoRequest
+  * @throws IOException if the JSON string is invalid with respect to ModifyGroupBaseInfoRequest
+  */
+  public static ModifyGroupBaseInfoRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ModifyGroupBaseInfoRequest.class);
+  }
+
+ /**
+  * Convert an instance of ModifyGroupBaseInfoRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

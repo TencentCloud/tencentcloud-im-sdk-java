@@ -1,45 +1,55 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.OfflinePushInfo;
 import com.tencentcloudapi.im.model.TIMMsgElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * BatchSendSingleChatMsgRequest
  */
-@JsonPropertyOrder({
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_SYNC_OTHER_MACHINE,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_FROM_ACCOUNT,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_TO_ACCOUNT,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_MSG_LIFE_TIME,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_MSG_SEQ,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_MSG_RANDOM,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_SEND_MSG_CONTROL,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_MSG_BODY,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_CLOUD_CUSTOM_DATA,
-  BatchSendSingleChatMsgRequest.JSON_PROPERTY_OFFLINE_PUSH_INFO
-})
 
 public class BatchSendSingleChatMsgRequest {
   /**
    * 1：把消息同步到 From_Account 在线终端和漫游上 2：消息不同步至 From_Account；若不填写默认情况下会将消息存 From_Account 漫游
    */
+  @JsonAdapter(SyncOtherMachineEnum.Adapter.class)
   public enum SyncOtherMachineEnum {
     NUMBER_1(1),
     
@@ -51,7 +61,6 @@ public class BatchSendSingleChatMsgRequest {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -61,7 +70,6 @@ public class BatchSendSingleChatMsgRequest {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static SyncOtherMachineEnum fromValue(Integer value) {
       for (SyncOtherMachineEnum b : SyncOtherMachineEnum.values()) {
         if (b.value.equals(value)) {
@@ -70,36 +78,59 @@ public class BatchSendSingleChatMsgRequest {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<SyncOtherMachineEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SyncOtherMachineEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SyncOtherMachineEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return SyncOtherMachineEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_SYNC_OTHER_MACHINE = "SyncOtherMachine";
+  public static final String SERIALIZED_NAME_SYNC_OTHER_MACHINE = "SyncOtherMachine";
+  @SerializedName(SERIALIZED_NAME_SYNC_OTHER_MACHINE)
   private SyncOtherMachineEnum syncOtherMachine;
 
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private List<String> toAccount = new ArrayList<>();
 
-  public static final String JSON_PROPERTY_MSG_LIFE_TIME = "MsgLifeTime";
+  public static final String SERIALIZED_NAME_MSG_LIFE_TIME = "MsgLifeTime";
+  @SerializedName(SERIALIZED_NAME_MSG_LIFE_TIME)
   private Integer msgLifeTime;
 
-  public static final String JSON_PROPERTY_MSG_SEQ = "MsgSeq";
+  public static final String SERIALIZED_NAME_MSG_SEQ = "MsgSeq";
+  @SerializedName(SERIALIZED_NAME_MSG_SEQ)
   private Integer msgSeq;
 
-  public static final String JSON_PROPERTY_MSG_RANDOM = "MsgRandom";
+  public static final String SERIALIZED_NAME_MSG_RANDOM = "MsgRandom";
+  @SerializedName(SERIALIZED_NAME_MSG_RANDOM)
   private Integer msgRandom;
 
-  public static final String JSON_PROPERTY_SEND_MSG_CONTROL = "SendMsgControl";
+  public static final String SERIALIZED_NAME_SEND_MSG_CONTROL = "SendMsgControl";
+  @SerializedName(SERIALIZED_NAME_SEND_MSG_CONTROL)
   private List<String> sendMsgControl = null;
 
-  public static final String JSON_PROPERTY_MSG_BODY = "MsgBody";
+  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
+  @SerializedName(SERIALIZED_NAME_MSG_BODY)
   private List<TIMMsgElement> msgBody = new ArrayList<>();
 
-  public static final String JSON_PROPERTY_CLOUD_CUSTOM_DATA = "CloudCustomData";
+  public static final String SERIALIZED_NAME_CLOUD_CUSTOM_DATA = "CloudCustomData";
+  @SerializedName(SERIALIZED_NAME_CLOUD_CUSTOM_DATA)
   private String cloudCustomData;
 
-  public static final String JSON_PROPERTY_OFFLINE_PUSH_INFO = "OfflinePushInfo";
+  public static final String SERIALIZED_NAME_OFFLINE_PUSH_INFO = "OfflinePushInfo";
+  @SerializedName(SERIALIZED_NAME_OFFLINE_PUSH_INFO)
   private OfflinePushInfo offlinePushInfo;
 
   public BatchSendSingleChatMsgRequest() { 
@@ -117,16 +148,12 @@ public class BatchSendSingleChatMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "1：把消息同步到 From_Account 在线终端和漫游上 2：消息不同步至 From_Account；若不填写默认情况下会将消息存 From_Account 漫游")
-  @JsonProperty(JSON_PROPERTY_SYNC_OTHER_MACHINE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public SyncOtherMachineEnum getSyncOtherMachine() {
     return syncOtherMachine;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SYNC_OTHER_MACHINE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSyncOtherMachine(SyncOtherMachineEnum syncOtherMachine) {
     this.syncOtherMachine = syncOtherMachine;
   }
@@ -144,16 +171,12 @@ public class BatchSendSingleChatMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "管理员指定消息发送方帐号（若需设置 From_Account 信息，则该参数取值不能为空）")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -175,18 +198,13 @@ public class BatchSendSingleChatMsgRequest {
    * @return toAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息接收方用户 UserID")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public List<String> getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToAccount(List<String> toAccount) {
     this.toAccount = toAccount;
   }
@@ -204,17 +222,13 @@ public class BatchSendSingleChatMsgRequest {
    * @return msgLifeTime
   **/
   @javax.annotation.Nullable
- @Max(604800)  @ApiModelProperty(value = "消息离线保存时长（单位：秒），最长为7天（604800秒）。若设置该字段为0，则消息只发在线用户，不保存离线及漫游")
-  @JsonProperty(JSON_PROPERTY_MSG_LIFE_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @ApiModelProperty(value = "消息离线保存时长（单位：秒），最长为7天（604800秒）。若设置该字段为0，则消息只发在线用户，不保存离线及漫游")
 
   public Integer getMsgLifeTime() {
     return msgLifeTime;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_LIFE_TIME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgLifeTime(Integer msgLifeTime) {
     this.msgLifeTime = msgLifeTime;
   }
@@ -232,16 +246,12 @@ public class BatchSendSingleChatMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息序列号（32位无符号整数），后台会根据该字段去重及进行同秒内消息的排序，详细规则请看本接口的功能说明。若不填该字段，则由后台填入随机数")
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgSeq() {
     return msgSeq;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgSeq(Integer msgSeq) {
     this.msgSeq = msgSeq;
   }
@@ -258,18 +268,13 @@ public class BatchSendSingleChatMsgRequest {
    * @return msgRandom
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机")
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getMsgRandom() {
     return msgRandom;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMsgRandom(Integer msgRandom) {
     this.msgRandom = msgRandom;
   }
@@ -295,16 +300,12 @@ public class BatchSendSingleChatMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息发送控制选项，是一个 String 数组，只对本次请求有效。\"NoUnread\"表示该条消息不计入未读数。\"NoLastMsg\"表示该条消息不更新会话列表。\"WithMuteNotifications\"表示该条消息的接收方对发送方设置的免打扰选项生效（默认不生效）。")
-  @JsonProperty(JSON_PROPERTY_SEND_MSG_CONTROL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<String> getSendMsgControl() {
     return sendMsgControl;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SEND_MSG_CONTROL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSendMsgControl(List<String> sendMsgControl) {
     this.sendMsgControl = sendMsgControl;
   }
@@ -326,19 +327,13 @@ public class BatchSendSingleChatMsgRequest {
    * @return msgBody
   **/
   @javax.annotation.Nonnull
-  @NotNull
-  @Valid
   @ApiModelProperty(required = true, value = "TIM 消息")
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public List<TIMMsgElement> getMsgBody() {
     return msgBody;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMsgBody(List<TIMMsgElement> msgBody) {
     this.msgBody = msgBody;
   }
@@ -356,16 +351,12 @@ public class BatchSendSingleChatMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）")
-  @JsonProperty(JSON_PROPERTY_CLOUD_CUSTOM_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCloudCustomData() {
     return cloudCustomData;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CLOUD_CUSTOM_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCloudCustomData(String cloudCustomData) {
     this.cloudCustomData = cloudCustomData;
   }
@@ -382,21 +373,17 @@ public class BatchSendSingleChatMsgRequest {
    * @return offlinePushInfo
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_OFFLINE_PUSH_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public OfflinePushInfo getOfflinePushInfo() {
     return offlinePushInfo;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_OFFLINE_PUSH_INFO)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOfflinePushInfo(OfflinePushInfo offlinePushInfo) {
     this.offlinePushInfo = offlinePushInfo;
   }
+
 
 
   @Override
@@ -454,5 +441,139 @@ public class BatchSendSingleChatMsgRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("SyncOtherMachine");
+    openapiFields.add("From_Account");
+    openapiFields.add("To_Account");
+    openapiFields.add("MsgLifeTime");
+    openapiFields.add("MsgSeq");
+    openapiFields.add("MsgRandom");
+    openapiFields.add("SendMsgControl");
+    openapiFields.add("MsgBody");
+    openapiFields.add("CloudCustomData");
+    openapiFields.add("OfflinePushInfo");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("To_Account");
+    openapiRequiredFields.add("MsgRandom");
+    openapiRequiredFields.add("MsgBody");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to BatchSendSingleChatMsgRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (BatchSendSingleChatMsgRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in BatchSendSingleChatMsgRequest is not found in the empty JSON string", BatchSendSingleChatMsgRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!BatchSendSingleChatMsgRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `BatchSendSingleChatMsgRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : BatchSendSingleChatMsgRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be an array in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      // ensure the json data is an array
+      if (jsonObj.get("SendMsgControl") != null && !jsonObj.get("SendMsgControl").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `SendMsgControl` to be an array in the JSON string but got `%s`", jsonObj.get("SendMsgControl").toString()));
+      }
+      JsonArray jsonArraymsgBody = jsonObj.getAsJsonArray("MsgBody");
+      if (jsonArraymsgBody != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("MsgBody").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `MsgBody` to be an array in the JSON string but got `%s`", jsonObj.get("MsgBody").toString()));
+        }
+
+        // validate the optional field `MsgBody` (array)
+        for (int i = 0; i < jsonArraymsgBody.size(); i++) {
+          TIMMsgElement.validateJsonObject(jsonArraymsgBody.get(i).getAsJsonObject());
+        };
+      }
+      if (jsonObj.get("CloudCustomData") != null && !jsonObj.get("CloudCustomData").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `CloudCustomData` to be a primitive type in the JSON string but got `%s`", jsonObj.get("CloudCustomData").toString()));
+      }
+      // validate the optional field `OfflinePushInfo`
+      if (jsonObj.getAsJsonObject("OfflinePushInfo") != null) {
+        OfflinePushInfo.validateJsonObject(jsonObj.getAsJsonObject("OfflinePushInfo"));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!BatchSendSingleChatMsgRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'BatchSendSingleChatMsgRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<BatchSendSingleChatMsgRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(BatchSendSingleChatMsgRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<BatchSendSingleChatMsgRequest>() {
+           @Override
+           public void write(JsonWriter out, BatchSendSingleChatMsgRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public BatchSendSingleChatMsgRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of BatchSendSingleChatMsgRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of BatchSendSingleChatMsgRequest
+  * @throws IOException if the JSON string is invalid with respect to BatchSendSingleChatMsgRequest
+  */
+  public static BatchSendSingleChatMsgRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, BatchSendSingleChatMsgRequest.class);
+  }
+
+ /**
+  * Convert an instance of BatchSendSingleChatMsgRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

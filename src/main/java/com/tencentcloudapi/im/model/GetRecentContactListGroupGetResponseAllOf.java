@@ -1,58 +1,76 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.GetRecentContactListGroupGetResponseAllOfSessionItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GetRecentContactListGroupGetResponseAllOf
  */
-@JsonPropertyOrder({
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_SESSION_ITEM,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_COMPLETE_FLAG,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_TIME_STAMP,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_START_INDEX,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_TOP_TIME_STAMP,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_TOP_START_INDEX,
-  GetRecentContactListGroupGetResponseAllOf.JSON_PROPERTY_ERROR_DISPLAY
-})
-@JsonTypeName("GetRecentContactListGroupGetResponse_allOf")
 
 public class GetRecentContactListGroupGetResponseAllOf {
-  public static final String JSON_PROPERTY_SESSION_ITEM = "SessionItem";
+  public static final String SERIALIZED_NAME_SESSION_ITEM = "SessionItem";
+  @SerializedName(SERIALIZED_NAME_SESSION_ITEM)
   private List<GetRecentContactListGroupGetResponseAllOfSessionItem> sessionItem = null;
 
-  public static final String JSON_PROPERTY_COMPLETE_FLAG = "CompleteFlag";
+  public static final String SERIALIZED_NAME_COMPLETE_FLAG = "CompleteFlag";
+  @SerializedName(SERIALIZED_NAME_COMPLETE_FLAG)
   private Integer completeFlag;
 
-  public static final String JSON_PROPERTY_TIME_STAMP = "TimeStamp";
+  public static final String SERIALIZED_NAME_TIME_STAMP = "TimeStamp";
+  @SerializedName(SERIALIZED_NAME_TIME_STAMP)
   private Integer timeStamp;
 
-  public static final String JSON_PROPERTY_START_INDEX = "StartIndex";
+  public static final String SERIALIZED_NAME_START_INDEX = "StartIndex";
+  @SerializedName(SERIALIZED_NAME_START_INDEX)
   private Integer startIndex;
 
-  public static final String JSON_PROPERTY_TOP_TIME_STAMP = "TopTimeStamp";
+  public static final String SERIALIZED_NAME_TOP_TIME_STAMP = "TopTimeStamp";
+  @SerializedName(SERIALIZED_NAME_TOP_TIME_STAMP)
   private Integer topTimeStamp;
 
-  public static final String JSON_PROPERTY_TOP_START_INDEX = "TopStartIndex";
+  public static final String SERIALIZED_NAME_TOP_START_INDEX = "TopStartIndex";
+  @SerializedName(SERIALIZED_NAME_TOP_START_INDEX)
   private Integer topStartIndex;
 
-  public static final String JSON_PROPERTY_ERROR_DISPLAY = "ErrorDisplay";
+  public static final String SERIALIZED_NAME_ERROR_DISPLAY = "ErrorDisplay";
+  @SerializedName(SERIALIZED_NAME_ERROR_DISPLAY)
   private String errorDisplay;
 
   public GetRecentContactListGroupGetResponseAllOf() { 
@@ -77,18 +95,13 @@ public class GetRecentContactListGroupGetResponseAllOf {
    * @return sessionItem
   **/
   @javax.annotation.Nullable
-  @Valid
   @ApiModelProperty(value = "会话对象数组")
-  @JsonProperty(JSON_PROPERTY_SESSION_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public List<GetRecentContactListGroupGetResponseAllOfSessionItem> getSessionItem() {
     return sessionItem;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SESSION_ITEM)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSessionItem(List<GetRecentContactListGroupGetResponseAllOfSessionItem> sessionItem) {
     this.sessionItem = sessionItem;
   }
@@ -106,16 +119,12 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "结束标识：1 表示已返回全量会话，0 表示还有会话没拉完")
-  @JsonProperty(JSON_PROPERTY_COMPLETE_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getCompleteFlag() {
     return completeFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_COMPLETE_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCompleteFlag(Integer completeFlag) {
     this.completeFlag = completeFlag;
   }
@@ -133,16 +142,12 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "普通会话下一页拉取的起始时间，分页拉取时通过请求包的 TimeStamp 字段带给移动通信后台")
-  @JsonProperty(JSON_PROPERTY_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getTimeStamp() {
     return timeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTimeStamp(Integer timeStamp) {
     this.timeStamp = timeStamp;
   }
@@ -160,16 +165,12 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "普通会话下一页拉取的起始位置，分页拉取时通过请求包的 StartIndex 字段带给移动通信后台")
-  @JsonProperty(JSON_PROPERTY_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getStartIndex() {
     return startIndex;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setStartIndex(Integer startIndex) {
     this.startIndex = startIndex;
   }
@@ -187,16 +188,12 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "置顶会话下一页拉取的起始时间，分页拉取时通过请求包的 TopTimeStamp 字段带给移动通信后台")
-  @JsonProperty(JSON_PROPERTY_TOP_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getTopTimeStamp() {
     return topTimeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOP_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTopTimeStamp(Integer topTimeStamp) {
     this.topTimeStamp = topTimeStamp;
   }
@@ -214,16 +211,12 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "置顶会话下一页拉取的起始位置，分页拉取时通过请求包的 TopStartIndex 字段带给移动通信后台")
-  @JsonProperty(JSON_PROPERTY_TOP_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getTopStartIndex() {
     return topStartIndex;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOP_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTopStartIndex(Integer topStartIndex) {
     this.topStartIndex = topStartIndex;
   }
@@ -241,19 +234,16 @@ public class GetRecentContactListGroupGetResponseAllOf {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "详细的客户端展示信息")
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getErrorDisplay() {
     return errorDisplay;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ERROR_DISPLAY)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setErrorDisplay(String errorDisplay) {
     this.errorDisplay = errorDisplay;
   }
+
 
 
   @Override
@@ -305,5 +295,111 @@ public class GetRecentContactListGroupGetResponseAllOf {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("SessionItem");
+    openapiFields.add("CompleteFlag");
+    openapiFields.add("TimeStamp");
+    openapiFields.add("StartIndex");
+    openapiFields.add("TopTimeStamp");
+    openapiFields.add("TopStartIndex");
+    openapiFields.add("ErrorDisplay");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GetRecentContactListGroupGetResponseAllOf
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GetRecentContactListGroupGetResponseAllOf.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetRecentContactListGroupGetResponseAllOf is not found in the empty JSON string", GetRecentContactListGroupGetResponseAllOf.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GetRecentContactListGroupGetResponseAllOf.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetRecentContactListGroupGetResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      JsonArray jsonArraysessionItem = jsonObj.getAsJsonArray("SessionItem");
+      if (jsonArraysessionItem != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("SessionItem").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `SessionItem` to be an array in the JSON string but got `%s`", jsonObj.get("SessionItem").toString()));
+        }
+
+        // validate the optional field `SessionItem` (array)
+        for (int i = 0; i < jsonArraysessionItem.size(); i++) {
+          GetRecentContactListGroupGetResponseAllOfSessionItem.validateJsonObject(jsonArraysessionItem.get(i).getAsJsonObject());
+        };
+      }
+      if (jsonObj.get("ErrorDisplay") != null && !jsonObj.get("ErrorDisplay").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ErrorDisplay` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ErrorDisplay").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GetRecentContactListGroupGetResponseAllOf.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetRecentContactListGroupGetResponseAllOf' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GetRecentContactListGroupGetResponseAllOf> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetRecentContactListGroupGetResponseAllOf.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GetRecentContactListGroupGetResponseAllOf>() {
+           @Override
+           public void write(JsonWriter out, GetRecentContactListGroupGetResponseAllOf value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GetRecentContactListGroupGetResponseAllOf read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GetRecentContactListGroupGetResponseAllOf given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GetRecentContactListGroupGetResponseAllOf
+  * @throws IOException if the JSON string is invalid with respect to GetRecentContactListGroupGetResponseAllOf
+  */
+  public static GetRecentContactListGroupGetResponseAllOf fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetRecentContactListGroupGetResponseAllOf.class);
+  }
+
+ /**
+  * Convert an instance of GetRecentContactListGroupGetResponseAllOf to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

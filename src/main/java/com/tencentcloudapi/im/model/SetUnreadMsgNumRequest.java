@@ -1,38 +1,57 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * SetUnreadMsgNumRequest
  */
-@JsonPropertyOrder({
-  SetUnreadMsgNumRequest.JSON_PROPERTY_GROUP_ID,
-  SetUnreadMsgNumRequest.JSON_PROPERTY_MEMBER_ACCOUNT,
-  SetUnreadMsgNumRequest.JSON_PROPERTY_UNREAD_MSG_NUM
-})
 
 public class SetUnreadMsgNumRequest {
-  public static final String JSON_PROPERTY_GROUP_ID = "GroupId";
+  public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
+  @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;
 
-  public static final String JSON_PROPERTY_MEMBER_ACCOUNT = "Member_Account";
+  public static final String SERIALIZED_NAME_MEMBER_ACCOUNT = "Member_Account";
+  @SerializedName(SERIALIZED_NAME_MEMBER_ACCOUNT)
   private String memberAccount;
 
-  public static final String JSON_PROPERTY_UNREAD_MSG_NUM = "UnreadMsgNum";
+  public static final String SERIALIZED_NAME_UNREAD_MSG_NUM = "UnreadMsgNum";
+  @SerializedName(SERIALIZED_NAME_UNREAD_MSG_NUM)
   private Integer unreadMsgNum;
 
   public SetUnreadMsgNumRequest() { 
@@ -49,18 +68,13 @@ public class SetUnreadMsgNumRequest {
    * @return groupId
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "操作的群 ID")
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getGroupId() {
     return groupId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GROUP_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -77,18 +91,13 @@ public class SetUnreadMsgNumRequest {
    * @return memberAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "要操作的群成员")
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getMemberAccount() {
     return memberAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MEMBER_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMemberAccount(String memberAccount) {
     this.memberAccount = memberAccount;
   }
@@ -105,21 +114,17 @@ public class SetUnreadMsgNumRequest {
    * @return unreadMsgNum
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "成员未读消息数")
-  @JsonProperty(JSON_PROPERTY_UNREAD_MSG_NUM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getUnreadMsgNum() {
     return unreadMsgNum;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_UNREAD_MSG_NUM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setUnreadMsgNum(Integer unreadMsgNum) {
     this.unreadMsgNum = unreadMsgNum;
   }
+
 
 
   @Override
@@ -163,5 +168,108 @@ public class SetUnreadMsgNumRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("GroupId");
+    openapiFields.add("Member_Account");
+    openapiFields.add("UnreadMsgNum");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("GroupId");
+    openapiRequiredFields.add("Member_Account");
+    openapiRequiredFields.add("UnreadMsgNum");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to SetUnreadMsgNumRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (SetUnreadMsgNumRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in SetUnreadMsgNumRequest is not found in the empty JSON string", SetUnreadMsgNumRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!SetUnreadMsgNumRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `SetUnreadMsgNumRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : SetUnreadMsgNumRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("GroupId") != null && !jsonObj.get("GroupId").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `GroupId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("GroupId").toString()));
+      }
+      if (jsonObj.get("Member_Account") != null && !jsonObj.get("Member_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Member_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Member_Account").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!SetUnreadMsgNumRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'SetUnreadMsgNumRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<SetUnreadMsgNumRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(SetUnreadMsgNumRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<SetUnreadMsgNumRequest>() {
+           @Override
+           public void write(JsonWriter out, SetUnreadMsgNumRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public SetUnreadMsgNumRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of SetUnreadMsgNumRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of SetUnreadMsgNumRequest
+  * @throws IOException if the JSON string is invalid with respect to SetUnreadMsgNumRequest
+  */
+  public static SetUnreadMsgNumRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, SetUnreadMsgNumRequest.class);
+  }
+
+ /**
+  * Convert an instance of SetUnreadMsgNumRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

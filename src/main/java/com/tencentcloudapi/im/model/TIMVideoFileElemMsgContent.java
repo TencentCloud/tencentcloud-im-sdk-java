@@ -1,60 +1,71 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * TIMVideoFileElemMsgContent
  */
-@JsonPropertyOrder({
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_URL,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_U_U_I_D,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_SIZE,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_SECOND,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_FORMAT,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_VIDEO_DOWNLOAD_FLAG,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_URL,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_U_U_I_D,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_SIZE,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_WIDTH,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_HEIGHT,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_FORMAT,
-  TIMVideoFileElemMsgContent.JSON_PROPERTY_THUMB_DOWNLOAD_FLAG
-})
-@JsonTypeName("TIMVideoFileElem_MsgContent")
 
 public class TIMVideoFileElemMsgContent {
-  public static final String JSON_PROPERTY_VIDEO_URL = "VideoUrl";
+  public static final String SERIALIZED_NAME_VIDEO_URL = "VideoUrl";
+  @SerializedName(SERIALIZED_NAME_VIDEO_URL)
   private String videoUrl;
 
-  public static final String JSON_PROPERTY_VIDEO_U_U_I_D = "VideoUUID";
+  public static final String SERIALIZED_NAME_VIDEO_U_U_I_D = "VideoUUID";
+  @SerializedName(SERIALIZED_NAME_VIDEO_U_U_I_D)
   private String videoUUID;
 
-  public static final String JSON_PROPERTY_VIDEO_SIZE = "VideoSize";
+  public static final String SERIALIZED_NAME_VIDEO_SIZE = "VideoSize";
+  @SerializedName(SERIALIZED_NAME_VIDEO_SIZE)
   private Integer videoSize;
 
-  public static final String JSON_PROPERTY_VIDEO_SECOND = "VideoSecond";
+  public static final String SERIALIZED_NAME_VIDEO_SECOND = "VideoSecond";
+  @SerializedName(SERIALIZED_NAME_VIDEO_SECOND)
   private Integer videoSecond;
 
-  public static final String JSON_PROPERTY_VIDEO_FORMAT = "VideoFormat";
+  public static final String SERIALIZED_NAME_VIDEO_FORMAT = "VideoFormat";
+  @SerializedName(SERIALIZED_NAME_VIDEO_FORMAT)
   private String videoFormat;
 
   /**
    * Gets or Sets videoDownloadFlag
    */
+  @JsonAdapter(VideoDownloadFlagEnum.Adapter.class)
   public enum VideoDownloadFlagEnum {
     NUMBER_2(2);
 
@@ -64,7 +75,6 @@ public class TIMVideoFileElemMsgContent {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -74,7 +84,6 @@ public class TIMVideoFileElemMsgContent {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static VideoDownloadFlagEnum fromValue(Integer value) {
       for (VideoDownloadFlagEnum b : VideoDownloadFlagEnum.values()) {
         if (b.value.equals(value)) {
@@ -83,32 +92,53 @@ public class TIMVideoFileElemMsgContent {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<VideoDownloadFlagEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final VideoDownloadFlagEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public VideoDownloadFlagEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return VideoDownloadFlagEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_VIDEO_DOWNLOAD_FLAG = "VideoDownloadFlag";
+  public static final String SERIALIZED_NAME_VIDEO_DOWNLOAD_FLAG = "VideoDownloadFlag";
+  @SerializedName(SERIALIZED_NAME_VIDEO_DOWNLOAD_FLAG)
   private VideoDownloadFlagEnum videoDownloadFlag;
 
-  public static final String JSON_PROPERTY_THUMB_URL = "ThumbUrl";
+  public static final String SERIALIZED_NAME_THUMB_URL = "ThumbUrl";
+  @SerializedName(SERIALIZED_NAME_THUMB_URL)
   private String thumbUrl;
 
-  public static final String JSON_PROPERTY_THUMB_U_U_I_D = "ThumbUUID";
+  public static final String SERIALIZED_NAME_THUMB_U_U_I_D = "ThumbUUID";
+  @SerializedName(SERIALIZED_NAME_THUMB_U_U_I_D)
   private String thumbUUID;
 
-  public static final String JSON_PROPERTY_THUMB_SIZE = "ThumbSize";
+  public static final String SERIALIZED_NAME_THUMB_SIZE = "ThumbSize";
+  @SerializedName(SERIALIZED_NAME_THUMB_SIZE)
   private Integer thumbSize;
 
-  public static final String JSON_PROPERTY_THUMB_WIDTH = "ThumbWidth";
+  public static final String SERIALIZED_NAME_THUMB_WIDTH = "ThumbWidth";
+  @SerializedName(SERIALIZED_NAME_THUMB_WIDTH)
   private Integer thumbWidth;
 
-  public static final String JSON_PROPERTY_THUMB_HEIGHT = "ThumbHeight";
+  public static final String SERIALIZED_NAME_THUMB_HEIGHT = "ThumbHeight";
+  @SerializedName(SERIALIZED_NAME_THUMB_HEIGHT)
   private Integer thumbHeight;
 
-  public static final String JSON_PROPERTY_THUMB_FORMAT = "ThumbFormat";
+  public static final String SERIALIZED_NAME_THUMB_FORMAT = "ThumbFormat";
+  @SerializedName(SERIALIZED_NAME_THUMB_FORMAT)
   private String thumbFormat;
 
   /**
    * Gets or Sets thumbDownloadFlag
    */
+  @JsonAdapter(ThumbDownloadFlagEnum.Adapter.class)
   public enum ThumbDownloadFlagEnum {
     NUMBER_2(2);
 
@@ -118,7 +148,6 @@ public class TIMVideoFileElemMsgContent {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -128,7 +157,6 @@ public class TIMVideoFileElemMsgContent {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static ThumbDownloadFlagEnum fromValue(Integer value) {
       for (ThumbDownloadFlagEnum b : ThumbDownloadFlagEnum.values()) {
         if (b.value.equals(value)) {
@@ -137,9 +165,23 @@ public class TIMVideoFileElemMsgContent {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<ThumbDownloadFlagEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final ThumbDownloadFlagEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public ThumbDownloadFlagEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return ThumbDownloadFlagEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_THUMB_DOWNLOAD_FLAG = "ThumbDownloadFlag";
+  public static final String SERIALIZED_NAME_THUMB_DOWNLOAD_FLAG = "ThumbDownloadFlag";
+  @SerializedName(SERIALIZED_NAME_THUMB_DOWNLOAD_FLAG)
   private ThumbDownloadFlagEnum thumbDownloadFlag;
 
   public TIMVideoFileElemMsgContent() { 
@@ -157,16 +199,12 @@ public class TIMVideoFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getVideoUrl() {
     return videoUrl;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVideoUrl(String videoUrl) {
     this.videoUrl = videoUrl;
   }
@@ -183,18 +221,13 @@ public class TIMVideoFileElemMsgContent {
    * @return videoUUID
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getVideoUUID() {
     return videoUUID;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVideoUUID(String videoUUID) {
     this.videoUUID = videoUUID;
   }
@@ -211,18 +244,13 @@ public class TIMVideoFileElemMsgContent {
    * @return videoSize
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getVideoSize() {
     return videoSize;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVideoSize(Integer videoSize) {
     this.videoSize = videoSize;
   }
@@ -239,18 +267,13 @@ public class TIMVideoFileElemMsgContent {
    * @return videoSecond
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_SECOND)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getVideoSecond() {
     return videoSecond;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_SECOND)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVideoSecond(Integer videoSecond) {
     this.videoSecond = videoSecond;
   }
@@ -267,18 +290,13 @@ public class TIMVideoFileElemMsgContent {
    * @return videoFormat
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getVideoFormat() {
     return videoFormat;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setVideoFormat(String videoFormat) {
     this.videoFormat = videoFormat;
   }
@@ -296,16 +314,12 @@ public class TIMVideoFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_VIDEO_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public VideoDownloadFlagEnum getVideoDownloadFlag() {
     return videoDownloadFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_VIDEO_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setVideoDownloadFlag(VideoDownloadFlagEnum videoDownloadFlag) {
     this.videoDownloadFlag = videoDownloadFlag;
   }
@@ -323,16 +337,12 @@ public class TIMVideoFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getThumbUrl() {
     return thumbUrl;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_URL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setThumbUrl(String thumbUrl) {
     this.thumbUrl = thumbUrl;
   }
@@ -349,18 +359,13 @@ public class TIMVideoFileElemMsgContent {
    * @return thumbUUID
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getThumbUUID() {
     return thumbUUID;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_U_U_I_D)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setThumbUUID(String thumbUUID) {
     this.thumbUUID = thumbUUID;
   }
@@ -377,18 +382,13 @@ public class TIMVideoFileElemMsgContent {
    * @return thumbSize
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getThumbSize() {
     return thumbSize;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_SIZE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setThumbSize(Integer thumbSize) {
     this.thumbSize = thumbSize;
   }
@@ -405,18 +405,13 @@ public class TIMVideoFileElemMsgContent {
    * @return thumbWidth
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_WIDTH)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getThumbWidth() {
     return thumbWidth;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_WIDTH)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setThumbWidth(Integer thumbWidth) {
     this.thumbWidth = thumbWidth;
   }
@@ -433,18 +428,13 @@ public class TIMVideoFileElemMsgContent {
    * @return thumbHeight
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_HEIGHT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getThumbHeight() {
     return thumbHeight;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_HEIGHT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setThumbHeight(Integer thumbHeight) {
     this.thumbHeight = thumbHeight;
   }
@@ -461,18 +451,13 @@ public class TIMVideoFileElemMsgContent {
    * @return thumbFormat
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getThumbFormat() {
     return thumbFormat;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_FORMAT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setThumbFormat(String thumbFormat) {
     this.thumbFormat = thumbFormat;
   }
@@ -490,19 +475,16 @@ public class TIMVideoFileElemMsgContent {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_THUMB_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public ThumbDownloadFlagEnum getThumbDownloadFlag() {
     return thumbDownloadFlag;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_THUMB_DOWNLOAD_FLAG)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setThumbDownloadFlag(ThumbDownloadFlagEnum thumbDownloadFlag) {
     this.thumbDownloadFlag = thumbDownloadFlag;
   }
+
 
 
   @Override
@@ -566,5 +548,136 @@ public class TIMVideoFileElemMsgContent {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("VideoUrl");
+    openapiFields.add("VideoUUID");
+    openapiFields.add("VideoSize");
+    openapiFields.add("VideoSecond");
+    openapiFields.add("VideoFormat");
+    openapiFields.add("VideoDownloadFlag");
+    openapiFields.add("ThumbUrl");
+    openapiFields.add("ThumbUUID");
+    openapiFields.add("ThumbSize");
+    openapiFields.add("ThumbWidth");
+    openapiFields.add("ThumbHeight");
+    openapiFields.add("ThumbFormat");
+    openapiFields.add("ThumbDownloadFlag");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("VideoUUID");
+    openapiRequiredFields.add("VideoSize");
+    openapiRequiredFields.add("VideoSecond");
+    openapiRequiredFields.add("VideoFormat");
+    openapiRequiredFields.add("ThumbUUID");
+    openapiRequiredFields.add("ThumbSize");
+    openapiRequiredFields.add("ThumbWidth");
+    openapiRequiredFields.add("ThumbHeight");
+    openapiRequiredFields.add("ThumbFormat");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to TIMVideoFileElemMsgContent
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (TIMVideoFileElemMsgContent.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in TIMVideoFileElemMsgContent is not found in the empty JSON string", TIMVideoFileElemMsgContent.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!TIMVideoFileElemMsgContent.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TIMVideoFileElemMsgContent` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : TIMVideoFileElemMsgContent.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("VideoUrl") != null && !jsonObj.get("VideoUrl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `VideoUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("VideoUrl").toString()));
+      }
+      if (jsonObj.get("VideoUUID") != null && !jsonObj.get("VideoUUID").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `VideoUUID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("VideoUUID").toString()));
+      }
+      if (jsonObj.get("VideoFormat") != null && !jsonObj.get("VideoFormat").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `VideoFormat` to be a primitive type in the JSON string but got `%s`", jsonObj.get("VideoFormat").toString()));
+      }
+      if (jsonObj.get("ThumbUrl") != null && !jsonObj.get("ThumbUrl").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ThumbUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ThumbUrl").toString()));
+      }
+      if (jsonObj.get("ThumbUUID") != null && !jsonObj.get("ThumbUUID").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ThumbUUID` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ThumbUUID").toString()));
+      }
+      if (jsonObj.get("ThumbFormat") != null && !jsonObj.get("ThumbFormat").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ThumbFormat` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ThumbFormat").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!TIMVideoFileElemMsgContent.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'TIMVideoFileElemMsgContent' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<TIMVideoFileElemMsgContent> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(TIMVideoFileElemMsgContent.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<TIMVideoFileElemMsgContent>() {
+           @Override
+           public void write(JsonWriter out, TIMVideoFileElemMsgContent value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public TIMVideoFileElemMsgContent read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of TIMVideoFileElemMsgContent given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of TIMVideoFileElemMsgContent
+  * @throws IOException if the JSON string is invalid with respect to TIMVideoFileElemMsgContent
+  */
+  public static TIMVideoFileElemMsgContent fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, TIMVideoFileElemMsgContent.class);
+  }
+
+ /**
+  * Convert an instance of TIMVideoFileElemMsgContent to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

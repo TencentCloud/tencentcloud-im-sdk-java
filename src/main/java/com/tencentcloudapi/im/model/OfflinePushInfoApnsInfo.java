@@ -1,47 +1,65 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * OfflinePushInfoApnsInfo
  */
-@JsonPropertyOrder({
-  OfflinePushInfoApnsInfo.JSON_PROPERTY_BADGE_MODE,
-  OfflinePushInfoApnsInfo.JSON_PROPERTY_TITLE,
-  OfflinePushInfoApnsInfo.JSON_PROPERTY_SUB_TITLE,
-  OfflinePushInfoApnsInfo.JSON_PROPERTY_IMAGE,
-  OfflinePushInfoApnsInfo.JSON_PROPERTY_MUTABLE_CONTENT
-})
-@JsonTypeName("OfflinePushInfo_ApnsInfo")
 
 public class OfflinePushInfoApnsInfo {
-  public static final String JSON_PROPERTY_BADGE_MODE = "BadgeMode";
+  public static final String SERIALIZED_NAME_BADGE_MODE = "BadgeMode";
+  @SerializedName(SERIALIZED_NAME_BADGE_MODE)
   private Integer badgeMode;
 
-  public static final String JSON_PROPERTY_TITLE = "Title";
+  public static final String SERIALIZED_NAME_TITLE = "Title";
+  @SerializedName(SERIALIZED_NAME_TITLE)
   private String title;
 
-  public static final String JSON_PROPERTY_SUB_TITLE = "SubTitle";
+  public static final String SERIALIZED_NAME_SUB_TITLE = "SubTitle";
+  @SerializedName(SERIALIZED_NAME_SUB_TITLE)
   private String subTitle;
 
-  public static final String JSON_PROPERTY_IMAGE = "Image";
+  public static final String SERIALIZED_NAME_IMAGE = "Image";
+  @SerializedName(SERIALIZED_NAME_IMAGE)
   private String image;
 
-  public static final String JSON_PROPERTY_MUTABLE_CONTENT = "MutableContent";
+  public static final String SERIALIZED_NAME_MUTABLE_CONTENT = "MutableContent";
+  @SerializedName(SERIALIZED_NAME_MUTABLE_CONTENT)
   private Integer mutableContent = 0;
 
   public OfflinePushInfoApnsInfo() { 
@@ -59,16 +77,12 @@ public class OfflinePushInfoApnsInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "这个字段缺省或者为0表示需要计数，为1表示本条消息不需要计数，即右上角图标数字不增加。")
-  @JsonProperty(JSON_PROPERTY_BADGE_MODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getBadgeMode() {
     return badgeMode;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_BADGE_MODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBadgeMode(Integer badgeMode) {
     this.badgeMode = badgeMode;
   }
@@ -86,16 +100,12 @@ public class OfflinePushInfoApnsInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "该字段用于标识 APNs 推送的标题，若填写则会覆盖最上层 Title。")
-  @JsonProperty(JSON_PROPERTY_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getTitle() {
     return title;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setTitle(String title) {
     this.title = title;
   }
@@ -113,16 +123,12 @@ public class OfflinePushInfoApnsInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "该字段用于标识 APNs 推送的子标题。")
-  @JsonProperty(JSON_PROPERTY_SUB_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getSubTitle() {
     return subTitle;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SUB_TITLE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSubTitle(String subTitle) {
     this.subTitle = subTitle;
   }
@@ -140,16 +146,12 @@ public class OfflinePushInfoApnsInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "该字段用于标识 APNs 携带的图片地址，当客户端拿到该字段时，可以通过下载图片资源的方式将图片展示在弹窗上。")
-  @JsonProperty(JSON_PROPERTY_IMAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getImage() {
     return image;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_IMAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setImage(String image) {
     this.image = image;
   }
@@ -167,19 +169,16 @@ public class OfflinePushInfoApnsInfo {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "为1表示开启 iOS 10 的推送扩展，默认为0。")
-  @JsonProperty(JSON_PROPERTY_MUTABLE_CONTENT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMutableContent() {
     return mutableContent;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MUTABLE_CONTENT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMutableContent(Integer mutableContent) {
     this.mutableContent = mutableContent;
   }
+
 
 
   @Override
@@ -227,5 +226,103 @@ public class OfflinePushInfoApnsInfo {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("BadgeMode");
+    openapiFields.add("Title");
+    openapiFields.add("SubTitle");
+    openapiFields.add("Image");
+    openapiFields.add("MutableContent");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to OfflinePushInfoApnsInfo
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (OfflinePushInfoApnsInfo.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in OfflinePushInfoApnsInfo is not found in the empty JSON string", OfflinePushInfoApnsInfo.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!OfflinePushInfoApnsInfo.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `OfflinePushInfoApnsInfo` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("Title") != null && !jsonObj.get("Title").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Title` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Title").toString()));
+      }
+      if (jsonObj.get("SubTitle") != null && !jsonObj.get("SubTitle").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `SubTitle` to be a primitive type in the JSON string but got `%s`", jsonObj.get("SubTitle").toString()));
+      }
+      if (jsonObj.get("Image") != null && !jsonObj.get("Image").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `Image` to be a primitive type in the JSON string but got `%s`", jsonObj.get("Image").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!OfflinePushInfoApnsInfo.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'OfflinePushInfoApnsInfo' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<OfflinePushInfoApnsInfo> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(OfflinePushInfoApnsInfo.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<OfflinePushInfoApnsInfo>() {
+           @Override
+           public void write(JsonWriter out, OfflinePushInfoApnsInfo value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public OfflinePushInfoApnsInfo read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of OfflinePushInfoApnsInfo given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of OfflinePushInfoApnsInfo
+  * @throws IOException if the JSON string is invalid with respect to OfflinePushInfoApnsInfo
+  */
+  public static OfflinePushInfoApnsInfo fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, OfflinePushInfoApnsInfo.class);
+  }
+
+ /**
+  * Convert an instance of OfflinePushInfoApnsInfo to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

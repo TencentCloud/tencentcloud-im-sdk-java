@@ -1,42 +1,54 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.TIMMsgElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * ImportMsgRequest
  */
-@JsonPropertyOrder({
-  ImportMsgRequest.JSON_PROPERTY_SYNC_FROM_OLD_SYSTEM,
-  ImportMsgRequest.JSON_PROPERTY_FROM_ACCOUNT,
-  ImportMsgRequest.JSON_PROPERTY_TO_ACCOUNT,
-  ImportMsgRequest.JSON_PROPERTY_MSG_SEQ,
-  ImportMsgRequest.JSON_PROPERTY_MSG_RANDOM,
-  ImportMsgRequest.JSON_PROPERTY_MSG_TIME_STAMP,
-  ImportMsgRequest.JSON_PROPERTY_MSG_BODY,
-  ImportMsgRequest.JSON_PROPERTY_CLOUD_CUSTOM_DATA
-})
 
 public class ImportMsgRequest {
   /**
    * 该字段只能填1或2，其他值是非法值 1表示实时消息导入，消息计入未读计数 2表示历史消息导入，消息不计入未读
    */
+  @JsonAdapter(SyncFromOldSystemEnum.Adapter.class)
   public enum SyncFromOldSystemEnum {
     NUMBER_0(0),
     
@@ -48,7 +60,6 @@ public class ImportMsgRequest {
       this.value = value;
     }
 
-    @JsonValue
     public Integer getValue() {
       return value;
     }
@@ -58,7 +69,6 @@ public class ImportMsgRequest {
       return String.valueOf(value);
     }
 
-    @JsonCreator
     public static SyncFromOldSystemEnum fromValue(Integer value) {
       for (SyncFromOldSystemEnum b : SyncFromOldSystemEnum.values()) {
         if (b.value.equals(value)) {
@@ -67,30 +77,51 @@ public class ImportMsgRequest {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+
+    public static class Adapter extends TypeAdapter<SyncFromOldSystemEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final SyncFromOldSystemEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public SyncFromOldSystemEnum read(final JsonReader jsonReader) throws IOException {
+        Integer value =  jsonReader.nextInt();
+        return SyncFromOldSystemEnum.fromValue(value);
+      }
+    }
   }
 
-  public static final String JSON_PROPERTY_SYNC_FROM_OLD_SYSTEM = "SyncFromOldSystem";
+  public static final String SERIALIZED_NAME_SYNC_FROM_OLD_SYSTEM = "SyncFromOldSystem";
+  @SerializedName(SERIALIZED_NAME_SYNC_FROM_OLD_SYSTEM)
   private SyncFromOldSystemEnum syncFromOldSystem;
 
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_TO_ACCOUNT = "To_Account";
+  public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
+  @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
   private String toAccount;
 
-  public static final String JSON_PROPERTY_MSG_SEQ = "MsgSeq";
+  public static final String SERIALIZED_NAME_MSG_SEQ = "MsgSeq";
+  @SerializedName(SERIALIZED_NAME_MSG_SEQ)
   private Integer msgSeq;
 
-  public static final String JSON_PROPERTY_MSG_RANDOM = "MsgRandom";
+  public static final String SERIALIZED_NAME_MSG_RANDOM = "MsgRandom";
+  @SerializedName(SERIALIZED_NAME_MSG_RANDOM)
   private Integer msgRandom;
 
-  public static final String JSON_PROPERTY_MSG_TIME_STAMP = "MsgTimeStamp";
+  public static final String SERIALIZED_NAME_MSG_TIME_STAMP = "MsgTimeStamp";
+  @SerializedName(SERIALIZED_NAME_MSG_TIME_STAMP)
   private Integer msgTimeStamp;
 
-  public static final String JSON_PROPERTY_MSG_BODY = "MsgBody";
+  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
+  @SerializedName(SERIALIZED_NAME_MSG_BODY)
   private List<TIMMsgElement> msgBody = new ArrayList<>();
 
-  public static final String JSON_PROPERTY_CLOUD_CUSTOM_DATA = "CloudCustomData";
+  public static final String SERIALIZED_NAME_CLOUD_CUSTOM_DATA = "CloudCustomData";
+  @SerializedName(SERIALIZED_NAME_CLOUD_CUSTOM_DATA)
   private String cloudCustomData;
 
   public ImportMsgRequest() { 
@@ -107,18 +138,13 @@ public class ImportMsgRequest {
    * @return syncFromOldSystem
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "该字段只能填1或2，其他值是非法值 1表示实时消息导入，消息计入未读计数 2表示历史消息导入，消息不计入未读")
-  @JsonProperty(JSON_PROPERTY_SYNC_FROM_OLD_SYSTEM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public SyncFromOldSystemEnum getSyncFromOldSystem() {
     return syncFromOldSystem;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SYNC_FROM_OLD_SYSTEM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setSyncFromOldSystem(SyncFromOldSystemEnum syncFromOldSystem) {
     this.syncFromOldSystem = syncFromOldSystem;
   }
@@ -135,18 +161,13 @@ public class ImportMsgRequest {
    * @return fromAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息发送方 UserID，用于指定发送消息方")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -163,18 +184,13 @@ public class ImportMsgRequest {
    * @return toAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息接收方 UserID")
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getToAccount() {
     return toAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TO_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
@@ -192,16 +208,12 @@ public class ImportMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息序列号（32位无符号整数），后台会根据该字段去重及进行同秒内消息的排序，详细规则请看本接口的功能说明。若不填该字段，则由后台填入随机数")
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getMsgSeq() {
     return msgSeq;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_SEQ)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setMsgSeq(Integer msgSeq) {
     this.msgSeq = msgSeq;
   }
@@ -218,18 +230,13 @@ public class ImportMsgRequest {
    * @return msgRandom
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息随机数（32位无符号整数），后台用于同一秒内的消息去重。请确保该字段填的是随机")
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getMsgRandom() {
     return msgRandom;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_RANDOM)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMsgRandom(Integer msgRandom) {
     this.msgRandom = msgRandom;
   }
@@ -246,18 +253,13 @@ public class ImportMsgRequest {
    * @return msgTimeStamp
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "消息时间戳，UNIX 时间戳，单位为秒。后台会根据该字段去重，详细规则请看本接口的功能说明。")
-  @JsonProperty(JSON_PROPERTY_MSG_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getMsgTimeStamp() {
     return msgTimeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMsgTimeStamp(Integer msgTimeStamp) {
     this.msgTimeStamp = msgTimeStamp;
   }
@@ -279,19 +281,13 @@ public class ImportMsgRequest {
    * @return msgBody
   **/
   @javax.annotation.Nonnull
-  @NotNull
-  @Valid
   @ApiModelProperty(required = true, value = "消息内容，具体格式请参考（https://cloud.tencent.com/document/product/269/2720）消息格式描述（注意，一条消息可包括多种消息元素，MsgBody 为 Array 类型）")
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public List<TIMMsgElement> getMsgBody() {
     return msgBody;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_MSG_BODY)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setMsgBody(List<TIMMsgElement> msgBody) {
     this.msgBody = msgBody;
   }
@@ -309,19 +305,16 @@ public class ImportMsgRequest {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息自定义数据（云端保存，会发送到对端，程序卸载重装后还能拉取到）")
-  @JsonProperty(JSON_PROPERTY_CLOUD_CUSTOM_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public String getCloudCustomData() {
     return cloudCustomData;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CLOUD_CUSTOM_DATA)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setCloudCustomData(String cloudCustomData) {
     this.cloudCustomData = cloudCustomData;
   }
+
 
 
   @Override
@@ -375,5 +368,131 @@ public class ImportMsgRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("SyncFromOldSystem");
+    openapiFields.add("From_Account");
+    openapiFields.add("To_Account");
+    openapiFields.add("MsgSeq");
+    openapiFields.add("MsgRandom");
+    openapiFields.add("MsgTimeStamp");
+    openapiFields.add("MsgBody");
+    openapiFields.add("CloudCustomData");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("SyncFromOldSystem");
+    openapiRequiredFields.add("From_Account");
+    openapiRequiredFields.add("To_Account");
+    openapiRequiredFields.add("MsgRandom");
+    openapiRequiredFields.add("MsgTimeStamp");
+    openapiRequiredFields.add("MsgBody");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to ImportMsgRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (ImportMsgRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in ImportMsgRequest is not found in the empty JSON string", ImportMsgRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!ImportMsgRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportMsgRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : ImportMsgRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
+      }
+      JsonArray jsonArraymsgBody = jsonObj.getAsJsonArray("MsgBody");
+      if (jsonArraymsgBody != null) {
+        // ensure the json data is an array
+        if (!jsonObj.get("MsgBody").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `MsgBody` to be an array in the JSON string but got `%s`", jsonObj.get("MsgBody").toString()));
+        }
+
+        // validate the optional field `MsgBody` (array)
+        for (int i = 0; i < jsonArraymsgBody.size(); i++) {
+          TIMMsgElement.validateJsonObject(jsonArraymsgBody.get(i).getAsJsonObject());
+        };
+      }
+      if (jsonObj.get("CloudCustomData") != null && !jsonObj.get("CloudCustomData").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `CloudCustomData` to be a primitive type in the JSON string but got `%s`", jsonObj.get("CloudCustomData").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!ImportMsgRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ImportMsgRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<ImportMsgRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ImportMsgRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<ImportMsgRequest>() {
+           @Override
+           public void write(JsonWriter out, ImportMsgRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public ImportMsgRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of ImportMsgRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of ImportMsgRequest
+  * @throws IOException if the JSON string is invalid with respect to ImportMsgRequest
+  */
+  public static ImportMsgRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ImportMsgRequest.class);
+  }
+
+ /**
+  * Convert an instance of ImportMsgRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

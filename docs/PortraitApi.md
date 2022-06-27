@@ -8,15 +8,13 @@ All URIs are relative to *https://console.tim.qq.com*
 | [**portraitSet**](PortraitApi.md#portraitSet) | **POST** /v4/profile/portrait_set | 设置资料（https://cloud.tencent.com/document/product/269/1640） |
 
 
-
-## portraitGet
-
+<a name="portraitGet"></a>
+# **portraitGet**
 > PortraitGetResponse portraitGet(random, portraitGetRequest)
 
 拉取资料（https://cloud.tencent.com/document/product/269/1639）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -26,39 +24,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.PortraitApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        PortraitApi apiInstance = new PortraitApi(defaultClient);
-        Integer random = 56; // Integer | 
-        PortraitGetRequest portraitGetRequest = new PortraitGetRequest(); // PortraitGetRequest | 
-        //TODO: Set the parameters
-
-        try {
-            PortraitGetResponse result = apiInstance.portraitGet(random, portraitGetRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling PortraitApi#portraitGet");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    PortraitApi apiInstance = new PortraitApi(defaultClient);
+    Integer random = 56; // Integer | 
+    PortraitGetRequest portraitGetRequest = new PortraitGetRequest(); // PortraitGetRequest | 
+    try {
+      PortraitGetResponse result = apiInstance.portraitGet(random, portraitGetRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortraitApi#portraitGet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -75,24 +70,21 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | 正常响应 |  -  |
 
-
-## portraitSet
-
+<a name="portraitSet"></a>
+# **portraitSet**
 > PortraitSetResponse portraitSet(random, portraitSetRequest)
 
 设置资料（https://cloud.tencent.com/document/product/269/1640）
 
 ### Example
-
 ```java
 // Import classes:
 import com.tencentcloudapi.im.ApiClient;
@@ -102,39 +94,36 @@ import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.PortraitApi;
 
 public class Example {
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-        PortraitApi apiInstance = new PortraitApi(defaultClient);
-        Integer random = 56; // Integer | 
-        PortraitSetRequest portraitSetRequest = new PortraitSetRequest(); // PortraitSetRequest | 
-        //TODO: Set the parameters
-
-        try {
-            PortraitSetResponse result = apiInstance.portraitSet(random, portraitSetRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling PortraitApi#portraitSet");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    PortraitApi apiInstance = new PortraitApi(defaultClient);
+    Integer random = 56; // Integer | 
+    PortraitSetRequest portraitSetRequest = new PortraitSetRequest(); // PortraitSetRequest | 
+    try {
+      PortraitSetResponse result = apiInstance.portraitSet(random, portraitSetRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling PortraitApi#portraitSet");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 ```
 
 ### Parameters
-
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -151,9 +140,8 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
-
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |

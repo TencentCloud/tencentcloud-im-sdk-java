@@ -1,50 +1,69 @@
+/*
+ * TIM SERVER REST API SDK
+ * TIM REST API
+ */
+
 
 package com.tencentcloudapi.im.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import javax.validation.constraints.*;
-import javax.validation.Valid;
-import org.hibernate.validator.constraints.*;
+import java.io.IOException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.tencentcloudapi.im.JSON;
 
 /**
  * GetRecentContactListGroupGetRequest
  */
-@JsonPropertyOrder({
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_FROM_ACCOUNT,
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_TIME_STAMP,
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_START_INDEX,
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_TOP_TIME_STAMP,
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_TOP_START_INDEX,
-  GetRecentContactListGroupGetRequest.JSON_PROPERTY_ASSIST_FLAGS
-})
 
 public class GetRecentContactListGroupGetRequest {
-  public static final String JSON_PROPERTY_FROM_ACCOUNT = "From_Account";
+  public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
+  @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
 
-  public static final String JSON_PROPERTY_TIME_STAMP = "TimeStamp";
+  public static final String SERIALIZED_NAME_TIME_STAMP = "TimeStamp";
+  @SerializedName(SERIALIZED_NAME_TIME_STAMP)
   private Integer timeStamp;
 
-  public static final String JSON_PROPERTY_START_INDEX = "StartIndex";
+  public static final String SERIALIZED_NAME_START_INDEX = "StartIndex";
+  @SerializedName(SERIALIZED_NAME_START_INDEX)
   private Integer startIndex;
 
-  public static final String JSON_PROPERTY_TOP_TIME_STAMP = "TopTimeStamp";
+  public static final String SERIALIZED_NAME_TOP_TIME_STAMP = "TopTimeStamp";
+  @SerializedName(SERIALIZED_NAME_TOP_TIME_STAMP)
   private Integer topTimeStamp;
 
-  public static final String JSON_PROPERTY_TOP_START_INDEX = "TopStartIndex";
+  public static final String SERIALIZED_NAME_TOP_START_INDEX = "TopStartIndex";
+  @SerializedName(SERIALIZED_NAME_TOP_START_INDEX)
   private Integer topStartIndex;
 
-  public static final String JSON_PROPERTY_ASSIST_FLAGS = "AssistFlags";
+  public static final String SERIALIZED_NAME_ASSIST_FLAGS = "AssistFlags";
+  @SerializedName(SERIALIZED_NAME_ASSIST_FLAGS)
   private Integer assistFlags;
 
   public GetRecentContactListGroupGetRequest() { 
@@ -61,18 +80,13 @@ public class GetRecentContactListGroupGetRequest {
    * @return fromAccount
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "填 UserID，请求拉取该用户的会话列表")
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public String getFromAccount() {
     return fromAccount;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_FROM_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
@@ -89,18 +103,13 @@ public class GetRecentContactListGroupGetRequest {
    * @return timeStamp
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "普通会话的起始时间，第一页填 0")
-  @JsonProperty(JSON_PROPERTY_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getTimeStamp() {
     return timeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTimeStamp(Integer timeStamp) {
     this.timeStamp = timeStamp;
   }
@@ -117,18 +126,13 @@ public class GetRecentContactListGroupGetRequest {
    * @return startIndex
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "普通会话的起始位置，第一页填 0")
-  @JsonProperty(JSON_PROPERTY_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getStartIndex() {
     return startIndex;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setStartIndex(Integer startIndex) {
     this.startIndex = startIndex;
   }
@@ -145,18 +149,13 @@ public class GetRecentContactListGroupGetRequest {
    * @return topTimeStamp
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "置顶会话的起始时间，第一页填 0")
-  @JsonProperty(JSON_PROPERTY_TOP_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getTopTimeStamp() {
     return topTimeStamp;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOP_TIME_STAMP)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTopTimeStamp(Integer topTimeStamp) {
     this.topTimeStamp = topTimeStamp;
   }
@@ -173,18 +172,13 @@ public class GetRecentContactListGroupGetRequest {
    * @return topStartIndex
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "置顶会话的起始位置，第一页填 0")
-  @JsonProperty(JSON_PROPERTY_TOP_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getTopStartIndex() {
     return topStartIndex;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOP_START_INDEX)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setTopStartIndex(Integer topStartIndex) {
     this.topStartIndex = topStartIndex;
   }
@@ -201,21 +195,17 @@ public class GetRecentContactListGroupGetRequest {
    * @return assistFlags
   **/
   @javax.annotation.Nonnull
-  @NotNull
   @ApiModelProperty(required = true, value = "会话辅助标志位： bit 0 - 是否支持置顶会话 bit 1 - 是否返回空会话 bit 2 - 是否支持置顶会话分页")
-  @JsonProperty(JSON_PROPERTY_ASSIST_FLAGS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
   public Integer getAssistFlags() {
     return assistFlags;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ASSIST_FLAGS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setAssistFlags(Integer assistFlags) {
     this.assistFlags = assistFlags;
   }
+
 
 
   @Override
@@ -265,5 +255,111 @@ public class GetRecentContactListGroupGetRequest {
     return o.toString().replace("\n", "\n    ");
   }
 
+
+  public static HashSet<String> openapiFields;
+  public static HashSet<String> openapiRequiredFields;
+
+  static {
+    // a set of all properties/fields (JSON key names)
+    openapiFields = new HashSet<String>();
+    openapiFields.add("From_Account");
+    openapiFields.add("TimeStamp");
+    openapiFields.add("StartIndex");
+    openapiFields.add("TopTimeStamp");
+    openapiFields.add("TopStartIndex");
+    openapiFields.add("AssistFlags");
+
+    // a set of required properties/fields (JSON key names)
+    openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("From_Account");
+    openapiRequiredFields.add("TimeStamp");
+    openapiRequiredFields.add("StartIndex");
+    openapiRequiredFields.add("TopTimeStamp");
+    openapiRequiredFields.add("TopStartIndex");
+    openapiRequiredFields.add("AssistFlags");
+  }
+
+ /**
+  * Validates the JSON Object and throws an exception if issues found
+  *
+  * @param jsonObj JSON Object
+  * @throws IOException if the JSON Object is invalid with respect to GetRecentContactListGroupGetRequest
+  */
+  public static void validateJsonObject(JsonObject jsonObj) throws IOException {
+      if (jsonObj == null) {
+        if (GetRecentContactListGroupGetRequest.openapiRequiredFields.isEmpty()) {
+          return;
+        } else { // has required fields
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GetRecentContactListGroupGetRequest is not found in the empty JSON string", GetRecentContactListGroupGetRequest.openapiRequiredFields.toString()));
+        }
+      }
+
+      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
+      // check to see if the JSON string contains additional fields
+      for (Entry<String, JsonElement> entry : entries) {
+        if (!GetRecentContactListGroupGetRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetRecentContactListGroupGetRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : GetRecentContactListGroupGetRequest.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+  }
+
+  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+       if (!GetRecentContactListGroupGetRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GetRecentContactListGroupGetRequest' and its subtypes
+       }
+       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+       final TypeAdapter<GetRecentContactListGroupGetRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GetRecentContactListGroupGetRequest.class));
+
+       return (TypeAdapter<T>) new TypeAdapter<GetRecentContactListGroupGetRequest>() {
+           @Override
+           public void write(JsonWriter out, GetRecentContactListGroupGetRequest value) throws IOException {
+             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             elementAdapter.write(out, obj);
+           }
+
+           @Override
+           public GetRecentContactListGroupGetRequest read(JsonReader in) throws IOException {
+             JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
+             validateJsonObject(jsonObj);
+             return thisAdapter.fromJsonTree(jsonObj);
+           }
+
+       }.nullSafe();
+    }
+  }
+
+ /**
+  * Create an instance of GetRecentContactListGroupGetRequest given an JSON string
+  *
+  * @param jsonString JSON string
+  * @return An instance of GetRecentContactListGroupGetRequest
+  * @throws IOException if the JSON string is invalid with respect to GetRecentContactListGroupGetRequest
+  */
+  public static GetRecentContactListGroupGetRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GetRecentContactListGroupGetRequest.class);
+  }
+
+ /**
+  * Convert an instance of GetRecentContactListGroupGetRequest to an JSON string
+  *
+  * @return JSON string
+  */
+  public String toJson() {
+    return JSON.getGson().toJson(this);
+  }
 }
 

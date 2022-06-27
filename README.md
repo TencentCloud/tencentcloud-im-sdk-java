@@ -11,9 +11,8 @@ TIM REST API
 ## Requirements
 
 Building the API client library requires:
-
 1. Java 1.8+
-2. Maven/Gradle
+2. Maven (3.8.3+)/Gradle (7.2+)
 
 ## Installation
 
@@ -39,7 +38,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.tencentcloudapi.im</groupId>
   <artifactId>tencentcloud-im-sdk-java</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -49,7 +48,14 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.4"
+  repositories {
+    mavenCentral()     // Needed if the 'tencentcloud-im-sdk-java' jar has been published to maven central.
+    mavenLocal()       // Needed if the 'tencentcloud-im-sdk-java' jar has been published to the local maven repo.
+  }
+
+  dependencies {
+     implementation "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.5"
+  }
 ```
 
 ### Others
@@ -62,8 +68,8 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/tencentcloud-im-sdk-java-1.0.4.jar`
-- `target/lib/*.jar`
+* `target/tencentcloud-im-sdk-java-1.0.5.jar`
+* `target/lib/*.jar`
 
 ## Getting Started
 
@@ -71,41 +77,40 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import com.tencentcloudapi.im.*;
-import com.tencentcloudapi.im.auth.*;
-import com.tencentcloudapi.im.model.*;
+// Import classes:
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.models.*;
 import com.tencentcloudapi.im.api.AccountApi;
 
-public class AccountApiExample {
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
 
-    public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://console.tim.qq.com");
-        // 此处替换成您的sdkappid
-        // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
-        defaultClient.setSdkappid(123456789);
-        // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
-        // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
-        defaultClient.setIdentifier("identifier");
-        // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
-        defaultClient.setKey("key");
-        
-        AccountApi apiInstance = new AccountApi(defaultClient);
-        Integer random = 56; // Integer | 
-        AccountCheckRequest accountCheckRequest = new AccountCheckRequest(); // AccountCheckRequest | 
-        //TODO: Set the parameters
-
-        try {
-            AccountCheckResponse result = apiInstance.accountCheck(random, accountCheckRequest);
-            System.out.println(result);
-        } catch (ApiException e) {
-            System.err.println("Exception when calling AccountApi#accountCheck");
-            System.err.println("Status code: " + e.getCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
-        }
+    AccountApi apiInstance = new AccountApi(defaultClient);
+    Integer random = 56; // Integer | 
+    AccountCheckRequest accountCheckRequest = new AccountCheckRequest(); // AccountCheckRequest | 
+    try {
+      AccountCheckResponse result = apiInstance.accountCheck(random, accountCheckRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountApi#accountCheck");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
     }
+  }
 }
 
 ```
