@@ -28,7 +28,7 @@ All URIs are relative to *https://console.tim.qq.com*
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -98,7 +98,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -168,7 +168,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -238,7 +238,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -308,7 +308,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -378,7 +378,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -448,7 +448,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -518,7 +518,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -588,7 +588,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
@@ -658,7 +658,7 @@ No authorization required
 import com.tencentcloudapi.im.ApiClient;
 import com.tencentcloudapi.im.ApiException;
 import com.tencentcloudapi.im.Configuration;
-import com.tencentcloudapi.im.models.*;
+import com.tencentcloudapi.im.model.*;
 import com.tencentcloudapi.im.api.AllMemberPushApi;
 
 public class Example {
