@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +46,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GetGroupInfoRequest {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_GROUP_ID_LIST = "GroupIdList";
   @SerializedName(SERIALIZED_NAME_GROUP_ID_LIST)
   private List<String> groupIdList = new ArrayList<>();

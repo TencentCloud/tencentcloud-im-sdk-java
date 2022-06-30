@@ -16,6 +16,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,8 @@ import com.tencentcloudapi.im.JSON;
 @ApiModel(description = "详细的登录平台信息")
 
 public class QueryOnlineStatusResponseAllOfDetail {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_PLATFORM = "Platform";
   @SerializedName(SERIALIZED_NAME_PLATFORM)
   private String platform;

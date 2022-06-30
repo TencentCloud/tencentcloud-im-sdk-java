@@ -16,6 +16,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,6 +43,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class ClearGroupAttrRequest {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_GROUP_ID = "GroupId";
   @SerializedName(SERIALIZED_NAME_GROUP_ID)
   private String groupId;

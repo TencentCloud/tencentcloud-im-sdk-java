@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,6 +47,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class SendSingleChatMsgRequest {
+  private static final long serialVersionUID = 1L;
+
   /**
    * 1：把消息同步到 From_Account 在线终端和漫游上；2：消息不同步至 From_Account；若不填写默认情况下会将消息存 From_Account 漫游
    */

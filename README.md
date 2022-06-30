@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.tencentcloudapi.im</groupId>
   <artifactId>tencentcloud-im-sdk-java</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -54,7 +54,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.5"
+     implementation "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.6"
   }
 ```
 
@@ -68,7 +68,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/tencentcloud-im-sdk-java-1.0.5.jar`
+* `target/tencentcloud-im-sdk-java-1.0.6.jar`
 * `target/lib/*.jar`
 
 ## Getting Started

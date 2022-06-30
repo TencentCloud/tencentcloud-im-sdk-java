@@ -16,6 +16,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,8 @@ import com.tencentcloudapi.im.JSON;
 @ApiModel(description = "对于每种 MsgType 用不同的 MsgContent 格式")
 
 public class TIMTextElemMsgContent {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_TEXT = "Text";
   @SerializedName(SERIALIZED_NAME_TEXT)
   private String text;

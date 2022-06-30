@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +46,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class ImportMsgRequest {
+  private static final long serialVersionUID = 1L;
+
   /**
    * 该字段只能填1或2，其他值是非法值 1表示实时消息导入，消息计入未读计数 2表示历史消息导入，消息不计入未读
    */

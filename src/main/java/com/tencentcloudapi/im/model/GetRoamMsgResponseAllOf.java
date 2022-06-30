@@ -19,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +46,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GetRoamMsgResponseAllOf {
+  private static final long serialVersionUID = 1L;
+
   /**
    * 是否全部拉取，0表示未全部拉取，需要续拉，1表示已全部拉取
    */

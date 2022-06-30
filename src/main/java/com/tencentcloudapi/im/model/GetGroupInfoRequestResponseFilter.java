@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,6 +46,8 @@ import com.tencentcloudapi.im.JSON;
 @ApiModel(description = "包含三个过滤器：GroupBaseInfoFilter，MemberInfoFilter，AppDefinedDataFilter_Group，分别是基础信息字段过滤器，成员信息字段过滤器，群组维度的自定义字段过滤器")
 
 public class GetGroupInfoRequestResponseFilter {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_GROUP_BASE_INFO_FILTER = "GroupBaseInfoFilter";
   @SerializedName(SERIALIZED_NAME_GROUP_BASE_INFO_FILTER)
   private List<String> groupBaseInfoFilter = null;

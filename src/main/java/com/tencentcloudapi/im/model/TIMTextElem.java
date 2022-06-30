@@ -17,6 +17,7 @@ import com.tencentcloudapi.im.model.TIMTextElemMsgContent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,8 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class TIMTextElem {
+  private static final long serialVersionUID = 1L;
+
   public static final String SERIALIZED_NAME_MSG_TYPE = "MsgType";
   @SerializedName(SERIALIZED_NAME_MSG_TYPE)
   private String msgType = "TIMTextElem";

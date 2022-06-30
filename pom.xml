@@ -5,7 +5,7 @@
     <artifactId>tencentcloud-im-sdk-java</artifactId>
     <packaging>jar</packaging>
     <name>tencentcloud-im-sdk-java</name>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <url>https://console.cloud.tencent.com/im</url>
     <description>OpenAPI Java</description>
     <scm>
