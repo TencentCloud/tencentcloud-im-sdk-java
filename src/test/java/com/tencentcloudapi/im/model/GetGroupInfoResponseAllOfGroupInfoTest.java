@@ -11,9 +11,13 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.tencentcloudapi.im.model.GetGroupInfoResponseAllOfAppDefinedData;
+import com.tencentcloudapi.im.model.GetGroupInfoResponseAllOfMemberList;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +45,22 @@ public class GetGroupInfoResponseAllOfGroupInfoTest {
     }
 
     /**
+     * Test the property 'errorCode'
+     */
+    @Test
+    public void errorCodeTest() {
+        // TODO: test errorCode
+    }
+
+    /**
+     * Test the property 'errorInfo'
+     */
+    @Test
+    public void errorInfoTest() {
+        // TODO: test errorInfo
+    }
+
+    /**
      * Test the property 'type'
      */
     @Test
@@ -54,6 +74,22 @@ public class GetGroupInfoResponseAllOfGroupInfoTest {
     @Test
     public void nameTest() {
         // TODO: test name
+    }
+
+    /**
+     * Test the property 'appid'
+     */
+    @Test
+    public void appidTest() {
+        // TODO: test appid
+    }
+
+    /**
+     * Test the property 'shutUpAllMember'
+     */
+    @Test
+    public void shutUpAllMemberTest() {
+        // TODO: test shutUpAllMember
     }
 
     /**
@@ -150,6 +186,30 @@ public class GetGroupInfoResponseAllOfGroupInfoTest {
     @Test
     public void applyJoinOptionTest() {
         // TODO: test applyJoinOption
+    }
+
+    /**
+     * Test the property 'appDefinedData'
+     */
+    @Test
+    public void appDefinedDataTest() {
+        // TODO: test appDefinedData
+    }
+
+    /**
+     * Test the property 'memberList'
+     */
+    @Test
+    public void memberListTest() {
+        // TODO: test memberList
+    }
+
+    /**
+     * Test the property 'appMemberDefinedData'
+     */
+    @Test
+    public void appMemberDefinedDataTest() {
+        // TODO: test appMemberDefinedData
     }
 
 }

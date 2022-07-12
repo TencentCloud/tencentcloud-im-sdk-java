@@ -15,6 +15,7 @@ import com.tencentcloudapi.im.model.GetC2cUnreadMsgNumResponse;
 import com.tencentcloudapi.im.model.GetRoamMsgRequest;
 import com.tencentcloudapi.im.model.GetRoamMsgResponse;
 import com.tencentcloudapi.im.model.ImportMsgRequest;
+import com.tencentcloudapi.im.model.ModifyC2cMsgRequest;
 import com.tencentcloudapi.im.model.MsgWithdrawRequest;
 import com.tencentcloudapi.im.model.SendSingleChatMsgRequest;
 import com.tencentcloudapi.im.model.SendSingleChatMsgResponse;
@@ -110,6 +111,19 @@ public class SingleChatApiTest {
         Integer random = null;
         ImportMsgRequest importMsgRequest = null;
         CommonResponse response = api.importmsg(random, importMsgRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * 修改单聊历史消息（https://cloud.tencent.com/document/product/269/74740）
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void modifyC2cMsgTest() throws ApiException {
+        Integer random = null;
+        ModifyC2cMsgRequest modifyC2cMsgRequest = null;
+        CommonResponse response = api.modifyC2cMsg(random, modifyC2cMsgRequest);
         // TODO: test validations
     }
 

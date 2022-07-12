@@ -11,7 +11,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.tencentcloudapi.im.model.GetGroupMemberInfoResponseAllOfAppMemberDefinedData;
+import com.tencentcloudapi.im.model.GetGroupInfoResponseAllOfAppDefinedData;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;

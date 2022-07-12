@@ -41,6 +41,14 @@ public class GetGroupMemberInfoResponseAllOfMemberListTest {
     }
 
     /**
+     * Test the property 'shutUpUntil'
+     */
+    @Test
+    public void shutUpUntilTest() {
+        // TODO: test shutUpUntil
+    }
+
+    /**
      * Test the property 'role'
      */
     @Test

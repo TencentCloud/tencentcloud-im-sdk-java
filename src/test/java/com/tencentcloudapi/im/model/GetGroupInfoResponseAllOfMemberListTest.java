@@ -88,4 +88,12 @@ public class GetGroupInfoResponseAllOfMemberListTest {
         // TODO: test nameCard
     }
 
+    /**
+     * Test the property 'shutUpUntil'
+     */
+    @Test
+    public void shutUpUntilTest() {
+        // TODO: test shutUpUntil
+    }
+
 }

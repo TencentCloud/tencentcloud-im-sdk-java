@@ -7,8 +7,13 @@
 package com.tencentcloudapi.im.api;
 
 import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.model.AllowBannedObjectRequest;
+import com.tencentcloudapi.im.model.CommonResponse;
+import com.tencentcloudapi.im.model.ForbidIllegalObjectRequest;
 import com.tencentcloudapi.im.model.GetAppInfoRequest;
 import com.tencentcloudapi.im.model.GetAppInfoResponse;
+import com.tencentcloudapi.im.model.GetCosSigRequest;
+import com.tencentcloudapi.im.model.GetCosSigResponse;
 import com.tencentcloudapi.im.model.GetIPListResponse;
 import com.tencentcloudapi.im.model.GetOperateMsgHistoryRequest;
 import com.tencentcloudapi.im.model.GetOperateMsgHistoryResponse;
@@ -27,6 +32,45 @@ import java.util.Map;
 public class OperationApiTest {
 
     private final OperationApi api = new OperationApi();
+
+    /**
+     * 聊天文件解封（https://cloud.tencent.com/document/product/269/74776）
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void allowBannedObjectTest() throws ApiException {
+        Integer random = null;
+        AllowBannedObjectRequest allowBannedObjectRequest = null;
+        CommonResponse response = api.allowBannedObject(random, allowBannedObjectRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * 聊天文件封禁（https://cloud.tencent.com/document/product/269/74775）
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void forbidIllegalObjectTest() throws ApiException {
+        Integer random = null;
+        ForbidIllegalObjectRequest forbidIllegalObjectRequest = null;
+        CommonResponse response = api.forbidIllegalObject(random, forbidIllegalObjectRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * 聊天文件签名（https://cloud.tencent.com/document/product/269/74777）
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCosSigTest() throws ApiException {
+        Integer random = null;
+        GetCosSigRequest getCosSigRequest = null;
+        GetCosSigResponse response = api.getCosSig(random, getCosSigRequest);
+        // TODO: test validations
+    }
 
     /**
      * 下载最近消息记录（https://cloud.tencent.com/document/product/269/1650）

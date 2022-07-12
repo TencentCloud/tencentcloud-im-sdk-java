@@ -13,7 +13,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.tencentcloudapi.im.model.CommonResponse;
 import com.tencentcloudapi.im.model.FriendGetResponseAllOf;
-import com.tencentcloudapi.im.model.FriendGetResponseAllOfResultItem;
+import com.tencentcloudapi.im.model.FriendGetResponseAllOfUserDataItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -62,19 +62,51 @@ public class FriendGetResponseTest {
     }
 
     /**
-     * Test the property 'resultItem'
+     * Test the property 'userDataItem'
      */
     @Test
-    public void resultItemTest() {
-        // TODO: test resultItem
+    public void userDataItemTest() {
+        // TODO: test userDataItem
     }
 
     /**
-     * Test the property 'failAccount'
+     * Test the property 'standardSequence'
      */
     @Test
-    public void failAccountTest() {
-        // TODO: test failAccount
+    public void standardSequenceTest() {
+        // TODO: test standardSequence
+    }
+
+    /**
+     * Test the property 'customSequence'
+     */
+    @Test
+    public void customSequenceTest() {
+        // TODO: test customSequence
+    }
+
+    /**
+     * Test the property 'friendNum'
+     */
+    @Test
+    public void friendNumTest() {
+        // TODO: test friendNum
+    }
+
+    /**
+     * Test the property 'completeFlag'
+     */
+    @Test
+    public void completeFlagTest() {
+        // TODO: test completeFlag
+    }
+
+    /**
+     * Test the property 'nextStartIndex'
+     */
+    @Test
+    public void nextStartIndexTest() {
+        // TODO: test nextStartIndex
     }
 
     /**

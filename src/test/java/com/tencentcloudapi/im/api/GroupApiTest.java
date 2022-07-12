@@ -47,6 +47,7 @@ import com.tencentcloudapi.im.model.ImportGroupResponse;
 import com.tencentcloudapi.im.model.ModifyGroupAttrRequest;
 import com.tencentcloudapi.im.model.ModifyGroupBaseInfoRequest;
 import com.tencentcloudapi.im.model.ModifyGroupMemberInfoRequest;
+import com.tencentcloudapi.im.model.ModifyGroupMsgRequest;
 import com.tencentcloudapi.im.model.SendGroupMsgRequest;
 import com.tencentcloudapi.im.model.SendGroupMsgResponse;
 import com.tencentcloudapi.im.model.SendGroupSystemNotificationRequest;
@@ -377,6 +378,19 @@ public class GroupApiTest {
         Integer random = null;
         ModifyGroupMemberInfoRequest modifyGroupMemberInfoRequest = null;
         CommonResponse response = api.modifyGroupMemberInfo(random, modifyGroupMemberInfoRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741）
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void modifyGroupMsgTest() throws ApiException {
+        Integer random = null;
+        ModifyGroupMsgRequest modifyGroupMsgRequest = null;
+        CommonResponse response = api.modifyGroupMsg(random, modifyGroupMsgRequest);
         // TODO: test validations
     }
 
