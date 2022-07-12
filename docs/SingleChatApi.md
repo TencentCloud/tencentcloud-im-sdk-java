@@ -10,6 +10,7 @@ All URIs are relative to *https://console.tim.qq.com*
 | [**batchsendmsg**](SingleChatApi.md#batchsendmsg) | **POST** /v4/openim/batchsendmsg | 批量发单聊消息（https://cloud.tencent.com/document/product/269/1612） |
 | [**getC2cUnreadMsgNum**](SingleChatApi.md#getC2cUnreadMsgNum) | **POST** /v4/openim/get_c2c_unread_msg_num | 查询单聊未读消息计数（https://cloud.tencent.com/document/product/269/56043） |
 | [**importmsg**](SingleChatApi.md#importmsg) | **POST** /v4/openim/importmsg | 导入单聊消息（https://cloud.tencent.com/document/product/269/2568） |
+| [**modifyC2cMsg**](SingleChatApi.md#modifyC2cMsg) | **POST** /v4/openim/modify_c2c_msg | 修改单聊历史消息（https://cloud.tencent.com/document/product/269/74740） |
 | [**sendmsg**](SingleChatApi.md#sendmsg) | **POST** /v4/openim/sendmsg | 单发单聊消息（https://cloud.tencent.com/document/product/269/2282） |
 
 
@@ -414,6 +415,76 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **random** | **Integer**|  | |
 | **importMsgRequest** | [**ImportMsgRequest**](ImportMsgRequest.md)|  | [optional] |
+
+### Return type
+
+[**CommonResponse**](CommonResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | 正常响应 |  -  |
+
+<a name="modifyC2cMsg"></a>
+# **modifyC2cMsg**
+> CommonResponse modifyC2cMsg(random, modifyC2cMsgRequest)
+
+修改单聊历史消息（https://cloud.tencent.com/document/product/269/74740）
+
+### Example
+```java
+// Import classes:
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.model.*;
+import com.tencentcloudapi.im.api.SingleChatApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
+
+    SingleChatApi apiInstance = new SingleChatApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ModifyC2cMsgRequest modifyC2cMsgRequest = new ModifyC2cMsgRequest(); // ModifyC2cMsgRequest | 
+    try {
+      CommonResponse result = apiInstance.modifyC2cMsg(random, modifyC2cMsgRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling SingleChatApi#modifyC2cMsg");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **random** | **Integer**|  | |
+| **modifyC2cMsgRequest** | [**ModifyC2cMsgRequest**](ModifyC2cMsgRequest.md)|  | [optional] |
 
 ### Return type
 

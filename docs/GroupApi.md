@@ -28,6 +28,7 @@ All URIs are relative to *https://console.tim.qq.com*
 | [**modifyGroupAttr**](GroupApi.md#modifyGroupAttr) | **POST** /v4/group_open_http_svc/modify_group_attr | 修改群自定义属性（https://cloud.tencent.com/document/product/269/67010） |
 | [**modifyGroupBaseInfo**](GroupApi.md#modifyGroupBaseInfo) | **POST** /v4/group_open_http_svc/modify_group_base_info | 修改群基础资料（https://cloud.tencent.com/document/product/269/1620） |
 | [**modifyGroupMemberInfo**](GroupApi.md#modifyGroupMemberInfo) | **POST** /v4/group_open_http_svc/modify_group_member_info | 修改群成员资料(https://cloud.tencent.com/document/product/269/1623) |
+| [**modifyGroupMsg**](GroupApi.md#modifyGroupMsg) | **POST** /v4/openim/modify_group_msg | 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741） |
 | [**sendGroupMsg**](GroupApi.md#sendGroupMsg) | **POST** /v4/group_open_http_svc/send_group_msg | 在群组中发送普通消息（https://cloud.tencent.com/document/product/269/1629） |
 | [**sendGroupSystemNotification**](GroupApi.md#sendGroupSystemNotification) | **POST** /v4/group_open_http_svc/send_group_system_notification | 在群组中发送系统通知（https://cloud.tencent.com/document/product/269/1630） |
 | [**setGroupAttr**](GroupApi.md#setGroupAttr) | **POST** /v4/group_open_http_svc/set_group_attr | 重置群自定义属性（https://cloud.tencent.com/document/product/269/67011） |
@@ -1695,6 +1696,76 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **random** | **Integer**|  | |
 | **modifyGroupMemberInfoRequest** | [**ModifyGroupMemberInfoRequest**](ModifyGroupMemberInfoRequest.md)|  | [optional] |
+
+### Return type
+
+[**CommonResponse**](CommonResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | 正常响应 |  -  |
+
+<a name="modifyGroupMsg"></a>
+# **modifyGroupMsg**
+> CommonResponse modifyGroupMsg(random, modifyGroupMsgRequest)
+
+修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741）
+
+### Example
+```java
+// Import classes:
+import com.tencentcloudapi.im.ApiClient;
+import com.tencentcloudapi.im.ApiException;
+import com.tencentcloudapi.im.Configuration;
+import com.tencentcloudapi.im.model.*;
+import com.tencentcloudapi.im.api.GroupApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://console.tim.qq.com");
+    // 此处替换成您的sdkappid
+    // 应用 SDKAppID，可在即时通信 IM 控制台（https://console.cloud.tencent.com/im） 的应用卡片中获取。
+    defaultClient.setSdkappid(123456789);
+    // 此处替换成您的identifier;用户名，调用 REST API时必须为App管理员帐号
+    // 参考:https://cloud.tencent.com/document/product/269/31999#app-.E7.AE.A1.E7.90.86.E5.91.98
+    defaultClient.setIdentifier("identifier");
+    // 此处替换成您的key 参考：https://cloud.tencent.com/document/product/269/32688#getkey
+    defaultClient.setKey("key");
+
+    GroupApi apiInstance = new GroupApi(defaultClient);
+    Integer random = 56; // Integer | 
+    ModifyGroupMsgRequest modifyGroupMsgRequest = new ModifyGroupMsgRequest(); // ModifyGroupMsgRequest | 
+    try {
+      CommonResponse result = apiInstance.modifyGroupMsg(random, modifyGroupMsgRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupApi#modifyGroupMsg");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **random** | **Integer**|  | |
+| **modifyGroupMsgRequest** | [**ModifyGroupMsgRequest**](ModifyGroupMsgRequest.md)|  | [optional] |
 
 ### Return type
 

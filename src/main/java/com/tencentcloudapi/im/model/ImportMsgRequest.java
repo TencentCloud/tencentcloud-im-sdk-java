@@ -19,7 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,16 +45,14 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class ImportMsgRequest {
-  private static final long serialVersionUID = 1L;
-
   /**
    * 该字段只能填1或2，其他值是非法值 1表示实时消息导入，消息计入未读计数 2表示历史消息导入，消息不计入未读
    */
   @JsonAdapter(SyncFromOldSystemEnum.Adapter.class)
   public enum SyncFromOldSystemEnum {
-    NUMBER_0(0),
+    NUMBER_1(1),
     
-    NUMBER_1(1);
+    NUMBER_2(2);
 
     private Integer value;
 
@@ -318,6 +315,41 @@ public class ImportMsgRequest {
     this.cloudCustomData = cloudCustomData;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public ImportMsgRequest putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -336,12 +368,13 @@ public class ImportMsgRequest {
         Objects.equals(this.msgRandom, importMsgRequest.msgRandom) &&
         Objects.equals(this.msgTimeStamp, importMsgRequest.msgTimeStamp) &&
         Objects.equals(this.msgBody, importMsgRequest.msgBody) &&
-        Objects.equals(this.cloudCustomData, importMsgRequest.cloudCustomData);
+        Objects.equals(this.cloudCustomData, importMsgRequest.cloudCustomData)&&
+        Objects.equals(this.additionalProperties, importMsgRequest.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(syncFromOldSystem, fromAccount, toAccount, msgSeq, msgRandom, msgTimeStamp, msgBody, cloudCustomData);
+    return Objects.hash(syncFromOldSystem, fromAccount, toAccount, msgSeq, msgRandom, msgTimeStamp, msgBody, cloudCustomData, additionalProperties);
   }
 
   @Override
@@ -356,6 +389,7 @@ public class ImportMsgRequest {
     sb.append("    msgTimeStamp: ").append(toIndentedString(msgTimeStamp)).append("\n");
     sb.append("    msgBody: ").append(toIndentedString(msgBody)).append("\n");
     sb.append("    cloudCustomData: ").append(toIndentedString(cloudCustomData)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -412,14 +446,6 @@ public class ImportMsgRequest {
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!ImportMsgRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `ImportMsgRequest` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
-
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : ImportMsgRequest.openapiRequiredFields) {
         if (jsonObj.get(requiredField) == null) {
@@ -464,6 +490,23 @@ public class ImportMsgRequest {
            @Override
            public void write(JsonWriter out, ImportMsgRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -471,7 +514,25 @@ public class ImportMsgRequest {
            public ImportMsgRequest read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             ImportMsgRequest instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

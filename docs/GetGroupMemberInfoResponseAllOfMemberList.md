@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**memberAccount** | **String** | 群成员 ID 只读 |  [optional] |
+|**shutUpUntil** | **Integer** | 禁言截至时间（秒数） |  [optional] |
 |**role** | **String** | 群内身份 群内身份，包括 Owner 群主、Admin 群管理员以及 Member 群成员 |  [optional] |
 |**joinTime** | **Integer** | 入群时间 只读 |  [optional] |
 |**msgSeq** | **Integer** | 该成员当前已读消息 Seq 只读 |  [optional] |

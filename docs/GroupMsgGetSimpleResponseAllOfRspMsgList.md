@@ -13,8 +13,8 @@
 |**msgRandom** | **Integer** | 消息随机值，用于对消息去重，有客户端发消息时填写，如果没有填，服务端会自动生成 |  [optional] |
 |**msgSeq** | **Integer** | 消息 seq，用于标识唯一消息，值越小发送的越早 |  [optional] |
 |**msgTimeStamp** | **Integer** | 消息被发送的时间戳，server 的时间 |  [optional] |
-|**msgBody** | [**List&lt;TIMMsgElement&gt;**](TIMMsgElement.md) |  |  [optional] |
 |**isSystemMsg** | **Integer** | 字段为1时表示系统消息 |  [optional] |
+|**msgBody** | **Object** | 消息内容 |  [optional] |
 
 
 

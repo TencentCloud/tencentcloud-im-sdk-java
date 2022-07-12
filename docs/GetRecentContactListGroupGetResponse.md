@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**actionStatus** | **String** | 请求处理的结果，OK 表示处理成功，FAIL 表示失败 |  [optional] |
-|**errorInfo** | **String** | 错误信息 |  |
+|**errorInfo** | **String** | 错误信息 |  [optional] |
 |**errorCode** | **Integer** | 错误码，0表示成功，非0表示失败 |  |
 |**sessionItem** | [**List&lt;GetRecentContactListGroupGetResponseAllOfSessionItem&gt;**](GetRecentContactListGroupGetResponseAllOfSessionItem.md) | 会话对象数组 |  [optional] |
 |**completeFlag** | **Integer** | 结束标识：1 表示已返回全量会话，0 表示还有会话没拉完 |  [optional] |

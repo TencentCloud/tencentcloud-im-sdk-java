@@ -21,7 +21,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,8 +47,6 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GroupGetResponse {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_ACTION_STATUS = "ActionStatus";
   @SerializedName(SERIALIZED_NAME_ACTION_STATUS)
   private String actionStatus;
@@ -68,7 +65,7 @@ public class GroupGetResponse {
 
   public static final String SERIALIZED_NAME_CURRENT_SEQUENCE = "CurrentSequence";
   @SerializedName(SERIALIZED_NAME_CURRENT_SEQUENCE)
-  private List<String> currentSequence = null;
+  private Integer currentSequence;
 
   public static final String SERIALIZED_NAME_ERROR_DISPLAY = "ErrorDisplay";
   @SerializedName(SERIALIZED_NAME_ERROR_DISPLAY)
@@ -110,8 +107,8 @@ public class GroupGetResponse {
    * 错误信息
    * @return errorInfo
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "错误信息")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "错误信息")
 
   public String getErrorInfo() {
     return errorInfo;
@@ -177,17 +174,9 @@ public class GroupGetResponse {
   }
 
 
-  public GroupGetResponse currentSequence(List<String> currentSequence) {
+  public GroupGetResponse currentSequence(Integer currentSequence) {
     
     this.currentSequence = currentSequence;
-    return this;
-  }
-
-  public GroupGetResponse addCurrentSequenceItem(String currentSequenceItem) {
-    if (this.currentSequence == null) {
-      this.currentSequence = new ArrayList<>();
-    }
-    this.currentSequence.add(currentSequenceItem);
     return this;
   }
 
@@ -198,12 +187,12 @@ public class GroupGetResponse {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "返回最新的分组 Sequence")
 
-  public List<String> getCurrentSequence() {
+  public Integer getCurrentSequence() {
     return currentSequence;
   }
 
 
-  public void setCurrentSequence(List<String> currentSequence) {
+  public void setCurrentSequence(Integer currentSequence) {
     this.currentSequence = currentSequence;
   }
 
@@ -230,6 +219,41 @@ public class GroupGetResponse {
     this.errorDisplay = errorDisplay;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public GroupGetResponse putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -246,12 +270,13 @@ public class GroupGetResponse {
         Objects.equals(this.errorCode, groupGetResponse.errorCode) &&
         Objects.equals(this.resultItem, groupGetResponse.resultItem) &&
         Objects.equals(this.currentSequence, groupGetResponse.currentSequence) &&
-        Objects.equals(this.errorDisplay, groupGetResponse.errorDisplay);
+        Objects.equals(this.errorDisplay, groupGetResponse.errorDisplay)&&
+        Objects.equals(this.additionalProperties, groupGetResponse.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(actionStatus, errorInfo, errorCode, resultItem, currentSequence, errorDisplay);
+    return Objects.hash(actionStatus, errorInfo, errorCode, resultItem, currentSequence, errorDisplay, additionalProperties);
   }
 
   @Override
@@ -264,6 +289,7 @@ public class GroupGetResponse {
     sb.append("    resultItem: ").append(toIndentedString(resultItem)).append("\n");
     sb.append("    currentSequence: ").append(toIndentedString(currentSequence)).append("\n");
     sb.append("    errorDisplay: ").append(toIndentedString(errorDisplay)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -295,7 +321,6 @@ public class GroupGetResponse {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("ErrorInfo");
     openapiRequiredFields.add("ErrorCode");
   }
 
@@ -311,14 +336,6 @@ public class GroupGetResponse {
           return;
         } else { // has required fields
           throw new IllegalArgumentException(String.format("The required field(s) %s in GroupGetResponse is not found in the empty JSON string", GroupGetResponse.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!GroupGetResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GroupGetResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
 
@@ -346,10 +363,6 @@ public class GroupGetResponse {
           GroupGetResponseAllOfResultItem.validateJsonObject(jsonArrayresultItem.get(i).getAsJsonObject());
         };
       }
-      // ensure the json data is an array
-      if (jsonObj.get("CurrentSequence") != null && !jsonObj.get("CurrentSequence").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `CurrentSequence` to be an array in the JSON string but got `%s`", jsonObj.get("CurrentSequence").toString()));
-      }
       if (jsonObj.get("ErrorDisplay") != null && !jsonObj.get("ErrorDisplay").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `ErrorDisplay` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ErrorDisplay").toString()));
       }
@@ -370,6 +383,23 @@ public class GroupGetResponse {
            @Override
            public void write(JsonWriter out, GroupGetResponse value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -377,7 +407,25 @@ public class GroupGetResponse {
            public GroupGetResponse read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             GroupGetResponse instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

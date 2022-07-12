@@ -17,7 +17,6 @@ import com.tencentcloudapi.im.model.TIMVideoFileElemMsgContent;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -44,8 +43,6 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class TIMVideoFileElem {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_MSG_TYPE = "MsgType";
   @SerializedName(SERIALIZED_NAME_MSG_TYPE)
   private String msgType = "TIMVideoFileElem";
@@ -102,6 +99,41 @@ public class TIMVideoFileElem {
     this.msgContent = msgContent;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public TIMVideoFileElem putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -114,12 +146,13 @@ public class TIMVideoFileElem {
     }
     TIMVideoFileElem tiMVideoFileElem = (TIMVideoFileElem) o;
     return Objects.equals(this.msgType, tiMVideoFileElem.msgType) &&
-        Objects.equals(this.msgContent, tiMVideoFileElem.msgContent);
+        Objects.equals(this.msgContent, tiMVideoFileElem.msgContent)&&
+        Objects.equals(this.additionalProperties, tiMVideoFileElem.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(msgType, msgContent);
+    return Objects.hash(msgType, msgContent, additionalProperties);
   }
 
   @Override
@@ -128,6 +161,7 @@ public class TIMVideoFileElem {
     sb.append("class TIMVideoFileElem {\n");
     sb.append("    msgType: ").append(toIndentedString(msgType)).append("\n");
     sb.append("    msgContent: ").append(toIndentedString(msgContent)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -174,14 +208,6 @@ public class TIMVideoFileElem {
         }
       }
 
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!TIMVideoFileElem.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `TIMVideoFileElem` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
-
       // check to make sure all required properties/fields are present in the JSON string
       for (String requiredField : TIMVideoFileElem.openapiRequiredFields) {
         if (jsonObj.get(requiredField) == null) {
@@ -212,6 +238,23 @@ public class TIMVideoFileElem {
            @Override
            public void write(JsonWriter out, TIMVideoFileElem value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -219,7 +262,25 @@ public class TIMVideoFileElem {
            public TIMVideoFileElem read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             TIMVideoFileElem instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

@@ -60,6 +60,7 @@ import com.tencentcloudapi.im.model.ImportGroupResponse;
 import com.tencentcloudapi.im.model.ModifyGroupAttrRequest;
 import com.tencentcloudapi.im.model.ModifyGroupBaseInfoRequest;
 import com.tencentcloudapi.im.model.ModifyGroupMemberInfoRequest;
+import com.tencentcloudapi.im.model.ModifyGroupMsgRequest;
 import com.tencentcloudapi.im.model.SendGroupMsgRequest;
 import com.tencentcloudapi.im.model.SendGroupMsgResponse;
 import com.tencentcloudapi.im.model.SendGroupSystemNotificationRequest;
@@ -3274,6 +3275,138 @@ public class GroupApi {
     public okhttp3.Call modifyGroupMemberInfoAsync(Integer random, ModifyGroupMemberInfoRequest modifyGroupMemberInfoRequest, final ApiCallback<CommonResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = modifyGroupMemberInfoValidateBeforeCall(random, modifyGroupMemberInfoRequest, _callback);
+        Type localVarReturnType = new TypeToken<CommonResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for modifyGroupMsg
+     * @param random  (required)
+     * @param modifyGroupMsgRequest  (optional)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 正常响应 </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call modifyGroupMsgCall(Integer random, ModifyGroupMsgRequest modifyGroupMsgRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = modifyGroupMsgRequest;
+
+        // create path and map variables
+        String localVarPath = "/v4/openim/modify_group_msg";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+
+        localVarQueryParams = localVarApiClient.buildLocalQueryParams(random);
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call modifyGroupMsgValidateBeforeCall(Integer random, ModifyGroupMsgRequest modifyGroupMsgRequest, final ApiCallback _callback) throws ApiException {
+        
+        // verify the required parameter 'random' is set
+        if (random == null) {
+            throw new ApiException("Missing the required parameter 'random' when calling modifyGroupMsg(Async)");
+        }
+        
+
+        okhttp3.Call localVarCall = modifyGroupMsgCall(random, modifyGroupMsgRequest, _callback);
+        return localVarCall;
+
+    }
+
+    /**
+     * 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741）
+     * 
+     * @param random  (required)
+     * @param modifyGroupMsgRequest  (optional)
+     * @return CommonResponse
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 正常响应 </td><td>  -  </td></tr>
+     </table>
+     */
+    public CommonResponse modifyGroupMsg(Integer random, ModifyGroupMsgRequest modifyGroupMsgRequest) throws ApiException {
+        ApiResponse<CommonResponse> localVarResp = modifyGroupMsgWithHttpInfo(random, modifyGroupMsgRequest);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741）
+     * 
+     * @param random  (required)
+     * @param modifyGroupMsgRequest  (optional)
+     * @return ApiResponse&lt;CommonResponse&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 正常响应 </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<CommonResponse> modifyGroupMsgWithHttpInfo(Integer random, ModifyGroupMsgRequest modifyGroupMsgRequest) throws ApiException {
+        okhttp3.Call localVarCall = modifyGroupMsgValidateBeforeCall(random, modifyGroupMsgRequest, null);
+        Type localVarReturnType = new TypeToken<CommonResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741） (asynchronously)
+     * 
+     * @param random  (required)
+     * @param modifyGroupMsgRequest  (optional)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> 正常响应 </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call modifyGroupMsgAsync(Integer random, ModifyGroupMsgRequest modifyGroupMsgRequest, final ApiCallback<CommonResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = modifyGroupMsgValidateBeforeCall(random, modifyGroupMsgRequest, _callback);
         Type localVarReturnType = new TypeToken<CommonResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

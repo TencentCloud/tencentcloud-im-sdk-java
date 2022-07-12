@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,8 +48,6 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GetC2cUnreadMsgNumResponse {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_ACTION_STATUS = "ActionStatus";
   @SerializedName(SERIALIZED_NAME_ACTION_STATUS)
   private String actionStatus;
@@ -111,8 +108,8 @@ public class GetC2cUnreadMsgNumResponse {
    * 错误信息
    * @return errorInfo
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "错误信息")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "错误信息")
 
   public String getErrorInfo() {
     return errorInfo;
@@ -231,6 +228,41 @@ public class GetC2cUnreadMsgNumResponse {
     this.errorList = errorList;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public GetC2cUnreadMsgNumResponse putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -247,12 +279,13 @@ public class GetC2cUnreadMsgNumResponse {
         Objects.equals(this.errorCode, getC2cUnreadMsgNumResponse.errorCode) &&
         Objects.equals(this.allC2CUnreadMsgNum, getC2cUnreadMsgNumResponse.allC2CUnreadMsgNum) &&
         Objects.equals(this.c2CUnreadMsgNumList, getC2cUnreadMsgNumResponse.c2CUnreadMsgNumList) &&
-        Objects.equals(this.errorList, getC2cUnreadMsgNumResponse.errorList);
+        Objects.equals(this.errorList, getC2cUnreadMsgNumResponse.errorList)&&
+        Objects.equals(this.additionalProperties, getC2cUnreadMsgNumResponse.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(actionStatus, errorInfo, errorCode, allC2CUnreadMsgNum, c2CUnreadMsgNumList, errorList);
+    return Objects.hash(actionStatus, errorInfo, errorCode, allC2CUnreadMsgNum, c2CUnreadMsgNumList, errorList, additionalProperties);
   }
 
   @Override
@@ -265,6 +298,7 @@ public class GetC2cUnreadMsgNumResponse {
     sb.append("    allC2CUnreadMsgNum: ").append(toIndentedString(allC2CUnreadMsgNum)).append("\n");
     sb.append("    c2CUnreadMsgNumList: ").append(toIndentedString(c2CUnreadMsgNumList)).append("\n");
     sb.append("    errorList: ").append(toIndentedString(errorList)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -296,7 +330,6 @@ public class GetC2cUnreadMsgNumResponse {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("ErrorInfo");
     openapiRequiredFields.add("ErrorCode");
   }
 
@@ -312,14 +345,6 @@ public class GetC2cUnreadMsgNumResponse {
           return;
         } else { // has required fields
           throw new IllegalArgumentException(String.format("The required field(s) %s in GetC2cUnreadMsgNumResponse is not found in the empty JSON string", GetC2cUnreadMsgNumResponse.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!GetC2cUnreadMsgNumResponse.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetC2cUnreadMsgNumResponse` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
 
@@ -376,6 +401,23 @@ public class GetC2cUnreadMsgNumResponse {
            @Override
            public void write(JsonWriter out, GetC2cUnreadMsgNumResponse value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -383,7 +425,25 @@ public class GetC2cUnreadMsgNumResponse {
            public GetC2cUnreadMsgNumResponse read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             GetC2cUnreadMsgNumResponse instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

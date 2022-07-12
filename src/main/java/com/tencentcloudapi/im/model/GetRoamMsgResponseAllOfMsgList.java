@@ -19,7 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,15 +45,13 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GetRoamMsgResponseAllOfMsgList {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
   @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
-  private Integer fromAccount;
+  private String fromAccount;
 
   public static final String SERIALIZED_NAME_TO_ACCOUNT = "To_Account";
   @SerializedName(SERIALIZED_NAME_TO_ACCOUNT)
-  private Integer toAccount;
+  private String toAccount;
 
   public static final String SERIALIZED_NAME_MSG_RANDOM = "MsgRandom";
   @SerializedName(SERIALIZED_NAME_MSG_RANDOM)
@@ -83,7 +80,7 @@ public class GetRoamMsgResponseAllOfMsgList {
   public GetRoamMsgResponseAllOfMsgList() { 
   }
 
-  public GetRoamMsgResponseAllOfMsgList fromAccount(Integer fromAccount) {
+  public GetRoamMsgResponseAllOfMsgList fromAccount(String fromAccount) {
     
     this.fromAccount = fromAccount;
     return this;
@@ -96,17 +93,17 @@ public class GetRoamMsgResponseAllOfMsgList {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息发送方 UserID")
 
-  public Integer getFromAccount() {
+  public String getFromAccount() {
     return fromAccount;
   }
 
 
-  public void setFromAccount(Integer fromAccount) {
+  public void setFromAccount(String fromAccount) {
     this.fromAccount = fromAccount;
   }
 
 
-  public GetRoamMsgResponseAllOfMsgList toAccount(Integer toAccount) {
+  public GetRoamMsgResponseAllOfMsgList toAccount(String toAccount) {
     
     this.toAccount = toAccount;
     return this;
@@ -119,12 +116,12 @@ public class GetRoamMsgResponseAllOfMsgList {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "消息接收方 UserID")
 
-  public Integer getToAccount() {
+  public String getToAccount() {
     return toAccount;
   }
 
 
-  public void setToAccount(Integer toAccount) {
+  public void setToAccount(String toAccount) {
     this.toAccount = toAccount;
   }
 
@@ -274,6 +271,41 @@ public class GetRoamMsgResponseAllOfMsgList {
     this.cloudCustomData = cloudCustomData;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public GetRoamMsgResponseAllOfMsgList putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -292,12 +324,13 @@ public class GetRoamMsgResponseAllOfMsgList {
         Objects.equals(this.msgFlagBits, getRoamMsgResponseAllOfMsgList.msgFlagBits) &&
         Objects.equals(this.msgKey, getRoamMsgResponseAllOfMsgList.msgKey) &&
         Objects.equals(this.msgBody, getRoamMsgResponseAllOfMsgList.msgBody) &&
-        Objects.equals(this.cloudCustomData, getRoamMsgResponseAllOfMsgList.cloudCustomData);
+        Objects.equals(this.cloudCustomData, getRoamMsgResponseAllOfMsgList.cloudCustomData)&&
+        Objects.equals(this.additionalProperties, getRoamMsgResponseAllOfMsgList.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fromAccount, toAccount, msgRandom, msgTimeStamp, msgFlagBits, msgKey, msgBody, cloudCustomData);
+    return Objects.hash(fromAccount, toAccount, msgRandom, msgTimeStamp, msgFlagBits, msgKey, msgBody, cloudCustomData, additionalProperties);
   }
 
   @Override
@@ -312,6 +345,7 @@ public class GetRoamMsgResponseAllOfMsgList {
     sb.append("    msgKey: ").append(toIndentedString(msgKey)).append("\n");
     sb.append("    msgBody: ").append(toIndentedString(msgBody)).append("\n");
     sb.append("    cloudCustomData: ").append(toIndentedString(cloudCustomData)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -361,13 +395,11 @@ public class GetRoamMsgResponseAllOfMsgList {
           throw new IllegalArgumentException(String.format("The required field(s) %s in GetRoamMsgResponseAllOfMsgList is not found in the empty JSON string", GetRoamMsgResponseAllOfMsgList.openapiRequiredFields.toString()));
         }
       }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!GetRoamMsgResponseAllOfMsgList.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GetRoamMsgResponseAllOfMsgList` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
+      if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
+      }
+      if (jsonObj.get("To_Account") != null && !jsonObj.get("To_Account").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `To_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("To_Account").toString()));
       }
       if (jsonObj.get("MsgKey") != null && !jsonObj.get("MsgKey").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `MsgKey` to be a primitive type in the JSON string but got `%s`", jsonObj.get("MsgKey").toString()));
@@ -404,6 +436,23 @@ public class GetRoamMsgResponseAllOfMsgList {
            @Override
            public void write(JsonWriter out, GetRoamMsgResponseAllOfMsgList value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -411,7 +460,25 @@ public class GetRoamMsgResponseAllOfMsgList {
            public GetRoamMsgResponseAllOfMsgList read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             GetRoamMsgResponseAllOfMsgList instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

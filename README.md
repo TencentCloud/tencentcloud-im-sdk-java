@@ -161,12 +161,16 @@ Class | Method | HTTP request | Description
 *GroupApi* | [**modifyGroupAttr**](docs/GroupApi.md#modifyGroupAttr) | **POST** /v4/group_open_http_svc/modify_group_attr | 修改群自定义属性（https://cloud.tencent.com/document/product/269/67010）
 *GroupApi* | [**modifyGroupBaseInfo**](docs/GroupApi.md#modifyGroupBaseInfo) | **POST** /v4/group_open_http_svc/modify_group_base_info | 修改群基础资料（https://cloud.tencent.com/document/product/269/1620）
 *GroupApi* | [**modifyGroupMemberInfo**](docs/GroupApi.md#modifyGroupMemberInfo) | **POST** /v4/group_open_http_svc/modify_group_member_info | 修改群成员资料(https://cloud.tencent.com/document/product/269/1623)
+*GroupApi* | [**modifyGroupMsg**](docs/GroupApi.md#modifyGroupMsg) | **POST** /v4/openim/modify_group_msg | 修改群聊历史消息（https://cloud.tencent.com/document/product/269/74741）
 *GroupApi* | [**sendGroupMsg**](docs/GroupApi.md#sendGroupMsg) | **POST** /v4/group_open_http_svc/send_group_msg | 在群组中发送普通消息（https://cloud.tencent.com/document/product/269/1629）
 *GroupApi* | [**sendGroupSystemNotification**](docs/GroupApi.md#sendGroupSystemNotification) | **POST** /v4/group_open_http_svc/send_group_system_notification | 在群组中发送系统通知（https://cloud.tencent.com/document/product/269/1630）
 *GroupApi* | [**setGroupAttr**](docs/GroupApi.md#setGroupAttr) | **POST** /v4/group_open_http_svc/set_group_attr | 重置群自定义属性（https://cloud.tencent.com/document/product/269/67011）
 *GroupApi* | [**setUnreadMsgNum**](docs/GroupApi.md#setUnreadMsgNum) | **POST** /v4/group_open_http_svc/set_unread_msg_num | 设置成员未读消息计数（https://cloud.tencent.com/document/product/269/1637）
 *MuteApi* | [**getnospeaking**](docs/MuteApi.md#getnospeaking) | **POST** /v4/openconfigsvr/getnospeaking | 查询全局禁言（https://cloud.tencent.com/document/product/269/4229）
 *MuteApi* | [**setnospeaking**](docs/MuteApi.md#setnospeaking) | **POST** /v4/openconfigsvr/setnospeaking | 设置全局禁言（https://cloud.tencent.com/document/product/269/4230）
+*OperationApi* | [**allowBannedObject**](docs/OperationApi.md#allowBannedObject) | **POST** /v4/im_cos_msg/allow_banned_object | 聊天文件解封（https://cloud.tencent.com/document/product/269/74776）
+*OperationApi* | [**forbidIllegalObject**](docs/OperationApi.md#forbidIllegalObject) | **POST** /v4/im_cos_msg/forbid_illegal_object | 聊天文件封禁（https://cloud.tencent.com/document/product/269/74775）
+*OperationApi* | [**getCosSig**](docs/OperationApi.md#getCosSig) | **POST** /v4/im_cos_msg/get_cos_sig | 聊天文件签名（https://cloud.tencent.com/document/product/269/74777）
 *OperationApi* | [**getHistory**](docs/OperationApi.md#getHistory) | **POST** /v4/open_msg_svc/get_history | 下载最近消息记录（https://cloud.tencent.com/document/product/269/1650）
 *OperationApi* | [**getIPList**](docs/OperationApi.md#getIPList) | **POST** /v4/ConfigSvc/GetIPList | 获取服务器 IP 地址（https://cloud.tencent.com/document/product/269/45438）
 *OperationApi* | [**getappinfo**](docs/OperationApi.md#getappinfo) | **POST** /v4/openconfigsvr/getappinfo | 拉取运营数据（https://cloud.tencent.com/document/product/269/4193）
@@ -195,6 +199,7 @@ Class | Method | HTTP request | Description
 *SingleChatApi* | [**batchsendmsg**](docs/SingleChatApi.md#batchsendmsg) | **POST** /v4/openim/batchsendmsg | 批量发单聊消息（https://cloud.tencent.com/document/product/269/1612）
 *SingleChatApi* | [**getC2cUnreadMsgNum**](docs/SingleChatApi.md#getC2cUnreadMsgNum) | **POST** /v4/openim/get_c2c_unread_msg_num | 查询单聊未读消息计数（https://cloud.tencent.com/document/product/269/56043）
 *SingleChatApi* | [**importmsg**](docs/SingleChatApi.md#importmsg) | **POST** /v4/openim/importmsg | 导入单聊消息（https://cloud.tencent.com/document/product/269/2568）
+*SingleChatApi* | [**modifyC2cMsg**](docs/SingleChatApi.md#modifyC2cMsg) | **POST** /v4/openim/modify_c2c_msg | 修改单聊历史消息（https://cloud.tencent.com/document/product/269/74740）
 *SingleChatApi* | [**sendmsg**](docs/SingleChatApi.md#sendmsg) | **POST** /v4/openim/sendmsg | 单发单聊消息（https://cloud.tencent.com/document/product/269/2282）
 
 
@@ -216,6 +221,7 @@ Class | Method | HTTP request | Description
  - [AddGroupMemberResponse](docs/AddGroupMemberResponse.md)
  - [AddGroupMemberResponseAllOf](docs/AddGroupMemberResponseAllOf.md)
  - [AddGroupMemberResponseAllOfMemberList](docs/AddGroupMemberResponseAllOfMemberList.md)
+ - [AllowBannedObjectRequest](docs/AllowBannedObjectRequest.md)
  - [BatchSendSingleChatMsgRequest](docs/BatchSendSingleChatMsgRequest.md)
  - [BatchSendSingleChatMsgResponse](docs/BatchSendSingleChatMsgResponse.md)
  - [BatchSendSingleChatMsgResponseAllOf](docs/BatchSendSingleChatMsgResponseAllOf.md)
@@ -247,6 +253,7 @@ Class | Method | HTTP request | Description
  - [DeleteGroupMsgBySenderRequest](docs/DeleteGroupMsgBySenderRequest.md)
  - [DestroyGroupRequest](docs/DestroyGroupRequest.md)
  - [ForbidCallbackControl](docs/ForbidCallbackControl.md)
+ - [ForbidIllegalObjectRequest](docs/ForbidIllegalObjectRequest.md)
  - [ForbidSendMsgRequest](docs/ForbidSendMsgRequest.md)
  - [FriendAddRequest](docs/FriendAddRequest.md)
  - [FriendAddRequestAddFriendItemInner](docs/FriendAddRequestAddFriendItemInner.md)
@@ -271,7 +278,8 @@ Class | Method | HTTP request | Description
  - [FriendGetRequest](docs/FriendGetRequest.md)
  - [FriendGetResponse](docs/FriendGetResponse.md)
  - [FriendGetResponseAllOf](docs/FriendGetResponseAllOf.md)
- - [FriendGetResponseAllOfResultItem](docs/FriendGetResponseAllOfResultItem.md)
+ - [FriendGetResponseAllOfUserDataItem](docs/FriendGetResponseAllOfUserDataItem.md)
+ - [FriendGetResponseAllOfValueItem](docs/FriendGetResponseAllOfValueItem.md)
  - [FriendImportRequest](docs/FriendImportRequest.md)
  - [FriendImportRequestAddFriendItemInner](docs/FriendImportRequestAddFriendItemInner.md)
  - [FriendImportRequestAddFriendItemInnerCustomItemInner](docs/FriendImportRequestAddFriendItemInnerCustomItemInner.md)
@@ -295,6 +303,11 @@ Class | Method | HTTP request | Description
  - [GetC2cUnreadMsgNumResponseAllOf](docs/GetC2cUnreadMsgNumResponseAllOf.md)
  - [GetC2cUnreadMsgNumResponseAllOfC2CUnreadMsgNumList](docs/GetC2cUnreadMsgNumResponseAllOfC2CUnreadMsgNumList.md)
  - [GetC2cUnreadMsgNumResponseAllOfErrorList](docs/GetC2cUnreadMsgNumResponseAllOfErrorList.md)
+ - [GetCosSigRequest](docs/GetCosSigRequest.md)
+ - [GetCosSigRequestRawURLsInner](docs/GetCosSigRequestRawURLsInner.md)
+ - [GetCosSigResponse](docs/GetCosSigResponse.md)
+ - [GetCosSigResponseAllOf](docs/GetCosSigResponseAllOf.md)
+ - [GetCosSigResponseAllOfPreSigURLs](docs/GetCosSigResponseAllOfPreSigURLs.md)
  - [GetGroupAttrRequest](docs/GetGroupAttrRequest.md)
  - [GetGroupAttrResponse](docs/GetGroupAttrResponse.md)
  - [GetGroupAttrResponseAllOf](docs/GetGroupAttrResponseAllOf.md)
@@ -303,11 +316,12 @@ Class | Method | HTTP request | Description
  - [GetGroupInfoRequestResponseFilter](docs/GetGroupInfoRequestResponseFilter.md)
  - [GetGroupInfoResponse](docs/GetGroupInfoResponse.md)
  - [GetGroupInfoResponseAllOf](docs/GetGroupInfoResponseAllOf.md)
+ - [GetGroupInfoResponseAllOfAppDefinedData](docs/GetGroupInfoResponseAllOfAppDefinedData.md)
  - [GetGroupInfoResponseAllOfGroupInfo](docs/GetGroupInfoResponseAllOfGroupInfo.md)
+ - [GetGroupInfoResponseAllOfMemberList](docs/GetGroupInfoResponseAllOfMemberList.md)
  - [GetGroupMemberInfoRequest](docs/GetGroupMemberInfoRequest.md)
  - [GetGroupMemberInfoResponse](docs/GetGroupMemberInfoResponse.md)
  - [GetGroupMemberInfoResponseAllOf](docs/GetGroupMemberInfoResponseAllOf.md)
- - [GetGroupMemberInfoResponseAllOfAppMemberDefinedData](docs/GetGroupMemberInfoResponseAllOfAppMemberDefinedData.md)
  - [GetGroupMemberInfoResponseAllOfMemberList](docs/GetGroupMemberInfoResponseAllOfMemberList.md)
  - [GetGroupShuttedUinRequest](docs/GetGroupShuttedUinRequest.md)
  - [GetGroupShuttedUinResponse](docs/GetGroupShuttedUinResponse.md)
@@ -402,11 +416,13 @@ Class | Method | HTTP request | Description
  - [ImportGroupResponseAllOf](docs/ImportGroupResponseAllOf.md)
  - [ImportMsgRequest](docs/ImportMsgRequest.md)
  - [KickRequest](docs/KickRequest.md)
+ - [ModifyC2cMsgRequest](docs/ModifyC2cMsgRequest.md)
  - [ModifyGroupAttrRequest](docs/ModifyGroupAttrRequest.md)
  - [ModifyGroupAttrRequestGroupAttrInner](docs/ModifyGroupAttrRequestGroupAttrInner.md)
  - [ModifyGroupBaseInfoRequest](docs/ModifyGroupBaseInfoRequest.md)
  - [ModifyGroupMemberInfoRequest](docs/ModifyGroupMemberInfoRequest.md)
  - [ModifyGroupMemberInfoRequestAppMemberDefinedDataInner](docs/ModifyGroupMemberInfoRequestAppMemberDefinedDataInner.md)
+ - [ModifyGroupMsgRequest](docs/ModifyGroupMsgRequest.md)
  - [MsgWithdrawRequest](docs/MsgWithdrawRequest.md)
  - [MultiAccountImportRequest](docs/MultiAccountImportRequest.md)
  - [MultiAccountImportResponse](docs/MultiAccountImportResponse.md)

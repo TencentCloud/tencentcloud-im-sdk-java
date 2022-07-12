@@ -13,13 +13,12 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.tencentcloudapi.im.model.FriendGetResponseAllOfResultItem;
+import com.tencentcloudapi.im.model.FriendGetResponseAllOfUserDataItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,86 +45,184 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class FriendGetResponseAllOf {
-  private static final long serialVersionUID = 1L;
+  public static final String SERIALIZED_NAME_USER_DATA_ITEM = "UserDataItem";
+  @SerializedName(SERIALIZED_NAME_USER_DATA_ITEM)
+  private List<FriendGetResponseAllOfUserDataItem> userDataItem = null;
 
-  public static final String SERIALIZED_NAME_RESULT_ITEM = "ResultItem";
-  @SerializedName(SERIALIZED_NAME_RESULT_ITEM)
-  private List<FriendGetResponseAllOfResultItem> resultItem = null;
+  public static final String SERIALIZED_NAME_STANDARD_SEQUENCE = "StandardSequence";
+  @SerializedName(SERIALIZED_NAME_STANDARD_SEQUENCE)
+  private Integer standardSequence;
 
-  public static final String SERIALIZED_NAME_FAIL_ACCOUNT = "Fail_Account";
-  @SerializedName(SERIALIZED_NAME_FAIL_ACCOUNT)
-  private List<String> failAccount = null;
+  public static final String SERIALIZED_NAME_CUSTOM_SEQUENCE = "CustomSequence";
+  @SerializedName(SERIALIZED_NAME_CUSTOM_SEQUENCE)
+  private Integer customSequence;
+
+  public static final String SERIALIZED_NAME_FRIEND_NUM = "FriendNum";
+  @SerializedName(SERIALIZED_NAME_FRIEND_NUM)
+  private Integer friendNum;
+
+  public static final String SERIALIZED_NAME_COMPLETE_FLAG = "CompleteFlag";
+  @SerializedName(SERIALIZED_NAME_COMPLETE_FLAG)
+  private Integer completeFlag;
+
+  public static final String SERIALIZED_NAME_NEXT_START_INDEX = "NextStartIndex";
+  @SerializedName(SERIALIZED_NAME_NEXT_START_INDEX)
+  private Integer nextStartIndex;
 
   public static final String SERIALIZED_NAME_ERROR_DISPLAY = "ErrorDisplay";
   @SerializedName(SERIALIZED_NAME_ERROR_DISPLAY)
-  private Integer errorDisplay;
+  private String errorDisplay;
 
   public FriendGetResponseAllOf() { 
   }
 
-  public FriendGetResponseAllOf resultItem(List<FriendGetResponseAllOfResultItem> resultItem) {
+  public FriendGetResponseAllOf userDataItem(List<FriendGetResponseAllOfUserDataItem> userDataItem) {
     
-    this.resultItem = resultItem;
+    this.userDataItem = userDataItem;
     return this;
   }
 
-  public FriendGetResponseAllOf addResultItemItem(FriendGetResponseAllOfResultItem resultItemItem) {
-    if (this.resultItem == null) {
-      this.resultItem = new ArrayList<>();
+  public FriendGetResponseAllOf addUserDataItemItem(FriendGetResponseAllOfUserDataItem userDataItemItem) {
+    if (this.userDataItem == null) {
+      this.userDataItem = new ArrayList<>();
     }
-    this.resultItem.add(resultItemItem);
+    this.userDataItem.add(userDataItemItem);
     return this;
   }
 
    /**
-   * Get resultItem
-   * @return resultItem
+   * Get userDataItem
+   * @return userDataItem
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<FriendGetResponseAllOfResultItem> getResultItem() {
-    return resultItem;
+  public List<FriendGetResponseAllOfUserDataItem> getUserDataItem() {
+    return userDataItem;
   }
 
 
-  public void setResultItem(List<FriendGetResponseAllOfResultItem> resultItem) {
-    this.resultItem = resultItem;
+  public void setUserDataItem(List<FriendGetResponseAllOfUserDataItem> userDataItem) {
+    this.userDataItem = userDataItem;
   }
 
 
-  public FriendGetResponseAllOf failAccount(List<String> failAccount) {
+  public FriendGetResponseAllOf standardSequence(Integer standardSequence) {
     
-    this.failAccount = failAccount;
-    return this;
-  }
-
-  public FriendGetResponseAllOf addFailAccountItem(String failAccountItem) {
-    if (this.failAccount == null) {
-      this.failAccount = new ArrayList<>();
-    }
-    this.failAccount.add(failAccountItem);
+    this.standardSequence = standardSequence;
     return this;
   }
 
    /**
-   * 返回处理失败的用户列表，仅当存在失败用户时才返回该字段
-   * @return failAccount
+   * 标配好友数据的 Sequence，客户端可以保存该 Sequence，下次请求时通过请求的 StandardSequence 字段返回给后台
+   * @return standardSequence
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "返回处理失败的用户列表，仅当存在失败用户时才返回该字段")
+  @ApiModelProperty(value = "标配好友数据的 Sequence，客户端可以保存该 Sequence，下次请求时通过请求的 StandardSequence 字段返回给后台")
 
-  public List<String> getFailAccount() {
-    return failAccount;
+  public Integer getStandardSequence() {
+    return standardSequence;
   }
 
 
-  public void setFailAccount(List<String> failAccount) {
-    this.failAccount = failAccount;
+  public void setStandardSequence(Integer standardSequence) {
+    this.standardSequence = standardSequence;
   }
 
 
-  public FriendGetResponseAllOf errorDisplay(Integer errorDisplay) {
+  public FriendGetResponseAllOf customSequence(Integer customSequence) {
+    
+    this.customSequence = customSequence;
+    return this;
+  }
+
+   /**
+   * 自定义好友数据的 Sequence，客户端可以保存该 Sequence，下次请求时通过请求的 CustomSequence 字段返回给后台
+   * @return customSequence
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "自定义好友数据的 Sequence，客户端可以保存该 Sequence，下次请求时通过请求的 CustomSequence 字段返回给后台")
+
+  public Integer getCustomSequence() {
+    return customSequence;
+  }
+
+
+  public void setCustomSequence(Integer customSequence) {
+    this.customSequence = customSequence;
+  }
+
+
+  public FriendGetResponseAllOf friendNum(Integer friendNum) {
+    
+    this.friendNum = friendNum;
+    return this;
+  }
+
+   /**
+   * 好友总数
+   * @return friendNum
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "好友总数")
+
+  public Integer getFriendNum() {
+    return friendNum;
+  }
+
+
+  public void setFriendNum(Integer friendNum) {
+    this.friendNum = friendNum;
+  }
+
+
+  public FriendGetResponseAllOf completeFlag(Integer completeFlag) {
+    
+    this.completeFlag = completeFlag;
+    return this;
+  }
+
+   /**
+   * 分页的结束标识，非0值表示已完成全量拉取
+   * @return completeFlag
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "分页的结束标识，非0值表示已完成全量拉取")
+
+  public Integer getCompleteFlag() {
+    return completeFlag;
+  }
+
+
+  public void setCompleteFlag(Integer completeFlag) {
+    this.completeFlag = completeFlag;
+  }
+
+
+  public FriendGetResponseAllOf nextStartIndex(Integer nextStartIndex) {
+    
+    this.nextStartIndex = nextStartIndex;
+    return this;
+  }
+
+   /**
+   * 分页接口下一页的起始位置
+   * @return nextStartIndex
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "分页接口下一页的起始位置")
+
+  public Integer getNextStartIndex() {
+    return nextStartIndex;
+  }
+
+
+  public void setNextStartIndex(Integer nextStartIndex) {
+    this.nextStartIndex = nextStartIndex;
+  }
+
+
+  public FriendGetResponseAllOf errorDisplay(String errorDisplay) {
     
     this.errorDisplay = errorDisplay;
     return this;
@@ -138,15 +235,50 @@ public class FriendGetResponseAllOf {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "详细的客户端展示信息")
 
-  public Integer getErrorDisplay() {
+  public String getErrorDisplay() {
     return errorDisplay;
   }
 
 
-  public void setErrorDisplay(Integer errorDisplay) {
+  public void setErrorDisplay(String errorDisplay) {
     this.errorDisplay = errorDisplay;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public FriendGetResponseAllOf putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -158,23 +290,33 @@ public class FriendGetResponseAllOf {
       return false;
     }
     FriendGetResponseAllOf friendGetResponseAllOf = (FriendGetResponseAllOf) o;
-    return Objects.equals(this.resultItem, friendGetResponseAllOf.resultItem) &&
-        Objects.equals(this.failAccount, friendGetResponseAllOf.failAccount) &&
-        Objects.equals(this.errorDisplay, friendGetResponseAllOf.errorDisplay);
+    return Objects.equals(this.userDataItem, friendGetResponseAllOf.userDataItem) &&
+        Objects.equals(this.standardSequence, friendGetResponseAllOf.standardSequence) &&
+        Objects.equals(this.customSequence, friendGetResponseAllOf.customSequence) &&
+        Objects.equals(this.friendNum, friendGetResponseAllOf.friendNum) &&
+        Objects.equals(this.completeFlag, friendGetResponseAllOf.completeFlag) &&
+        Objects.equals(this.nextStartIndex, friendGetResponseAllOf.nextStartIndex) &&
+        Objects.equals(this.errorDisplay, friendGetResponseAllOf.errorDisplay)&&
+        Objects.equals(this.additionalProperties, friendGetResponseAllOf.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(resultItem, failAccount, errorDisplay);
+    return Objects.hash(userDataItem, standardSequence, customSequence, friendNum, completeFlag, nextStartIndex, errorDisplay, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class FriendGetResponseAllOf {\n");
-    sb.append("    resultItem: ").append(toIndentedString(resultItem)).append("\n");
-    sb.append("    failAccount: ").append(toIndentedString(failAccount)).append("\n");
+    sb.append("    userDataItem: ").append(toIndentedString(userDataItem)).append("\n");
+    sb.append("    standardSequence: ").append(toIndentedString(standardSequence)).append("\n");
+    sb.append("    customSequence: ").append(toIndentedString(customSequence)).append("\n");
+    sb.append("    friendNum: ").append(toIndentedString(friendNum)).append("\n");
+    sb.append("    completeFlag: ").append(toIndentedString(completeFlag)).append("\n");
+    sb.append("    nextStartIndex: ").append(toIndentedString(nextStartIndex)).append("\n");
     sb.append("    errorDisplay: ").append(toIndentedString(errorDisplay)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -197,8 +339,12 @@ public class FriendGetResponseAllOf {
   static {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
-    openapiFields.add("ResultItem");
-    openapiFields.add("Fail_Account");
+    openapiFields.add("UserDataItem");
+    openapiFields.add("StandardSequence");
+    openapiFields.add("CustomSequence");
+    openapiFields.add("FriendNum");
+    openapiFields.add("CompleteFlag");
+    openapiFields.add("NextStartIndex");
     openapiFields.add("ErrorDisplay");
 
     // a set of required properties/fields (JSON key names)
@@ -219,29 +365,20 @@ public class FriendGetResponseAllOf {
           throw new IllegalArgumentException(String.format("The required field(s) %s in FriendGetResponseAllOf is not found in the empty JSON string", FriendGetResponseAllOf.openapiRequiredFields.toString()));
         }
       }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!FriendGetResponseAllOf.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `FriendGetResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
-      JsonArray jsonArrayresultItem = jsonObj.getAsJsonArray("ResultItem");
-      if (jsonArrayresultItem != null) {
+      JsonArray jsonArrayuserDataItem = jsonObj.getAsJsonArray("UserDataItem");
+      if (jsonArrayuserDataItem != null) {
         // ensure the json data is an array
-        if (!jsonObj.get("ResultItem").isJsonArray()) {
-          throw new IllegalArgumentException(String.format("Expected the field `ResultItem` to be an array in the JSON string but got `%s`", jsonObj.get("ResultItem").toString()));
+        if (!jsonObj.get("UserDataItem").isJsonArray()) {
+          throw new IllegalArgumentException(String.format("Expected the field `UserDataItem` to be an array in the JSON string but got `%s`", jsonObj.get("UserDataItem").toString()));
         }
 
-        // validate the optional field `ResultItem` (array)
-        for (int i = 0; i < jsonArrayresultItem.size(); i++) {
-          FriendGetResponseAllOfResultItem.validateJsonObject(jsonArrayresultItem.get(i).getAsJsonObject());
+        // validate the optional field `UserDataItem` (array)
+        for (int i = 0; i < jsonArrayuserDataItem.size(); i++) {
+          FriendGetResponseAllOfUserDataItem.validateJsonObject(jsonArrayuserDataItem.get(i).getAsJsonObject());
         };
       }
-      // ensure the json data is an array
-      if (jsonObj.get("Fail_Account") != null && !jsonObj.get("Fail_Account").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `Fail_Account` to be an array in the JSON string but got `%s`", jsonObj.get("Fail_Account").toString()));
+      if (jsonObj.get("ErrorDisplay") != null && !jsonObj.get("ErrorDisplay").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ErrorDisplay` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ErrorDisplay").toString()));
       }
   }
 
@@ -260,6 +397,23 @@ public class FriendGetResponseAllOf {
            @Override
            public void write(JsonWriter out, FriendGetResponseAllOf value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -267,7 +421,25 @@ public class FriendGetResponseAllOf {
            public FriendGetResponseAllOf read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             FriendGetResponseAllOf instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

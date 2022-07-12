@@ -19,7 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,8 +45,6 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class BlackListGetResponseAllOf {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_BLACK_LIST_ITEM = "BlackListItem";
   @SerializedName(SERIALIZED_NAME_BLACK_LIST_ITEM)
   private List<BlackListGetResponseAllOfBlackListItem> blackListItem = null;
@@ -166,6 +163,41 @@ public class BlackListGetResponseAllOf {
     this.errorDisplay = errorDisplay;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public BlackListGetResponseAllOf putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
 
 
   @Override
@@ -180,12 +212,13 @@ public class BlackListGetResponseAllOf {
     return Objects.equals(this.blackListItem, blackListGetResponseAllOf.blackListItem) &&
         Objects.equals(this.startIndex, blackListGetResponseAllOf.startIndex) &&
         Objects.equals(this.curruentSequence, blackListGetResponseAllOf.curruentSequence) &&
-        Objects.equals(this.errorDisplay, blackListGetResponseAllOf.errorDisplay);
+        Objects.equals(this.errorDisplay, blackListGetResponseAllOf.errorDisplay)&&
+        Objects.equals(this.additionalProperties, blackListGetResponseAllOf.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(blackListItem, startIndex, curruentSequence, errorDisplay);
+    return Objects.hash(blackListItem, startIndex, curruentSequence, errorDisplay, additionalProperties);
   }
 
   @Override
@@ -196,6 +229,7 @@ public class BlackListGetResponseAllOf {
     sb.append("    startIndex: ").append(toIndentedString(startIndex)).append("\n");
     sb.append("    curruentSequence: ").append(toIndentedString(curruentSequence)).append("\n");
     sb.append("    errorDisplay: ").append(toIndentedString(errorDisplay)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -241,14 +275,6 @@ public class BlackListGetResponseAllOf {
           throw new IllegalArgumentException(String.format("The required field(s) %s in BlackListGetResponseAllOf is not found in the empty JSON string", BlackListGetResponseAllOf.openapiRequiredFields.toString()));
         }
       }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!BlackListGetResponseAllOf.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `BlackListGetResponseAllOf` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
       JsonArray jsonArrayblackListItem = jsonObj.getAsJsonArray("BlackListItem");
       if (jsonArrayblackListItem != null) {
         // ensure the json data is an array
@@ -281,6 +307,23 @@ public class BlackListGetResponseAllOf {
            @Override
            public void write(JsonWriter out, BlackListGetResponseAllOf value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -288,7 +331,25 @@ public class BlackListGetResponseAllOf {
            public BlackListGetResponseAllOf read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             BlackListGetResponseAllOf instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();

@@ -13,13 +13,9 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.tencentcloudapi.im.model.TIMMsgElement;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.Serializable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,8 +42,6 @@ import com.tencentcloudapi.im.JSON;
  */
 
 public class GroupMsgGetSimpleResponseAllOfRspMsgList {
-  private static final long serialVersionUID = 1L;
-
   public static final String SERIALIZED_NAME_FROM_ACCOUNT = "From_Account";
   @SerializedName(SERIALIZED_NAME_FROM_ACCOUNT)
   private String fromAccount;
@@ -72,13 +66,13 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   @SerializedName(SERIALIZED_NAME_MSG_TIME_STAMP)
   private Integer msgTimeStamp;
 
-  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
-  @SerializedName(SERIALIZED_NAME_MSG_BODY)
-  private List<TIMMsgElement> msgBody = null;
-
   public static final String SERIALIZED_NAME_IS_SYSTEM_MSG = "IsSystemMsg";
   @SerializedName(SERIALIZED_NAME_IS_SYSTEM_MSG)
   private Integer isSystemMsg;
+
+  public static final String SERIALIZED_NAME_MSG_BODY = "MsgBody";
+  @SerializedName(SERIALIZED_NAME_MSG_BODY)
+  private Object msgBody;
 
   public GroupMsgGetSimpleResponseAllOfRspMsgList() { 
   }
@@ -221,37 +215,6 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   }
 
 
-  public GroupMsgGetSimpleResponseAllOfRspMsgList msgBody(List<TIMMsgElement> msgBody) {
-    
-    this.msgBody = msgBody;
-    return this;
-  }
-
-  public GroupMsgGetSimpleResponseAllOfRspMsgList addMsgBodyItem(TIMMsgElement msgBodyItem) {
-    if (this.msgBody == null) {
-      this.msgBody = new ArrayList<>();
-    }
-    this.msgBody.add(msgBodyItem);
-    return this;
-  }
-
-   /**
-   * Get msgBody
-   * @return msgBody
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public List<TIMMsgElement> getMsgBody() {
-    return msgBody;
-  }
-
-
-  public void setMsgBody(List<TIMMsgElement> msgBody) {
-    this.msgBody = msgBody;
-  }
-
-
   public GroupMsgGetSimpleResponseAllOfRspMsgList isSystemMsg(Integer isSystemMsg) {
     
     this.isSystemMsg = isSystemMsg;
@@ -275,6 +238,64 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
   }
 
 
+  public GroupMsgGetSimpleResponseAllOfRspMsgList msgBody(Object msgBody) {
+    
+    this.msgBody = msgBody;
+    return this;
+  }
+
+   /**
+   * 消息内容
+   * @return msgBody
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "消息内容")
+
+  public Object getMsgBody() {
+    return msgBody;
+  }
+
+
+  public void setMsgBody(Object msgBody) {
+    this.msgBody = msgBody;
+  }
+
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
+
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   */
+  public GroupMsgGetSimpleResponseAllOfRspMsgList putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
+    return this;
+  }
+
+  /**
+   * Return the additional (undeclared) property.
+   */
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
+  }
+
+  /**
+   * Return the additional (undeclared) property with the specified name.
+   */
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
+  }
+
 
   @Override
   public boolean equals(Object o) {
@@ -291,13 +312,14 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
         Objects.equals(this.msgRandom, groupMsgGetSimpleResponseAllOfRspMsgList.msgRandom) &&
         Objects.equals(this.msgSeq, groupMsgGetSimpleResponseAllOfRspMsgList.msgSeq) &&
         Objects.equals(this.msgTimeStamp, groupMsgGetSimpleResponseAllOfRspMsgList.msgTimeStamp) &&
-        Objects.equals(this.msgBody, groupMsgGetSimpleResponseAllOfRspMsgList.msgBody) &&
-        Objects.equals(this.isSystemMsg, groupMsgGetSimpleResponseAllOfRspMsgList.isSystemMsg);
+        Objects.equals(this.isSystemMsg, groupMsgGetSimpleResponseAllOfRspMsgList.isSystemMsg) &&
+        Objects.equals(this.msgBody, groupMsgGetSimpleResponseAllOfRspMsgList.msgBody)&&
+        Objects.equals(this.additionalProperties, groupMsgGetSimpleResponseAllOfRspMsgList.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(fromAccount, isPlaceMsg, msgPriority, msgRandom, msgSeq, msgTimeStamp, msgBody, isSystemMsg);
+    return Objects.hash(fromAccount, isPlaceMsg, msgPriority, msgRandom, msgSeq, msgTimeStamp, isSystemMsg, msgBody, additionalProperties);
   }
 
   @Override
@@ -310,8 +332,9 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
     sb.append("    msgRandom: ").append(toIndentedString(msgRandom)).append("\n");
     sb.append("    msgSeq: ").append(toIndentedString(msgSeq)).append("\n");
     sb.append("    msgTimeStamp: ").append(toIndentedString(msgTimeStamp)).append("\n");
-    sb.append("    msgBody: ").append(toIndentedString(msgBody)).append("\n");
     sb.append("    isSystemMsg: ").append(toIndentedString(isSystemMsg)).append("\n");
+    sb.append("    msgBody: ").append(toIndentedString(msgBody)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -340,8 +363,8 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
     openapiFields.add("MsgRandom");
     openapiFields.add("MsgSeq");
     openapiFields.add("MsgTimeStamp");
-    openapiFields.add("MsgBody");
     openapiFields.add("IsSystemMsg");
+    openapiFields.add("MsgBody");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -361,28 +384,8 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
           throw new IllegalArgumentException(String.format("The required field(s) %s in GroupMsgGetSimpleResponseAllOfRspMsgList is not found in the empty JSON string", GroupMsgGetSimpleResponseAllOfRspMsgList.openapiRequiredFields.toString()));
         }
       }
-
-      Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Entry<String, JsonElement> entry : entries) {
-        if (!GroupMsgGetSimpleResponseAllOfRspMsgList.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GroupMsgGetSimpleResponseAllOfRspMsgList` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
-        }
-      }
       if (jsonObj.get("From_Account") != null && !jsonObj.get("From_Account").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `From_Account` to be a primitive type in the JSON string but got `%s`", jsonObj.get("From_Account").toString()));
-      }
-      JsonArray jsonArraymsgBody = jsonObj.getAsJsonArray("MsgBody");
-      if (jsonArraymsgBody != null) {
-        // ensure the json data is an array
-        if (!jsonObj.get("MsgBody").isJsonArray()) {
-          throw new IllegalArgumentException(String.format("Expected the field `MsgBody` to be an array in the JSON string but got `%s`", jsonObj.get("MsgBody").toString()));
-        }
-
-        // validate the optional field `MsgBody` (array)
-        for (int i = 0; i < jsonArraymsgBody.size(); i++) {
-          TIMMsgElement.validateJsonObject(jsonArraymsgBody.get(i).getAsJsonObject());
-        };
       }
   }
 
@@ -401,6 +404,23 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
            @Override
            public void write(JsonWriter out, GroupMsgGetSimpleResponseAllOfRspMsgList value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additonal properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
@@ -408,7 +428,25 @@ public class GroupMsgGetSimpleResponseAllOfRspMsgList {
            public GroupMsgGetSimpleResponseAllOfRspMsgList read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
-             return thisAdapter.fromJsonTree(jsonObj);
+             // store additional fields in the deserialized instance
+             GroupMsgGetSimpleResponseAllOfRspMsgList instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else { // non-primitive type
+                   instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), Object.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();
