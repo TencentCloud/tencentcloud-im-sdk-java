@@ -4,9 +4,12 @@ TIM SERVER REST API SDK
 
 - API version: 1.0.0
 
-TIM REST API
 
+ 腾讯云IM REST API SDK 技术交流QQ群
 
+ QQ群号:909322484
+
+ <img src="images/img_group_01.png" width="20%" height="20%" />
 
 ## Requirements
 
@@ -38,7 +41,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.tencentcloudapi.im</groupId>
   <artifactId>tencentcloud-im-sdk-java</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -54,7 +57,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.6"
+     implementation "com.tencentcloudapi.im:tencentcloud-im-sdk-java:1.0.7"
   }
 ```
 
@@ -68,7 +71,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/tencentcloud-im-sdk-java-1.0.6.jar`
+* `target/tencentcloud-im-sdk-java-1.0.7.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -114,6 +117,11 @@ public class Example {
 }
 
 ```
+## Recommendation
+
+  - It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
+  - The retry mechanism needs to be implemented by yourself.
+
 
 ## Documentation for API Endpoints
 
@@ -481,13 +489,7 @@ Class | Method | HTTP request | Description
 All endpoints do not require authorization.
 Authentication schemes defined for the API:
 
-## Recommendation
-
-It's recommended to create an instance of `ApiClient` per thread in a multithreaded environment to avoid any potential issues.
-
 ## Contact
  腾讯云IM REST API SDK 技术交流QQ群
 
  QQ群号:909322484
-
- <img src="images/img_group_01.png" width="30%" height="30%" />

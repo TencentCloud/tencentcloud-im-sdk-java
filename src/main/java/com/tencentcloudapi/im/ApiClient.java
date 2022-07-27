@@ -55,6 +55,10 @@ import com.tencentcloudapi.im.auth.ApiKeyAuth;
 public class ApiClient {
 
     private String basePath = "https://console.tim.qq.com";
+    public static final long DEFAULT_CONNECT_TIMEOUT = 2000L;
+    public static final long DEFAULT_READ_TIMEOUT = 2000L;
+    public static final long DEFAULT_WRITE_TIMEOUT = 2000L;
+    public static final long DEFAULT_CALL_TIMEOUT = 3000L;
     private Integer sdkappid;
     private String key;
     private String identifier;
@@ -117,7 +121,12 @@ public class ApiClient {
             builder.addInterceptor(interceptor);
         }
 
-        httpClient = builder.build();
+        httpClient = builder
+                .connectTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
+                .readTimeout(DEFAULT_READ_TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(DEFAULT_WRITE_TIMEOUT, TimeUnit.MILLISECONDS)
+                .callTimeout(DEFAULT_CALL_TIMEOUT, TimeUnit.MILLISECONDS)
+                .build();
     }
 
     private void init() {
@@ -524,6 +533,28 @@ public class ApiClient {
      */
     public ApiClient setTempFolderPath(String tempFolderPath) {
         this.tempFolderPath = tempFolderPath;
+        return this;
+    }
+
+    /**
+     * Get call timeout (in milliseconds).
+     *
+     * @return Timeout in milliseconds
+     */
+    public int getCallTimeout() {
+        return httpClient.callTimeoutMillis();
+    }
+
+    /**
+     * Sets the call timeout (in milliseconds).
+     * A value of 0 means no timeout, otherwise values must be between 1 and
+     * {@link java.lang.Integer#MAX_VALUE}.
+     *
+     * @param callTimeout call timeout in milliseconds
+     * @return Api client
+     */
+    public ApiClient setCallTimeout(int callTimeout) {
+        httpClient = httpClient.newBuilder().callTimeout(callTimeout, TimeUnit.MILLISECONDS).build();
         return this;
     }
 
